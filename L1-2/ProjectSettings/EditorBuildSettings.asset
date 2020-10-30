@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/ballgame/LevelOne.unity
     guid: 49e3d7b8da5ddda4ebc8651cc9b6697e
+  - enabled: 1
+    path: Assets/ballgame/Flappy Bird.unity
+    guid: 2e8911fd150730647976df0cfd0ab3e5
   m_configObjects: {}
