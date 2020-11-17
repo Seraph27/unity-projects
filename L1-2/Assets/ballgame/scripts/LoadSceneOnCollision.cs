@@ -10,7 +10,7 @@ public class LoadSceneOnCollision : MonoBehaviour
 
     void OnCollisionEnter(Collision c){
         if (c.gameObject.tag == otherTag) {
-            SceneManager.LoadScene(sceneName);
+            // SceneManager.LoadScene(sceneName);
         }
     }
 }

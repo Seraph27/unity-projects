@@ -133,6 +133,7 @@
      <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Vehicles\Car\Scripts\WheelEffects.cs" />
      <Compile Include="Assets\ballgame\scripts\AddConstantVelocity.cs" />
      <Compile Include="Assets\ballgame\scripts\AddForceOnPlayerInput.cs" />
+     <Compile Include="Assets\ballgame\scripts\AddScoreOnTrigger.cs" />
      <Compile Include="Assets\ballgame\scripts\AddVelocityOnPlayerInput.cs" />
      <Compile Include="Assets\ballgame\scripts\DeleteObjectOnTrigger.cs" />
      <Compile Include="Assets\ballgame\scripts\DisplayParticleOnKeyPress.cs" />
@@ -143,6 +144,7 @@
      <Compile Include="Assets\ballgame\scripts\LoadSceneOnTrigger.cs" />
      <Compile Include="Assets\ballgame\scripts\SetConstantVelocity.cs" />
      <Compile Include="Assets\ballgame\scripts\SpawnObject.cs" />
+     <Compile Include="Assets\ballgame\scripts\SpawnWall.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.10f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

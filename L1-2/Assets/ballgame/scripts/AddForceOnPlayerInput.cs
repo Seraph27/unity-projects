@@ -23,12 +23,6 @@ public class AddForceOnPlayerInput : MonoBehaviour
         if (transform.position.y >= 5.5) {
             transform.position += new Vector3(0, -9.5f, 0);
         }
-        // gameObject.transform.Rotate(new Vector3(0, 0, rb.velocity.y * 2));
-        // if (gameObject.transform.rotation.z <= 45){
-        //     gameObject.transform.rotation = new Vector3(0, 0, 45);
-        // } 
-        // else if (gameObject.transform.rotation.z >= -45) {
-            
-        // }
+        transform.rotation = Quaternion.Euler(0, 0, rb.velocity.y*2);
     }
 }
