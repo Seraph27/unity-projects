@@ -135,6 +135,7 @@
      <Compile Include="Assets\ballgame\scripts\AddForceOnPlayerInput.cs" />
      <Compile Include="Assets\ballgame\scripts\AddScoreOnTrigger.cs" />
      <Compile Include="Assets\ballgame\scripts\AddVelocityOnPlayerInput.cs" />
+     <Compile Include="Assets\ballgame\scripts\DeleteObjectOnCollision.cs" />
      <Compile Include="Assets\ballgame\scripts\DeleteObjectOnTrigger.cs" />
      <Compile Include="Assets\ballgame\scripts\DisplayParticleOnKeyPress.cs" />
      <Compile Include="Assets\ballgame\scripts\GoToGameObject.cs" />
@@ -143,6 +144,7 @@
      <Compile Include="Assets\ballgame\scripts\LoadSceneOnKeyPress.cs" />
      <Compile Include="Assets\ballgame\scripts\LoadSceneOnTrigger.cs" />
      <Compile Include="Assets\ballgame\scripts\SetConstantVelocity.cs" />
+     <Compile Include="Assets\ballgame\scripts\SpawnBulletOnKeyPress.cs" />
      <Compile Include="Assets\ballgame\scripts\SpawnObject.cs" />
      <Compile Include="Assets\ballgame\scripts\SpawnWall.cs" />
     <Reference Include="UnityEngine">
