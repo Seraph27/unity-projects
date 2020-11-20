@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 7067877737282754014}
   - component: {fileID: -6445882726347268760}
   - component: {fileID: -6341294387237328337}
-  - component: {fileID: 129687548925342389}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Wall
@@ -125,16 +124,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: {x: -4, y: 0, z: 0}
---- !u!114 &129687548925342389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8318516601069566002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58f8e103aa31c9a4db408183afe49e98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  otherTag: Bullet
