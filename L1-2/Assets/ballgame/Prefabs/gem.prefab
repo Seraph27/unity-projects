@@ -12,12 +12,11 @@ GameObject:
   - component: {fileID: 6637935775158916363}
   - component: {fileID: 6637935775157965313}
   - component: {fileID: -8021787483405012000}
-  - component: {fileID: 4018523327511229108}
   - component: {fileID: 2605497233500049003}
   - component: {fileID: 6806399944046785582}
   m_Layer: 0
-  m_Name: SM_Prop_Gem_04
-  m_TagString: Untagged
+  m_Name: gem
+  m_TagString: Gem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,19 +95,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.24278629, y: 1.3991113, z: 0.22183537}
   m_Center: {x: -0.000000059604645, y: 0.69955564, z: 0}
---- !u!114 &4018523327511229108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6637935775155777065}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 002f25f89a424724cbcf8f7a9eda642c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  otherTag: Player
 --- !u!114 &2605497233500049003
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,6 +12,9 @@ public class SpawnWall : MonoBehaviour
     public float wallInterval = 0.0f;
 
     void Update() {
+        // howto get a script on another gameobject
+        // GameObject.Find("bird").GetComponent<BulletManager>().bulletCount
+
         timer += Time.deltaTime;
         if (timer >= interval) {
             Vector3 bottomWallPos = transform.position + new Vector3(

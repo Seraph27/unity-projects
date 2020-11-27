@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnBulletOnKeyPress : MonoBehaviour
+public class BulletManager : MonoBehaviour
 {
     public GameObject toSpawn;
     public string key;
@@ -20,6 +20,20 @@ public class SpawnBulletOnKeyPress : MonoBehaviour
         if (Input.GetKeyDown(key) && bulletCount > 0){
             Instantiate(toSpawn, transform.position + new Vector3(1,0,0), Quaternion.identity);
             bulletCount--;
+            print(bulletCount);
         }
     }
+
+    void OnTriggerEnter(Collider c) {   
+        print("is not tag problem");
+        if (c.gameObject.tag == "Gem") {
+            if (bulletCount < 3){
+                bulletCount++;
+                print(bulletCount);
+            }
+
+        }
+        GameObject.Destroy(c.gameObject);
+    }
+
 }
