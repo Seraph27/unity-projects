@@ -12,7 +12,7 @@ public class BulletManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        bulletAmountIcon = GameObject.Find("bulletAmount");
+        bulletAmountIcon = GameObject.Find("bulletAmountIcon");
     }
 
     // Update is called once per frame
@@ -27,7 +27,6 @@ public class BulletManager : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider c) {   
-        print("is not tag problem");
         if (c.gameObject.tag == "Gem") {
             if (bulletCount < 3){
                 bulletCount++;

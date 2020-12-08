@@ -9,10 +9,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{28c981ea-16be-41f6-39b1-0556b7edcc55}</ProjectGuid>
+    <ProjectGuid>{74f8e68c-9c04-12b1-0606-48b936024d5e}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>UnityEditor.UI</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -22,7 +22,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>Temp\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;UNITY_2019_4_10;UNITY_2019_4;UNITY_2019;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;INCLUDE_DYNAMIC_GI;ENABLE_MONO_BDWGC;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_VIDEO;PLATFORM_STANDALONE;PLATFORM_STANDALONE_WIN;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_STANDARD_2_0;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_LEGACY_INPUT_MANAGER;CROSS_PLATFORM_INPUT;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;UNITY_2019_4_10;UNITY_2019_4;UNITY_2019;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;INCLUDE_DYNAMIC_GI;ENABLE_MONO_BDWGC;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_VIDEO;PLATFORM_STANDALONE;PLATFORM_STANDALONE_WIN;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_4_6;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_LEGACY_INPUT_MANAGER;PACKAGE_PHYSICS;PACKAGE_PHYSICS2D;PACKAGE_ANIMATION;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER;NET_STANDARD_2_0</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
@@ -36,121 +36,44 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\2D\Scripts\Camera2DFollow.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\2D\Scripts\CameraFollow.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\2D\Scripts\Platformer2DUserControl.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\2D\Scripts\PlatformerCharacter2D.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\2D\Scripts\Restarter.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Cameras\Scripts\AbstractTargetFollower.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Cameras\Scripts\AutoCam.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Cameras\Scripts\FreeLookCam.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Cameras\Scripts\HandHeldCam.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Cameras\Scripts\LookatTarget.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Cameras\Scripts\PivotBasedCameraRig.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Cameras\Scripts\ProtectCameraFromWallClip.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Cameras\Scripts\TargetFieldOfView.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Characters\FirstPersonCharacter\Scripts\FirstPersonController.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Characters\FirstPersonCharacter\Scripts\HeadBob.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Characters\FirstPersonCharacter\Scripts\MouseLook.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Characters\FirstPersonCharacter\Scripts\RigidbodyFirstPersonController.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Characters\RollerBall\Scripts\Ball.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Characters\RollerBall\Scripts\BallUserControl.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Characters\ThirdPersonCharacter\Scripts\AICharacterControl.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Characters\ThirdPersonCharacter\Scripts\ThirdPersonCharacter.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Characters\ThirdPersonCharacter\Scripts\ThirdPersonUserControl.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\CrossPlatformInput\Scripts\AxisTouchButton.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\CrossPlatformInput\Scripts\ButtonHandler.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\CrossPlatformInput\Scripts\CrossPlatformInputManager.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\CrossPlatformInput\Scripts\InputAxisScrollbar.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\CrossPlatformInput\Scripts\Joystick.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\CrossPlatformInput\Scripts\MobileControlRig.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\MobileInput.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\StandaloneInput.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\CrossPlatformInput\Scripts\TiltInput.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\CrossPlatformInput\Scripts\TouchPad.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\CrossPlatformInput\Scripts\VirtualInput.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Environment\Water (Basic)\Scripts\WaterBasic.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Environment\Water\Water\Scripts\Displace.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Environment\Water\Water\Scripts\GerstnerDisplace.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Environment\Water\Water\Scripts\MeshContainer.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Environment\Water\Water\Scripts\PlanarReflection.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Environment\Water\Water\Scripts\SpecularLighting.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Environment\Water\Water\Scripts\Water.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Environment\Water\Water\Scripts\WaterBase.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Environment\Water\Water\Scripts\WaterTile.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\ParticleSystems\Scripts\AfterburnerPhysicsForce.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\ParticleSystems\Scripts\ExplosionFireAndDebris.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\ParticleSystems\Scripts\ExplosionPhysicsForce.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\ParticleSystems\Scripts\Explosive.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\ParticleSystems\Scripts\ExtinguishableParticleSystem.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\ParticleSystems\Scripts\FireLight.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\ParticleSystems\Scripts\Hose.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\ParticleSystems\Scripts\ParticleSystemMultiplier.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\ParticleSystems\Scripts\SmokeParticles.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\ParticleSystems\Scripts\WaterHoseParticles.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Utility\ActivateTrigger.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Utility\AlphaButtonClickMask.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Utility\AutoMobileShaderSwitch.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Utility\AutoMoveAndRotate.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Utility\CameraRefocus.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Utility\CurveControlledBob.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Utility\DragRigidbody.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Utility\DynamicShadowSettings.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Utility\EventSystemChecker.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Utility\FOVKick.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Utility\FPSCounter.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Utility\FollowTarget.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Utility\ForcedReset.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Utility\LerpControlledBob.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Utility\ObjectResetter.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Utility\ParticleSystemDestroyer.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Utility\PlatformSpecificContent.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Utility\SimpleActivatorMenu.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Utility\SimpleMouseRotator.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Utility\SmoothFollow.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Utility\TimedObjectActivator.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Utility\TimedObjectDestructor.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Utility\WaypointCircuit.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Utility\WaypointProgressTracker.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Vehicles\Aircraft\Scripts\AeroplaneAiControl.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Vehicles\Aircraft\Scripts\AeroplaneAudio.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Vehicles\Aircraft\Scripts\AeroplaneControlSurfaceAnimator.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Vehicles\Aircraft\Scripts\AeroplaneController.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Vehicles\Aircraft\Scripts\AeroplanePropellerAnimator.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Vehicles\Aircraft\Scripts\AeroplaneUserControl2Axis.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Vehicles\Aircraft\Scripts\AeroplaneUserControl4Axis.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Vehicles\Aircraft\Scripts\JetParticleEffect.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Vehicles\Aircraft\Scripts\LandingGear.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Vehicles\Car\Scripts\BrakeLight.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Vehicles\Car\Scripts\CarAIControl.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Vehicles\Car\Scripts\CarAudio.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Vehicles\Car\Scripts\CarController.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Vehicles\Car\Scripts\CarSelfRighting.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Vehicles\Car\Scripts\CarUserControl.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Vehicles\Car\Scripts\Mudguard.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Vehicles\Car\Scripts\SkidTrail.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Vehicles\Car\Scripts\Suspension.cs" />
-     <Compile Include="Assets\4-SimonsMazeWithMonsters\Standard Assets\Vehicles\Car\Scripts\WheelEffects.cs" />
-     <Compile Include="Assets\ballgame\scripts\AddConstantVelocity.cs" />
-     <Compile Include="Assets\ballgame\scripts\AddForceOnPlayerInput.cs" />
-     <Compile Include="Assets\ballgame\scripts\AddScoreOnTrigger.cs" />
-     <Compile Include="Assets\ballgame\scripts\AddVelocityOnPlayerInput.cs" />
-     <Compile Include="Assets\ballgame\scripts\BulletManager.cs" />
-     <Compile Include="Assets\ballgame\scripts\DeleteObjectOnCollision.cs" />
-     <Compile Include="Assets\ballgame\scripts\DeleteObjectOnTrigger.cs" />
-     <Compile Include="Assets\ballgame\scripts\DeleteObjectsOnCollision.cs" />
-     <Compile Include="Assets\ballgame\scripts\DisplayParticleOnKeyPress.cs" />
-     <Compile Include="Assets\ballgame\scripts\GoToGameObject.cs" />
-     <Compile Include="Assets\ballgame\scripts\LoadSceneOnClick.cs" />
-     <Compile Include="Assets\ballgame\scripts\LoadSceneOnCollision.cs" />
-     <Compile Include="Assets\ballgame\scripts\LoadSceneOnKeyPress.cs" />
-     <Compile Include="Assets\ballgame\scripts\LoadSceneOnTrigger.cs" />
-     <Compile Include="Assets\ballgame\scripts\SetConstantVelocity.cs" />
-     <Compile Include="Assets\ballgame\scripts\SetPositionOnKeyPress.cs" />
-     <Compile Include="Assets\ballgame\scripts\SpawnGems.cs" />
-     <Compile Include="Assets\ballgame\scripts\SpawnObject.cs" />
-     <Compile Include="Assets\ballgame\scripts\SpawnWall.cs" />
-     <Compile Include="Assets\ballgame\scripts\notes.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\EventSystem\EventSystemEditor.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\EventSystem\EventTriggerEditor.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\EventSystem\Physics2DRaycasterEditor.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\EventSystem\PhysicsRaycasterEditor.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\Properties\AssemblyInfo.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\AspectRatioFitterEditor.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\ButtonEditor.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\CanvasScalerEditor.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\ContentSizeFitterEditor.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\DropdownEditor.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\GraphicEditor.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\GridLayoutGroupEditor.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\HorizontalOrVerticalLayoutGroupEditor.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\ImageEditor.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\InputFieldEditor.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\InterceptedEventsPreview.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\LayoutElementEditor.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\LayoutPropertiesPreview.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\MaskEditor.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\MenuOptions.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\PrefabLayoutRebuilder.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\PropertyDrawers\AnimationTriggersDrawer.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\PropertyDrawers\ColorBlockDrawer.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\PropertyDrawers\DropdownOptionListDrawer.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\PropertyDrawers\FontDataDrawer.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\PropertyDrawers\NavigationDrawer.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\PropertyDrawers\SpriteStateDrawer.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\RawImageEditor.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\RectMask2DEditor.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\ScrollRectEditor.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\ScrollbarEditor.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\SelectableEditor.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\SelfControllerEditor.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\SliderEditor.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\SpriteDrawUtility.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\TextEditor.cs" />
+     <Compile Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\ToggleEditor.cs" />
+     <None Include="C:\Program Files\Unity\Hub\Editor\2019.4.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UnityEditor.UI.asmdef" />
     <Reference Include="UnityEngine">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.10f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -333,6 +256,18 @@
     </Reference>
     <Reference Include="UnityEditor">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.10f1/Editor/Data/Managed/UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.VR">
+        <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.10f1/Editor/Data/UnityExtensions/Unity/UnityVR/Editor/UnityEditor.VR.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Graphs">
+        <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.10f1/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.WindowsStandalone.Extensions">
+        <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.10f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+        <HintPath>C:/Users/Lenovo/Documents/unity_tests/project1/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.10f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
@@ -690,49 +625,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Unity.Timeline.Editor.csproj">
-      <Project>{7a7b7728-72e4-9af3-525f-65ad641ed6d4}</Project>
-      <Name>Unity.Timeline.Editor</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="Unity.VSCode.Editor.csproj">
-      <Project>{4561e7b6-61b1-56e6-6544-16c50ec069d9}</Project>
-      <Name>Unity.VSCode.Editor</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="Unity.TextMeshPro.Editor.csproj">
-      <Project>{57736cb4-de74-bb82-f571-43bcfc66546b}</Project>
-      <Name>Unity.TextMeshPro.Editor</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
     <ProjectReference Include="UnityEngine.UI.csproj">
-      <Project>{795d3ffe-7366-69a3-42d3-a41cb201b600}</Project>
+      <Project>{bacb3b66-1d0b-d688-1e2e-05a5f7d79837}</Project>
       <Name>UnityEngine.UI</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
-    <ProjectReference Include="Unity.Timeline.csproj">
-      <Project>{7585d143-afd1-1dda-d060-fbee654cdc2a}</Project>
-      <Name>Unity.Timeline</Name>
+    <ProjectReference Include="UnityEditor.TestRunner.csproj">
+      <Project>{b7f2d6f5-8c2b-c773-8705-6d05fcfef27e}</Project>
+      <Name>UnityEditor.TestRunner</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
-    <ProjectReference Include="Unity.CollabProxy.Editor.csproj">
-      <Project>{47624b41-0e3a-3bff-edaa-b0175a690464}</Project>
-      <Name>Unity.CollabProxy.Editor</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Rider.Editor.csproj">
-      <Project>{3b300e7e-0688-1208-3f11-d6be322e3053}</Project>
-      <Name>Unity.Rider.Editor</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="Unity.TextMeshPro.csproj">
-      <Project>{a9e578cf-c36c-6ac9-0100-623e090bbfb5}</Project>
-      <Name>Unity.TextMeshPro</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{4d9defc2-c577-9a6c-620b-3bc17bd5df56}</Project>
-      <Name>UnityEditor.UI</Name>
+    <ProjectReference Include="UnityEngine.TestRunner.csproj">
+      <Project>{366ac73a-218a-d8df-5725-a21b531c07dc}</Project>
+      <Name>UnityEngine.TestRunner</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
   </ItemGroup>
