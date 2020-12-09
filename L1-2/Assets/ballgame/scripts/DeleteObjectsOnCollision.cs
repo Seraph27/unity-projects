@@ -11,7 +11,7 @@ public class DeleteObjectsOnCollision : MonoBehaviour
             GameObject.Destroy(gameObject);
         }
 
-
+   
         
 
     }

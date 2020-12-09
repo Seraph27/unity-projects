@@ -13,6 +13,7 @@ public class MovementScript : MonoBehaviour
     Sprite side;
     Sprite back;
     SpriteRenderer ren;
+    Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,30 +21,40 @@ public class MovementScript : MonoBehaviour
         side = Resources.Load<Sprite>("sideView");
         back = Resources.Load<Sprite>("backView");
         ren = gameObject.GetComponent<SpriteRenderer>();
+        rb = gameObject.GetComponent<Rigidbody2D>();
+        
+        print(Camera.main.orthographicSize);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         var distanceThisFrame = speed * Time.deltaTime;
+        var playerVelocity = new Vector3(0,0,0);
+
 
         if (Input.GetKey(upKey)){ 
             ren.sprite = back;
-            transform.position += new Vector3(0,distanceThisFrame,0);
+            playerVelocity += new Vector3(0,1,0);
         }
         if (Input.GetKey(rightKey)){
             ren.sprite = side;
-             ren.flipX = false;
-            transform.position += new Vector3(distanceThisFrame,0,0);
+            ren.flipX = false;
+            playerVelocity += new Vector3(1,0,0);
         }
         if (Input.GetKey(leftKey)){
             ren.sprite = side;
             ren.flipX = true;
-            transform.position += new Vector3(-distanceThisFrame,0,0);
+            playerVelocity += new Vector3(-1,0,0);
         }
         if (Input.GetKey(downKey)){
             ren.sprite = front;
-            transform.position += new Vector3(0,-distanceThisFrame,0);
+            playerVelocity += new Vector3(0,-1,0);
         }
+
+        rb.velocity = playerVelocity * distanceThisFrame;
+       
+
     }
 }
