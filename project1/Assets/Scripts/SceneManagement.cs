@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LoadSceneOnClick : MonoBehaviour
+public class SceneManagement : MonoBehaviour
 {
     public string sceneName;
-    void OnMouseDown(){
+
+    void OnMouseDown() {
         SceneManager.LoadScene(sceneName);
     }
 
+
 }
-
-

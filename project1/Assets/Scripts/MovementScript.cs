@@ -54,7 +54,5 @@ public class MovementScript : MonoBehaviour
         }
 
         rb.velocity = playerVelocity * distanceThisFrame;
-       
-
     }
 }
