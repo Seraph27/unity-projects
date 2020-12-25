@@ -7,8 +7,9 @@ public class HealthBar : MonoBehaviour
 {
     public Slider healthBar;
     public PlayerHp playerHealth;
+    public GameObject player;
 
-    private void Start()
+    void Start()
     {
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHp>();
         healthBar = GetComponent<Slider>();
@@ -19,5 +20,10 @@ public class HealthBar : MonoBehaviour
     public void SetHealth(int hp)
     {
         healthBar.value = hp;
+    }
+
+    void Update() {
+        var playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position + new Vector3(0,-1,0);
+        healthBar.GetComponent<Transform>().position = Camera.main.WorldToScreenPoint(playerPosition);
     }
 }
