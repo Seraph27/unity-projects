@@ -24,6 +24,6 @@ public class HealthBar : MonoBehaviour
 
     void Update() {
         var playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position + new Vector3(0,-1,0);
-        healthBar.GetComponent<Transform>().position = Camera.main.WorldToScreenPoint(playerPosition);
+        healthBar.transform.position = Camera.main.WorldToScreenPoint(playerPosition);
     }
 }

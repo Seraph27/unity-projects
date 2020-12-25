@@ -10,7 +10,6 @@ public class EnemyAttack : MonoBehaviour
 
     void Start()
     {
-        
         InvokeRepeating("Shoot", 0.5f, 1.0f);
     }
 
