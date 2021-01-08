@@ -9,7 +9,7 @@ public class HealthBar : MonoBehaviour
     public PlayerHp playerHealth;
     public GameObject player;
 
-    void Start()
+    public void DelayedStart()
     {
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHp>();
         healthBar = GetComponent<Slider>();

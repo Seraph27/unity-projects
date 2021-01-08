@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementScript : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
+    public GameObject hpBarPrefab;
     public string upKey;
     public string rightKey;
     public string leftKey;
@@ -17,6 +18,12 @@ public class MovementScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        var hpBar = Instantiate(hpBarPrefab);
+        var hpBarScript = hpBar.transform.Find("healthBar").GetComponent<HealthBar>();
+        hpBarScript.playerHealth = gameObject.GetComponent<PlayerHp>();
+        hpBarScript.player = gameObject;
+        hpBarScript.DelayedStart();
+        gameObject.GetComponent<PlayerHp>().healthBar = hpBarScript; 
         front = Resources.Load<Sprite>("frontView");
         side = Resources.Load<Sprite>("sideView");
         back = Resources.Load<Sprite>("backView");
