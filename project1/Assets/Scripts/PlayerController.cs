@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     Sprite back;
     SpriteRenderer ren;
     Rigidbody2D rb;
+    public GameObject bullet;
+    public float bulletVelocity;
     // Start is called before the first frame update
     void Start()
     {
@@ -61,5 +63,17 @@ public class PlayerController : MonoBehaviour
         }
 
         rb.velocity = playerVelocity * distanceThisFrame;
+
+
+        var worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        var direction = (Vector2)(worldMousePos - transform.position);
+        direction.Normalize();
+        if (Input.GetMouseButtonDown(0)) {
+            Instantiate (bullet,
+                         transform.position + (Vector3)(direction * 0.5f),
+                         Quaternion.identity);
+        }
+
+        bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletVelocity;
     }
 }
