@@ -32,7 +32,11 @@ public class EnemyController : MonoBehaviour
        
     }
 
-    void OnCollisionEnter2D(Collision2D collider) {
+    void OnCollisionEnter2D(Collision2D collision) {
         direction *= -1;
+    }
+
+    void OnTriggerEnter2D(Collider2D collider){
+        GameObject.Destroy(gameObject);
     }
 }
