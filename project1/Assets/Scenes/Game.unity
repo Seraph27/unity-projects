@@ -493,7 +493,7 @@ GameObject:
   - component: {fileID: 966361562}
   m_Layer: 0
   m_Name: 'Enemy '
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -622,6 +622,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 500
+  hpBarPrefab: {fileID: 8597309420964140059, guid: e3c1bdbdd00c49a419687b752a28de67,
+    type: 3}
+  otherTag: PlayerProjectile
 --- !u!114 &966361562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1148,7 +1151,6 @@ GameObject:
   - component: {fileID: 1556965984}
   - component: {fileID: 1556965985}
   - component: {fileID: 1556965986}
-  - component: {fileID: 1556965987}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1242,6 +1244,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 6737834693707832142, guid: eb9580e16e8ba3f4cab55c519af9f000,
     type: 3}
   bulletVelocity: 10
+  otherTag: EnemyProjectile
 --- !u!50 &1556965985
 Rigidbody2D:
   serializedVersion: 4
@@ -1289,21 +1292,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.16}
   m_EdgeRadius: 0
---- !u!114 &1556965987
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1556965981}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46e31260b6c3d3b46a87264346688449, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHp: 100
-  otherTag: Bullet
-  healthBar: {fileID: 0}
 --- !u!1 &1672431388
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,28 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class HealthBar : MonoBehaviour
 {
     public Slider healthBar;
-    public PlayerHp playerHealth;
-    public GameObject player;
 
     public void DelayedStart()
     {
-        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHp>();
         healthBar = GetComponent<Slider>();
-        healthBar.maxValue = playerHealth.maxHp;
-        healthBar.value = playerHealth.maxHp;
     }
 
-    public void SetHealth(int hp)
-    {
+    public void SetMaxHp(int hp){
+        healthBar.maxValue = hp;
         healthBar.value = hp;
     }
 
-    void Update() {
-        var playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position + new Vector3(0,-1,0);
-        healthBar.transform.position = Camera.main.WorldToScreenPoint(playerPosition);
+    public void IsPlayerAlive(){
+        if(healthBar.value <= 0) {
+            SceneManager.LoadScene("StartScene");
+        }
     }
+
+    public void DamagePlayer(int damage)
+    {
+        healthBar.value -= damage;
+        // print("after famaged" + healthBar.value);
+    }
+
+    public void FollowEntity(string tag){
+        var pos = GameObject.FindGameObjectWithTag(tag).transform.position + new Vector3(0,-1,0);
+        healthBar.transform.position = Camera.main.WorldToScreenPoint(pos);
+    }
+
 }

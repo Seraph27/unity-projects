@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     public GameObject bulletPrefab;
     public float bulletVelocity;
+    HealthBar hpBarScript;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,18 +30,16 @@ public class PlayerController : MonoBehaviour
         // hpbar.isAlive()
 
         var hpBar = Instantiate(hpBarPrefab);
-        var hpBarScript = hpBar.transform.Find("healthBar").GetComponent<HealthBar>();
-        hpBarScript.playerHealth = gameObject.GetComponent<PlayerHp>();
-        hpBarScript.player = gameObject;
+        hpBarScript = hpBar.transform.Find("healthBar").GetComponent<HealthBar>();
         hpBarScript.DelayedStart();
-        gameObject.GetComponent<PlayerHp>().healthBar = hpBarScript; 
+        hpBarScript.SetMaxHp(100);
+        
         front = Resources.Load<Sprite>("frontView");
         side = Resources.Load<Sprite>("sideView");
         back = Resources.Load<Sprite>("backView");
         ren = gameObject.GetComponent<SpriteRenderer>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         
-        print(Camera.main.orthographicSize);
         
     }
 
@@ -84,7 +83,17 @@ public class PlayerController : MonoBehaviour
             // bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletVelocity;
         }
 
-        
+        hpBarScript.FollowEntity(gameObject.tag);
+        hpBarScript.IsPlayerAlive();
+    }
+
+    public string otherTag;
+
+    void OnTriggerEnter2D(Collider2D c) {
+        if (c.gameObject.tag == otherTag) {
+            hpBarScript.DamagePlayer(0); //change
+            Destroy(c.gameObject);
+        }
     }
 
     void makeBullet() {
@@ -92,12 +101,14 @@ public class PlayerController : MonoBehaviour
         var ren = bullet.AddComponent<SpriteRenderer>();
         var rb = bullet.AddComponent<Rigidbody2D>();
         var circleCollider = bullet.AddComponent<CircleCollider2D>();
+        bullet.tag = "PlayerProjectile";
         ren.sprite = Resources.Load<Sprite>("playerBullet"); 
         rb.gravityScale = 0;
         bullet.AddComponent<DeleteWhenOffScreen>();
         circleCollider.isTrigger = true;
         bullet.transform.localScale = new Vector3(3, 3, 0);
-        var worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        var worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);  //bullet shooting
         var direction = (Vector2)(worldMousePos - transform.position);
         direction.Normalize();
         bullet.transform.position = transform.position + (Vector3)(direction * 1.0f);

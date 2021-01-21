@@ -7,10 +7,18 @@ public class EnemyController : MonoBehaviour
     public float speed;
     int direction = 1;
     Rigidbody2D rb;
+    public GameObject hpBarPrefab;
+    GameObject hpBar;
+    HealthBar hpBarScript;
     // Start is called before the first frame update
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+        hpBar = Instantiate(hpBarPrefab);
+        hpBarScript = hpBar.transform.Find("healthBar").GetComponent<HealthBar>();
+        hpBarScript.DelayedStart();
+        hpBarScript.SetMaxHp(200);
+        
     }
 
     // Update is called once per frame
@@ -30,13 +38,26 @@ public class EnemyController : MonoBehaviour
 
         rb.velocity = playerVelocity * distanceThisFrame;
        
+        hpBarScript.FollowEntity(gameObject.tag);
+        if(hpBarScript.healthBar.value <= 0){
+            Destroy(gameObject);
+            Destroy(hpBar);
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision) {
         direction *= -1;
     }
 
-    void OnTriggerEnter2D(Collider2D collider){
-        GameObject.Destroy(gameObject);
+
+    public string otherTag;
+
+    void OnTriggerEnter2D(Collider2D c){
+        if (c.gameObject.tag == otherTag) {
+            hpBarScript.DamagePlayer(25); //change
+            Destroy(c.gameObject);
+            print(hpBarScript.healthBar.value);
+        }
     }
+
 }
