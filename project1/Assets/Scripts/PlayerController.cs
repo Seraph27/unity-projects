@@ -1,6 +1,7 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -21,19 +22,16 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        
         // add a health bar component
         // init hp bar with min and max health
         // store a reference to hp bar
         // hpbar.getHealth()
         // hpbar.changeHealth()
         // hpbar.isAlive()
-
         var hpBar = Instantiate(hpBarPrefab);
         hpBarScript = hpBar.transform.Find("healthBar").GetComponent<HealthBar>();
-        hpBarScript.DelayedStart();
-        hpBarScript.SetMaxHp(100);
-        
+        hpBarScript.Initalize(gameObject, 100);
         front = Resources.Load<Sprite>("frontView");
         side = Resources.Load<Sprite>("sideView");
         back = Resources.Load<Sprite>("backView");
@@ -83,8 +81,10 @@ public class PlayerController : MonoBehaviour
             // bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletVelocity;
         }
 
-        hpBarScript.FollowEntity(gameObject.tag);
-        hpBarScript.IsPlayerAlive();
+        if(!hpBarScript.IsPlayerAlive()){
+            SceneManager.LoadScene("StartScene");
+        }
+        
     }
 
     public string otherTag;

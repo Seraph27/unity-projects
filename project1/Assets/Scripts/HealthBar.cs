@@ -2,26 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+
 
 public class HealthBar : MonoBehaviour
 {
     public Slider healthBar;
-
-    public void DelayedStart()
+    GameObject objectToFollow;
+    public void Initalize(GameObject objectToFollow, int hp)
     {
         healthBar = GetComponent<Slider>();
-    }
-
-    public void SetMaxHp(int hp){
+        this.objectToFollow = objectToFollow;
         healthBar.maxValue = hp;
         healthBar.value = hp;
     }
 
-    public void IsPlayerAlive(){
-        if(healthBar.value <= 0) {
-            SceneManager.LoadScene("StartScene");
-        }
+    public bool IsPlayerAlive(){
+        return healthBar.value > 0;  //true if its alive
     }
 
     public void DamagePlayer(int damage)
@@ -30,8 +26,8 @@ public class HealthBar : MonoBehaviour
         // print("after famaged" + healthBar.value);
     }
 
-    public void FollowEntity(string tag){
-        var pos = GameObject.FindGameObjectWithTag(tag).transform.position + new Vector3(0,-1,0);
+    void Update(){
+        var pos = objectToFollow.transform.position + new Vector3(0,-1,0);
         healthBar.transform.position = Camera.main.WorldToScreenPoint(pos);
     }
 

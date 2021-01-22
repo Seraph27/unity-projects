@@ -16,8 +16,7 @@ public class EnemyController : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
         hpBar = Instantiate(hpBarPrefab);
         hpBarScript = hpBar.transform.Find("healthBar").GetComponent<HealthBar>();
-        hpBarScript.DelayedStart();
-        hpBarScript.SetMaxHp(200);
+        hpBarScript.Initalize(gameObject, 200);
         
     }
 
@@ -38,7 +37,6 @@ public class EnemyController : MonoBehaviour
 
         rb.velocity = playerVelocity * distanceThisFrame;
        
-        hpBarScript.FollowEntity(gameObject.tag);
         if(hpBarScript.healthBar.value <= 0){
             Destroy(gameObject);
             Destroy(hpBar);
