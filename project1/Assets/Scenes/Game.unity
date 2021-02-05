@@ -2862,8 +2862,8 @@ GameObject:
   - component: {fileID: 966361559}
   - component: {fileID: 966361558}
   - component: {fileID: 966361557}
-  - component: {fileID: 966361561}
   - component: {fileID: 966361562}
+  - component: {fileID: 966361561}
   m_Layer: 0
   m_Name: 'Enemy '
   m_TagString: Enemy
@@ -2991,15 +2991,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 966361556}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 290596e677d74284a972ec768ef80436, type: 3}
+  m_Script: {fileID: 11500000, guid: 4152fecfbd6f35b42a9c89a0982d0aa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 500
   hpBarPrefab: {fileID: 8597309420964140059, guid: e3c1bdbdd00c49a419687b752a28de67,
     type: 3}
+  speed: 200
   powerupPrefab: {fileID: 2118437933122348379, guid: f873d54cc30109c46ab246f1391002f4,
     type: 3}
-  otherTag: PlayerProjectile
 --- !u!114 &966361562
 MonoBehaviour:
   m_ObjectHideFlags: 0

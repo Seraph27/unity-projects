@@ -2,58 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+abstract public class EnemyController : MonoBehaviour
 {
-    public float speed;
-    int direction = 1;
-    Rigidbody2D rb;
+    protected Rigidbody2D rb;
     public GameObject hpBarPrefab;
-    public GameObject powerupPrefab;
-    GameObject hpBar;
-    HealthBar hpBarScript;
-    // Start is called before the first frame update
+    protected GameObject hpBar;
+    protected HealthBar hpBarScript;
+    
+    abstract public int GetBaseHp();
+
     void Start()
     {
+        print("is calling");
         rb = gameObject.GetComponent<Rigidbody2D>();
         hpBar = Instantiate(hpBarPrefab);
         hpBarScript = hpBar.transform.Find("healthBar").GetComponent<HealthBar>();
-        hpBarScript.Initalize(gameObject, 200);
-        
+        hpBarScript.Initalize(gameObject, GetBaseHp());  
     }
 
-    // Update is called once per frame
-    void Update()
+    virtual protected void Update()
     {
-        var distanceThisFrame = speed * Time.deltaTime;
-        var playerVelocity = new Vector3(0,0,0);
-        
-        if (transform.position.x > 5.5) {
-            direction = -1;
-        }
-        if (transform.position.x < -5.5) {
-            direction = 1;
-        }
-
-        playerVelocity = new Vector3(direction,0,0);
-
-        rb.velocity = playerVelocity * distanceThisFrame;
-       
         if(hpBarScript.healthBar.value <= 0){
-            Instantiate(powerupPrefab, transform.position, Quaternion.identity);
             Destroy(gameObject);
             Destroy(hpBar);
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision) {
-        direction *= -1;
-    }
-
-
-    public string otherTag;
-
     void OnTriggerEnter2D(Collider2D c){
-        if (c.gameObject.tag == otherTag) {
+        if (c.gameObject.tag == "PlayerProjectile") {
             hpBarScript.DamagePlayer(25); //change
             Destroy(c.gameObject);
             print(hpBarScript.healthBar.value);
