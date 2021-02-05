@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour
     int direction = 1;
     Rigidbody2D rb;
     public GameObject hpBarPrefab;
+    public GameObject powerupPrefab;
     GameObject hpBar;
     HealthBar hpBarScript;
     // Start is called before the first frame update
@@ -38,6 +39,7 @@ public class EnemyController : MonoBehaviour
         rb.velocity = playerVelocity * distanceThisFrame;
        
         if(hpBarScript.healthBar.value <= 0){
+            Instantiate(powerupPrefab, transform.position, Quaternion.identity);
             Destroy(gameObject);
             Destroy(hpBar);
         }

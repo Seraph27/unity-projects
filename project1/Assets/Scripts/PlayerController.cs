@@ -96,6 +96,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //drops 
+    //write on trigger enter so player knows what to do with drop
     void makeBullet() {
         var bullet = new GameObject("playerBullet");
         var ren = bullet.AddComponent<SpriteRenderer>();
@@ -103,10 +105,15 @@ public class PlayerController : MonoBehaviour
         var circleCollider = bullet.AddComponent<CircleCollider2D>();
         bullet.tag = "PlayerProjectile";
         ren.sprite = Resources.Load<Sprite>("playerBullet"); 
+        ren.sortingLayerName = "Projectiles";
+        ren.sortingOrder = 0;
         rb.gravityScale = 0;
         bullet.AddComponent<DeleteWhenOffScreen>();
         circleCollider.isTrigger = true;
+        circleCollider.radius = 0.1f;
         bullet.transform.localScale = new Vector3(3, 3, 0);
+
+
 
         var worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);  //bullet shooting
         var direction = (Vector2)(worldMousePos - transform.position);
