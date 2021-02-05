@@ -11,8 +11,8 @@ public class WorldRenderer : MonoBehaviour
     {
         var tileSprites = Resources.LoadAll<Sprite>("tileset1");
         var LevelStorer = new GameObject("LevelStorer");
-        for(int i = 0; i < 16; i++){
-            for(int j = 0; j < 16; j++){
+        for(int i = 0; i < 32; i++){
+            for(int j = 0; j < 32; j++){
                 var tile = new GameObject("Tile " + i.ToString() + " " + j.ToString());  //start from bottom left
                 var randomNumber = UnityEngine.Random.value;
                 tile.transform.parent = LevelStorer.transform;
