@@ -16,11 +16,11 @@ public class HealthBar : MonoBehaviour
         healthBar.value = hp;
     }
 
-    public bool IsPlayerAlive(){
+    public bool IsAlive(){
         return healthBar.value > 0;  //true if its alive
     }
 
-    public void DamagePlayer(int damage)
+    public void ApplyDamage(float damage)
     {
         healthBar.value -= damage;
         // print("after famaged" + healthBar.value);

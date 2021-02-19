@@ -14,7 +14,6 @@ public class BoringEnemy : EnemyController
     // Update is called once per frame
     override protected void Update()
     {
-        print("Update");
         var distanceThisFrame = speed * Time.deltaTime;
         var playerVelocity = new Vector3(0,0,0);
         

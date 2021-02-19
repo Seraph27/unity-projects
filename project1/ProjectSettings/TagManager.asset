@@ -8,6 +8,8 @@ TagManager:
   - Bullet
   - EnemyProjectile
   - PlayerProjectile
+  - Powerup_Damage
+  - Powerup_Health
   layers:
   - Default
   - TransparentFX

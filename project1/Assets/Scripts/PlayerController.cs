@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public GameObject bulletPrefab;
     public float bulletVelocity;
     HealthBar hpBarScript;
+    public float damageMultiplier = 1.0f; 
     // Start is called before the first frame update
     void Start()
     {
@@ -81,23 +82,33 @@ public class PlayerController : MonoBehaviour
             // bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletVelocity;
         }
 
-        if(!hpBarScript.IsPlayerAlive()){
+        if(!hpBarScript.IsAlive()){
             SceneManager.LoadScene("StartScene");
         }
         
     }
 
-    public string otherTag;
+    void OnTriggerEnter2D(Collider2D c) { 
+         //bullets
+        if (c.gameObject.tag == "EnemyProjectile") {
+            hpBarScript.ApplyDamage(0); 
+            Destroy(c.gameObject);
+        }
 
-    void OnTriggerEnter2D(Collider2D c) {
-        if (c.gameObject.tag == otherTag) {
-            hpBarScript.DamagePlayer(0); //change
+        //drops
+        if (c.gameObject.tag == "Powerup_Damage") {
+            damageMultiplier = 2.0f;
+            StartCoroutine(ResetDamageMultiplierCoroutine());
             Destroy(c.gameObject);
         }
     }
 
-    //drops 
-    //write on trigger enter so player knows what to do with drop
+
+    IEnumerator ResetDamageMultiplierCoroutine() {
+        yield return new WaitForSeconds(5);
+        damageMultiplier = 1.0f;
+    }
+    
     void makeBullet() {
         var bullet = new GameObject("playerBullet");
         var ren = bullet.AddComponent<SpriteRenderer>();
@@ -105,6 +116,9 @@ public class PlayerController : MonoBehaviour
         var circleCollider = bullet.AddComponent<CircleCollider2D>();
         bullet.tag = "PlayerProjectile";
         ren.sprite = Resources.Load<Sprite>("playerBullet"); 
+        if (damageMultiplier >= 2.0f){
+            ren.color = Color.red;
+        }
         ren.sortingLayerName = "Projectiles";
         ren.sortingOrder = 0;
         rb.gravityScale = 0;

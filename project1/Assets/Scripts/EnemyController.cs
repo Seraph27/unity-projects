@@ -8,16 +8,17 @@ abstract public class EnemyController : MonoBehaviour
     public GameObject hpBarPrefab;
     protected GameObject hpBar;
     protected HealthBar hpBarScript;
+    PlayerController playerController;
     
     abstract public int GetBaseHp();
 
     void Start()
     {
-        print("is calling");
         rb = gameObject.GetComponent<Rigidbody2D>();
         hpBar = Instantiate(hpBarPrefab);
         hpBarScript = hpBar.transform.Find("healthBar").GetComponent<HealthBar>();
         hpBarScript.Initalize(gameObject, GetBaseHp());  
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     virtual protected void Update()
@@ -30,9 +31,8 @@ abstract public class EnemyController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D c){
         if (c.gameObject.tag == "PlayerProjectile") {
-            hpBarScript.DamagePlayer(25); //change
+            hpBarScript.ApplyDamage(25 * playerController.damageMultiplier); //change
             Destroy(c.gameObject);
-            print(hpBarScript.healthBar.value);
         }
     }
 
