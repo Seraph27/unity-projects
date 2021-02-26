@@ -2,7 +2,8 @@
 using UnityEngine.Tilemaps;
 
 public class SpawnEnemies : MonoBehaviour {
-    public GameObject enemyPrefab;
+    public GameObject boringEnemyPrefab;
+    public GameObject interestingEnemyPrefab;
     void Start () {
         Tilemap tilemap = GetComponent<Tilemap>();
 
@@ -15,9 +16,14 @@ public class SpawnEnemies : MonoBehaviour {
                 if (tile != null) {
                     if(tile.name == "tileset1_52"){
                         Vector3 localPos = new Vector3(x - bounds.size.x / 2, y - bounds.size.y / 2 , 0);
-                        Instantiate(enemyPrefab, localPos , Quaternion.identity);
+                        Instantiate(boringEnemyPrefab, localPos , Quaternion.identity);
                         Debug.Log("x:" + x + " y:" + y + " tile:" + tile.name);
-                    }                  
+                    } 
+                    if(tile.name == "tileset1_114"){
+                        Vector3 localPos = new Vector3(x - bounds.size.x / 2, y - bounds.size.y / 2 , 0);
+                        Instantiate(interestingEnemyPrefab, localPos , Quaternion.identity);
+                        Debug.Log("x:" + x + " y:" + y + " tile:" + tile.name);
+                    }                    
                 } 
             }
         }        

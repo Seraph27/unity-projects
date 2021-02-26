@@ -12,10 +12,9 @@ GameObject:
   - component: {fileID: 1273605073673437798}
   - component: {fileID: 1273605073673437799}
   - component: {fileID: 1273605073673437796}
-  - component: {fileID: 1273605073673437803}
-  - component: {fileID: 1273605073673437800}
+  - component: {fileID: -4649995832108709359}
   m_Layer: 0
-  m_Name: BoringEnemy
+  m_Name: InterestingEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f5b9f526b203b0c4897351d308947f24, type: 3}
-  m_Color: {r: 1, g: 0.033018887, b: 0.9951756, a: 1}
+  m_Color: {r: 0.98160696, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -132,7 +131,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.16}
   m_EdgeRadius: 0
---- !u!114 &1273605073673437803
+--- !u!114 &-4649995832108709359
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,26 +140,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1273605073673437797}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cb05ae4a592ed348816e8252001f464, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectile: {fileID: 5717293696893373833, guid: 275804afc1a234e43af2c692d1890efc,
-    type: 3}
-  speed: 10
---- !u!114 &1273605073673437800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1273605073673437797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4152fecfbd6f35b42a9c89a0982d0aa4, type: 3}
+  m_Script: {fileID: 11500000, guid: fa141740b07f75845af1dcbbfdcde9db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hpBarPrefab: {fileID: 8597309420964140059, guid: e3c1bdbdd00c49a419687b752a28de67,
-    type: 3}
-  speed: 200
-  powerupPrefab: {fileID: 2118437933122348379, guid: f873d54cc30109c46ab246f1391002f4,
     type: 3}
