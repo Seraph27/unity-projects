@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     public GameObject bulletPrefab;
     public float bulletVelocity;
-    HealthBar hpBarScript;
+    public HealthBar hpBarScript;
     public float damageMultiplier = 1.0f; 
     // Start is called before the first frame update
     void Start()
