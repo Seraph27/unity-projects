@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public float bulletVelocity;
     public HealthBar hpBarScript;
     public float damageMultiplier = 1.0f; 
+    public int cash;
     // Start is called before the first frame update
     void Start()
     {
