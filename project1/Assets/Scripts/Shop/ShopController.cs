@@ -17,6 +17,7 @@ public class ShopController : MonoBehaviour
         print("triggered");
         if(c.gameObject.tag == "Player"){
             print(shopOverlay);
+            print(c.gameObject.GetComponent<PlayerController>().cash);
             shopOverlay.SetActive(true);
         }
     }

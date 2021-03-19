@@ -28,11 +28,11 @@ public class BoringEnemy : EnemyController
 
         rb.velocity = playerVelocity * distanceThisFrame;
 
-        if(hpBarScript.healthBar.value <= 0){
+        if(hpBarScript.value <= 0){
             Instantiate(powerupPrefab, transform.position, Quaternion.identity);
         }
 
-        base.Update();
+      base.Update();
     }
 
     void OnCollisionEnter2D(Collision2D collision) {

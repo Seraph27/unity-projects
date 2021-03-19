@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa141740b07f75845af1dcbbfdcde9db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpBarPrefab: {fileID: 8597309420964140059, guid: e3c1bdbdd00c49a419687b752a28de67,
+  hpBarPrefab: {fileID: 6703622591148104126, guid: 959a8f42eed72dd4c813d8e2c18b6577,
     type: 3}
 --- !u!114 &-6542092094800783500
 MonoBehaviour:

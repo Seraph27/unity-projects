@@ -16,13 +16,13 @@ abstract public class EnemyController : MonoBehaviour
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         hpBar = Instantiate(hpBarPrefab);
-        hpBarScript = hpBar.transform.Find("healthBar").GetComponent<HealthBar>();
+        hpBarScript = hpBar.GetComponent<HealthBar>();
         hpBarScript.Initalize(gameObject, GetBaseHp());  
     }
 
     virtual protected void Update()
     {
-        if(hpBarScript.healthBar.value <= 0){
+        if(hpBarScript.value <= 0){
             Destroy(gameObject);
             Destroy(hpBar);
         }

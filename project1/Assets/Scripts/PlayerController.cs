@@ -31,8 +31,9 @@ public class PlayerController : MonoBehaviour
         // hpbar.getHealth()
         // hpbar.changeHealth()
         // hpbar.isAlive()
+        cash = 100;
         var hpBar = Instantiate(hpBarPrefab);
-        hpBarScript = hpBar.transform.Find("healthBar").GetComponent<HealthBar>();
+        hpBarScript = hpBar.GetComponent<HealthBar>();
         hpBarScript.Initalize(gameObject, 100);
         front = Resources.Load<Sprite>("frontView");
         side = Resources.Load<Sprite>("sideView");

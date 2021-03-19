@@ -6,29 +6,33 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    public Slider healthBar;
+    GameObject healthBar;
+    public float maxValue, value;
     GameObject objectToFollow;
     public void Initalize(GameObject objectToFollow, int hp)
     {
-        healthBar = GetComponent<Slider>();
+        healthBar = transform.Find("whitePixel").gameObject;
         this.objectToFollow = objectToFollow;
-        healthBar.maxValue = hp;
-        healthBar.value = hp;
+        maxValue = hp;
+        value = hp;
     }
 
     public bool IsAlive(){
-        return healthBar.value > 0;  //true if its alive
+        return value > 0;  //true if its alive
     }
 
     public void ApplyDamage(float damage)
     {
-        healthBar.value -= damage;
+        value -= damage;
         // print("after famaged" + healthBar.value);
     }
 
     void Update(){
         var pos = objectToFollow.transform.position + new Vector3(0,-1,0);
-        healthBar.transform.position = Camera.main.WorldToScreenPoint(pos);
+        healthBar.transform.position = pos;
+
+        var ratio = value / maxValue;
+        healthBar.transform.localScale = new Vector3(100 * ratio, 20, 1);
     }
 
 }

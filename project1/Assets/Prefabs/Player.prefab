@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 000dd6d76e24a394abf800332cca2e8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpBarPrefab: {fileID: 8597309420964140059, guid: e3c1bdbdd00c49a419687b752a28de67,
+  hpBarPrefab: {fileID: 6703622591148104126, guid: 959a8f42eed72dd4c813d8e2c18b6577,
     type: 3}
   upKey: w
   rightKey: d
@@ -106,7 +106,9 @@ MonoBehaviour:
   bulletPrefab: {fileID: 6737834693707832142, guid: eb9580e16e8ba3f4cab55c519af9f000,
     type: 3}
   bulletVelocity: 10
+  hpBarScript: {fileID: 0}
   damageMultiplier: 1
+  cash: 0
 --- !u!50 &3567551268221341403
 Rigidbody2D:
   serializedVersion: 4

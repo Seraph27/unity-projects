@@ -159,7 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4152fecfbd6f35b42a9c89a0982d0aa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpBarPrefab: {fileID: 8597309420964140059, guid: e3c1bdbdd00c49a419687b752a28de67,
+  hpBarPrefab: {fileID: 6703622591148104126, guid: 959a8f42eed72dd4c813d8e2c18b6577,
     type: 3}
   speed: 200
   powerupPrefab: {fileID: 2118437933122348379, guid: f873d54cc30109c46ab246f1391002f4,
