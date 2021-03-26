@@ -544,7 +544,6 @@ GameObject:
   - component: {fileID: 682165605}
   - component: {fileID: 682165604}
   - component: {fileID: 682165606}
-  - component: {fileID: 682165607}
   m_Layer: 0
   m_Name: Passable
   m_TagString: Untagged
@@ -19956,26 +19955,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 682165602}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23022a3786345144f94f2ce5e531330b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boringEnemyPrefab: {fileID: 1273605073673437797, guid: 1eaf8a9e8e66d474bafa52df14ed71df,
-    type: 3}
-  interestingEnemyPrefab: {fileID: 1273605073673437797, guid: ea29deaaf43f0014eaadee7ea703eedd,
-    type: 3}
---- !u!114 &682165607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 682165602}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb6346fe7e5ca194ba5af8cc1dea3757, type: 3}
+  m_Script: {fileID: 11500000, guid: 5dd7b04184b2db144bd942923334874c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 3567551268221341415, guid: d787b27a9b961934fb826741b1b1476c,
+    type: 3}
+  boringEnemyPrefab: {fileID: 1273605073673437797, guid: 1eaf8a9e8e66d474bafa52df14ed71df,
+    type: 3}
+  interestingEnemyPrefab: {fileID: 1273605073673437797, guid: ea29deaaf43f0014eaadee7ea703eedd,
     type: 3}
 --- !u!1 &1053725642
 GameObject:
