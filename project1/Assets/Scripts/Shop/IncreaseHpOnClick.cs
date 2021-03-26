@@ -12,7 +12,7 @@ public class IncreaseHpOnClick : MonoBehaviour
     // Start is called before the first frame update
     void OnMouseDown()
         {
-            var playerController = GameObject.Find("Player(Clone)").GetComponent<PlayerController>();
+            var playerController = GameObject.Find("Player").GetComponent<PlayerController>();
 
             if(playerController.cash > 20){
                 print("increase hp :)");

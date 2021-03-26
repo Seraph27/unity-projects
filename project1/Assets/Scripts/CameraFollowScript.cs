@@ -17,7 +17,7 @@ public class CameraFollowScript : MonoBehaviour
         if (player != null) {
             transform.position = new Vector3(player.transform.position.x, player.transform.position.y, -10);
         } else {
-            player = GameObject.Find("Player(Clone)");
+            player = GameObject.Find("Player");
         }
        
     }

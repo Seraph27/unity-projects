@@ -19,7 +19,8 @@ public class SpawnEntites : MonoBehaviour {
                     Vector3 worldPos = tilemap.CellToWorld(new Vector3Int(x, y, 0));
 
                     if(tile.name == "tileset1_53"){
-                        Instantiate(playerPrefab, worldPos + new Vector3(0.5f, 0.5f, 0), Quaternion.identity);
+                        GameObject player = GameObject.Find("Player");
+                        player.transform.position = worldPos + new Vector3(0.5f, 0.5f, 0);
                     }  
                     if(tile.name == "tileset1_52"){   
                         Instantiate(boringEnemyPrefab, worldPos + new Vector3(0.5f, 0.5f, 0), Quaternion.identity);

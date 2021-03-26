@@ -9,19 +9,21 @@ abstract public class EnemyController : MonoBehaviour
     protected GameObject hpBar;
     protected HealthBar hpBarScript;
 
-    
+
     abstract public int GetBaseHp();
 
-    void Start()
+    virtual protected void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         hpBar = Instantiate(hpBarPrefab);
         hpBarScript = hpBar.GetComponent<HealthBar>();
         hpBarScript.Initalize(gameObject, GetBaseHp());  
+        
     }
 
     virtual protected void Update()
     {
+
         if(hpBarScript.value <= 0){
             Destroy(gameObject);
             Destroy(hpBar);
@@ -30,7 +32,7 @@ abstract public class EnemyController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D c){  //player dealt dmg
         if (c.gameObject.tag == "PlayerProjectile") {
-            GameObject player = GameObject.Find("Player(Clone)");
+            GameObject player = GameObject.Find("Player");
             if (player != null){
                 PlayerController playerController = player.GetComponent<PlayerController>();
                 hpBarScript.ApplyDamage(25 * playerController.damageMultiplier);
@@ -64,6 +66,9 @@ drops a meteor and it shows a red circle of where its gonna land, so player need
 Trail enemy:
 
 leaves a trail of poison anywhere it goes and does dmg when player steps on it
+
+bouce enemy:
+bounce arounds the screen
 
 dashing enemy:
 

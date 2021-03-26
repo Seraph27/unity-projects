@@ -10,7 +10,7 @@ public class HomingAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Player(Clone)");
+        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
