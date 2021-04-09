@@ -14,7 +14,6 @@ public class ShopController : MonoBehaviour
     
 
     void OnTriggerEnter2D(Collider2D c){
-        print("triggered");
         if(c.gameObject.tag == "Player"){
             print(shopOverlay);
             print(c.gameObject.GetComponent<PlayerController>().cash);

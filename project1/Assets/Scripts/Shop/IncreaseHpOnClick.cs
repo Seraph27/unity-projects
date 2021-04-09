@@ -12,6 +12,7 @@ public class IncreaseHpOnClick : MonoBehaviour
     // Start is called before the first frame update
     void OnMouseDown()
         {
+            print("Clicked");
             var playerController = GameObject.Find("Player").GetComponent<PlayerController>();
 
             if(playerController.cash >= 20){
