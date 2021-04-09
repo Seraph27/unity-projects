@@ -13,7 +13,7 @@ public class TrailController : MonoBehaviour
     {
         player = GameObject.Find("Player");
         owner = GameObject.Find("TrailEnemy");
-        StartCoroutine(SelfDestruct());
+        StartCoroutine(SelfDestruct());     //GameObject.Destroy(gameObject, 5);
     }
 
     IEnumerator SelfDestruct()
