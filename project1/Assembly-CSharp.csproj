@@ -39,6 +39,7 @@
      <Compile Include="Assets\Scripts\BoringEnemy.cs" />
      <Compile Include="Assets\Scripts\CameraFollowScript.cs" />
      <Compile Include="Assets\Scripts\CashController.cs" />
+     <Compile Include="Assets\Scripts\DashEnemy.cs" />
      <Compile Include="Assets\Scripts\DeleteWhenOffScreen.cs" />
      <Compile Include="Assets\Scripts\EnemyAttacks\BasicEnemyAttack.cs" />
      <Compile Include="Assets\Scripts\EnemyAttacks\HomingAttack.cs" />

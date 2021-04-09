@@ -63,7 +63,7 @@ Meteor enemy:
 
 drops a meteor and it shows a red circle of where its gonna land, so player needs to leave the area or they will take dmg
 
-Trail enemy:
+Trail enemy: (DONE)
 
 leaves a trail of poison anywhere it goes and does dmg when player steps on it
 
