@@ -24,13 +24,6 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-        // add a health bar component
-        // init hp bar with min and max health
-        // store a reference to hp bar
-        // hpbar.getHealth()
-        // hpbar.changeHealth()
-        // hpbar.isAlive()
         cash = 100;
         var hpBar = Instantiate(hpBarPrefab);
         hpBarScript = hpBar.GetComponent<HealthBar>();
@@ -40,8 +33,6 @@ public class PlayerController : MonoBehaviour
         back = Resources.Load<Sprite>("backView");
         ren = gameObject.GetComponent<SpriteRenderer>();
         rb = gameObject.GetComponent<Rigidbody2D>();
-        
-        
     }
 
     // Update is called once per frame

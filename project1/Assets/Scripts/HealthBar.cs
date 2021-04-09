@@ -27,6 +27,11 @@ public class HealthBar : MonoBehaviour
         // print("after famaged" + healthBar.value);
     }
 
+    public void IncreaseHp(int hp){
+        maxValue += hp;
+        value += hp;
+    }
+
     void Update(){
         var pos = objectToFollow.transform.position + new Vector3(0,-1,0);
         healthBar.transform.position = pos;

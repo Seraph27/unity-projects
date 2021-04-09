@@ -299,7 +299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef5be2e717f930489da168ca2588efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Game
+  sceneName: Level1
 --- !u!61 &889089314
 BoxCollider2D:
   m_ObjectHideFlags: 0

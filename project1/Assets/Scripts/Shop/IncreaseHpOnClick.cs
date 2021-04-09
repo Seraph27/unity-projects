@@ -14,9 +14,8 @@ public class IncreaseHpOnClick : MonoBehaviour
         {
             var playerController = GameObject.Find("Player").GetComponent<PlayerController>();
 
-            if(playerController.cash > 20){
-                print("increase hp :)");
-                //incrase hp
+            if(playerController.cash >= 20){
+                playerController.hpBarScript.IncreaseHp(50); //needs fix but i guess its ok for now
                 playerController.cash -= 20;
             }
             
