@@ -8,6 +8,7 @@ abstract public class EnemyController : MonoBehaviour
     public GameObject hpBarPrefab;
     protected GameObject hpBar;
     protected HealthBar hpBarScript;
+    protected SpriteRenderer ren;
 
 
     abstract public int GetBaseHp();
@@ -18,6 +19,7 @@ abstract public class EnemyController : MonoBehaviour
         hpBar = Instantiate(hpBarPrefab);
         hpBarScript = hpBar.GetComponent<HealthBar>();
         hpBarScript.Initalize(gameObject, GetBaseHp());  
+        ren = GetComponent<SpriteRenderer>();
         
     }
 

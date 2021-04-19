@@ -15025,7 +15025,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4782140530313081065}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -15057,7 +15057,7 @@ GameObject:
   - component: {fileID: 4782140530313081067}
   - component: {fileID: 4782140530313081064}
   - component: {fileID: 4782140530313081068}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DashEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}

@@ -6,12 +6,13 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    GameObject healthBar;
+    GameObject whitePixel;
     public float maxValue, value;
     GameObject objectToFollow;
+    public GameObject damageTextPrefab;
     public void Initalize(GameObject objectToFollow, int hp)
     {
-        healthBar = transform.Find("whitePixel").gameObject;
+        whitePixel = transform.Find("whitePixel").gameObject;
         this.objectToFollow = objectToFollow;
         maxValue = hp;
         value = hp;
@@ -24,7 +25,8 @@ public class HealthBar : MonoBehaviour
     public void ApplyDamage(float damage)
     {
         value -= damage;
-        // print("after famaged" + healthBar.value);
+        var damageText = Instantiate(damageTextPrefab, transform.position, Quaternion.identity);
+        GameObject.Destroy(damageText, 1);
     }
 
     public void IncreaseHp(int hp){
@@ -34,10 +36,10 @@ public class HealthBar : MonoBehaviour
 
     void Update(){
         var pos = objectToFollow.transform.position + new Vector3(0,-1,0);
-        healthBar.transform.position = pos;
+        transform.position = pos;
 
         var ratio = value / maxValue;
-        healthBar.transform.localScale = new Vector3(100 * ratio, 20, 1);
+        whitePixel.transform.localScale = new Vector3(100 * ratio, 20, 1);
     }
 
 }

@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     Sprite side;
     Sprite back;
     SpriteRenderer ren;
-    Rigidbody2D rb;
+    public Rigidbody2D rb;
     public GameObject bulletPrefab;
     public float bulletVelocity;
     public HealthBar hpBarScript;
