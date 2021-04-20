@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public HealthBar hpBarScript;
     public float damageMultiplier = 1.0f; 
     public int cash;
+    public GameObject cashTextPrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +34,7 @@ public class PlayerController : MonoBehaviour
         back = Resources.Load<Sprite>("backView");
         ren = gameObject.GetComponent<SpriteRenderer>();
         rb = gameObject.GetComponent<Rigidbody2D>();
+        Instantiate(cashTextPrefab, transform.position, Quaternion.identity);
     }
 
     // Update is called once per frame
