@@ -15,3 +15,6 @@ public class GameAssets : MonoBehaviour
 
     public Transform DamageText;
 }
+
+
+//idk if this is good or not idea is to be able to use GameObject.i.DamageText

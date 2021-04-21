@@ -383,7 +383,7 @@ PrefabInstance:
     - target: {fileID: 3567551268221341402, guid: d787b27a9b961934fb826741b1b1476c,
         type: 3}
       propertyPath: speed
-      value: 500
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 3567551268221341402, guid: d787b27a9b961934fb826741b1b1476c,
         type: 3}
@@ -429,7 +429,7 @@ PrefabInstance:
     - target: {fileID: 3567551268221341413, guid: d787b27a9b961934fb826741b1b1476c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3567551268221341413, guid: d787b27a9b961934fb826741b1b1476c,
         type: 3}
@@ -482,7 +482,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &187500437
 MonoBehaviour:
@@ -622,7 +622,7 @@ Transform:
   m_Children:
   - {fileID: 1458279148}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &682165602
 GameObject:
@@ -14332,7 +14332,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1241239954
 GameObject:
@@ -14732,7 +14732,7 @@ Transform:
   - {fileID: 91051083}
   - {fileID: 1241239955}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1508085289
 GameObject:
@@ -14799,7 +14799,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2018312185
 MonoBehaviour:
@@ -14827,7 +14827,7 @@ Transform:
   m_LocalScale: {x: 6, y: 6, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &4782140530313081064
 BoxCollider2D:

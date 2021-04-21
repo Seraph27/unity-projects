@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 
 public class HealthBar : MonoBehaviour
 {
@@ -10,6 +10,7 @@ public class HealthBar : MonoBehaviour
     public float maxValue, value;
     GameObject objectToFollow;
     public GameObject damageTextPrefab;
+
     public void Initalize(GameObject objectToFollow, int hp)
     {
         whitePixel = transform.Find("whitePixel").gameObject;
@@ -25,7 +26,9 @@ public class HealthBar : MonoBehaviour
     public void ApplyDamage(float damage)
     {
         value -= damage;
-        DamageTextController.CreateDamageText(transform.position, damage);
+        var damageText = Instantiate(damageTextPrefab, transform.position, Quaternion.identity);
+        damageText.transform.GetChild(0).GetComponent<TextMeshPro>().SetText(damage.ToString());
+        GameObject.Destroy(damageText, 1);
     }
 
     public void IncreaseHp(int hp){
