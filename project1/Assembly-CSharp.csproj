@@ -39,11 +39,13 @@
      <Compile Include="Assets\Scripts\BoringEnemy.cs" />
      <Compile Include="Assets\Scripts\CameraFollowScript.cs" />
      <Compile Include="Assets\Scripts\CashController.cs" />
+     <Compile Include="Assets\Scripts\DamageTextController.cs" />
      <Compile Include="Assets\Scripts\DashEnemy.cs" />
      <Compile Include="Assets\Scripts\DeleteWhenOffScreen.cs" />
      <Compile Include="Assets\Scripts\EnemyAttacks\BasicEnemyAttack.cs" />
      <Compile Include="Assets\Scripts\EnemyAttacks\HomingAttack.cs" />
      <Compile Include="Assets\Scripts\EnemyController.cs" />
+     <Compile Include="Assets\Scripts\GameAssets.cs" />
      <Compile Include="Assets\Scripts\HealthBar.cs" />
      <Compile Include="Assets\Scripts\InterestingEnemy.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />

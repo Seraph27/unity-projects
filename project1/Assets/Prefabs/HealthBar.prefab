@@ -127,5 +127,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxValue: 0
   value: 0
-  damageTextPrefab: {fileID: 9007732419908180088, guid: d47bb0570bd9bf5419e0e49205424946,
+  damageTextPrefab: {fileID: 6004363917370446325, guid: 17333310f2acee246a5b2fce83544fe9,
     type: 3}

@@ -25,8 +25,7 @@ public class HealthBar : MonoBehaviour
     public void ApplyDamage(float damage)
     {
         value -= damage;
-        var damageText = Instantiate(damageTextPrefab, transform.position, Quaternion.identity);
-        GameObject.Destroy(damageText, 1);
+        DamageTextController.CreateDamageText(transform.position, damage);
     }
 
     public void IncreaseHp(int hp){
