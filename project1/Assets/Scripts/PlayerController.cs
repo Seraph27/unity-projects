@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public enum WeaponKind{
+    PiuPiuLaser,
+    Shotgun,
+}
+
 public class PlayerController : MonoBehaviour
 {
     public GameObject hpBarPrefab;
@@ -22,6 +27,7 @@ public class PlayerController : MonoBehaviour
     public float damageMultiplier = 1.0f; 
     public int cash;
     public GameObject cashTextPrefab;
+    WeaponKind activeWeapon = WeaponKind.Shotgun;
     // Start is called before the first frame update
     void Start()
     {
@@ -63,28 +69,26 @@ public class PlayerController : MonoBehaviour
             playerVelocity += new Vector3(0,-1,0);
         }
 
-        rb.velocity = playerVelocity * distanceThisFrame;
+        rb.velocity = playerVelocity.normalized * distanceThisFrame;
 
-
-        var worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        var direction = (Vector2)(worldMousePos - transform.position);
-        direction.Normalize();
         if (Input.GetMouseButtonDown(0)) {
-            makeBullet();
-            // var bullet = Instantiate (bulletPrefab,
-            //              transform.position + (Vector3)(direction * 1.0f),
-            //              Quaternion.identity);
-            // bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletVelocity;
+            if(activeWeapon == WeaponKind.PiuPiuLaser) MakePiuPiuBullet();
+            else MakeShotgunBlast();
+                
         }
 
         if(!hpBarScript.IsAlive()){
             SceneManager.LoadScene("StartScene");
         }
-        
+
+        //weapon switch
+        if (Input.GetKey("1")){ 
+            activeWeapon = activeWeapon == WeaponKind.PiuPiuLaser ? WeaponKind.Shotgun : WeaponKind.PiuPiuLaser;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D c) { 
-         //bullets
+        //bullets
         if (c.gameObject.tag == "EnemyProjectile") {
             hpBarScript.ApplyDamage(0); 
             Destroy(c.gameObject);
@@ -104,14 +108,40 @@ public class PlayerController : MonoBehaviour
         damageMultiplier = 1.0f;
     }
     
-    void makeBullet() {
-        var bullet = new GameObject("playerBullet");
+    void MakePiuPiuBullet()
+    {
+        GameObject bullet;
+        Rigidbody2D rb;
+
+        (bullet, rb) = CreateGenericBullet(1, "PlayerBullet");
+    }
+
+
+    void MakeShotgunBlast() {
+        GameObject bullet;
+        Rigidbody2D rb;
+
+        for (int i = 0; i < 10; i++) {
+            (bullet, rb) = CreateGenericBullet(1, "PlayerBullet", 3, UnityEngine.Random.Range(-30, 30));
+        }
+    }
+
+
+
+    private (GameObject, Rigidbody2D) CreateGenericBullet(
+        float size, 
+        string spriteName, 
+        float speedMultiplier = 1, 
+        float rotationOffset = 0)
+    {
+        GameObject bullet = new GameObject(spriteName);
         var ren = bullet.AddComponent<SpriteRenderer>();
-        var rb = bullet.AddComponent<Rigidbody2D>();
+        Rigidbody2D rb = bullet.AddComponent<Rigidbody2D>();
         var circleCollider = bullet.AddComponent<CircleCollider2D>();
         bullet.tag = "PlayerProjectile";
-        ren.sprite = Resources.Load<Sprite>("playerBullet"); 
-        if (damageMultiplier >= 2.0f){
+        ren.sprite = Resources.Load<Sprite>(spriteName);
+        if (damageMultiplier >= 2.0f)
+        {
             ren.color = Color.red;
         }
         ren.sortingLayerName = "Projectiles";
@@ -119,16 +149,19 @@ public class PlayerController : MonoBehaviour
         rb.gravityScale = 0;
         bullet.AddComponent<DeleteWhenOffScreen>();
         circleCollider.isTrigger = true;
-        circleCollider.radius = 0.1f;
-        bullet.transform.localScale = new Vector3(3, 3, 0);
-
-
+        circleCollider.radius = size / 10;
+        bullet.transform.localScale = new Vector3(size * 3, size * 3, 0);
 
         var worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);  //bullet shooting
         var direction = (Vector2)(worldMousePos - transform.position);
         direction.Normalize();
-        bullet.transform.position = transform.position + (Vector3)(direction * 1.0f);
-        bullet.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x)*Mathf.Rad2Deg);
-        rb.velocity = direction * bulletVelocity;
+        var rotationDegrees = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + rotationOffset;
+        var rotationVector =  (Vector2)(Quaternion.Euler(0, 0, rotationDegrees) * Vector2.right);
+        bullet.transform.rotation = Quaternion.Euler(0, 0, rotationDegrees);
+        bullet.transform.position = transform.position + (Vector3)(rotationVector * 1.0f);
+        rb.velocity = rotationVector * 10 * speedMultiplier;
+        return (bullet, rb);
     }
+
+   
 }
