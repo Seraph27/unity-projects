@@ -27,7 +27,8 @@ public class PlayerController : MonoBehaviour
     public float damageMultiplier = 1.0f; 
     public int cash;
     public GameObject cashTextPrefab;
-    WeaponKind activeWeapon = WeaponKind.Shotgun;
+    bool isShootingActive = false;
+    WeaponKind activeWeapon = WeaponKind.PiuPiuLaser;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +42,8 @@ public class PlayerController : MonoBehaviour
         ren = gameObject.GetComponent<SpriteRenderer>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         Instantiate(cashTextPrefab, transform.position, Quaternion.identity);
+        print(GameController.Instance.i);
+        GameController.Instance.i++;
     }
 
     // Update is called once per frame
@@ -71,9 +74,16 @@ public class PlayerController : MonoBehaviour
 
         rb.velocity = playerVelocity.normalized * distanceThisFrame;
 
-        if (Input.GetMouseButtonDown(0)) {
-            if(activeWeapon == WeaponKind.PiuPiuLaser) MakePiuPiuBullet();
-            else MakeShotgunBlast();
+        if (Input.GetMouseButton(0) && isShootingActive == false) {
+            isShootingActive = true;
+            if(activeWeapon == WeaponKind.PiuPiuLaser) {
+                damageMultiplier = 1.0f;
+                StartCoroutine(MakePiuPiuBullet()); 
+            }
+            else {
+                damageMultiplier = 0.3f;
+                StartCoroutine(MakeShotgunBlast()); 
+            } 
                 
         }
 
@@ -82,7 +92,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //weapon switch
-        if (Input.GetKey("1")){ 
+        if (Input.GetKeyDown("1")){ 
             activeWeapon = activeWeapon == WeaponKind.PiuPiuLaser ? WeaponKind.Shotgun : WeaponKind.PiuPiuLaser;
         }
     }
@@ -96,7 +106,7 @@ public class PlayerController : MonoBehaviour
 
         //drops
         if (c.gameObject.tag == "Powerup_Damage") {
-            damageMultiplier = 2.0f;
+            damageMultiplier *= 2.0f;
             StartCoroutine(ResetDamageMultiplierCoroutine());
             Destroy(c.gameObject);
         }
@@ -108,22 +118,26 @@ public class PlayerController : MonoBehaviour
         damageMultiplier = 1.0f;
     }
     
-    void MakePiuPiuBullet()
+    IEnumerator MakePiuPiuBullet()
     {
         GameObject bullet;
         Rigidbody2D rb;
 
         (bullet, rb) = CreateGenericBullet(1, "PlayerBullet");
+        yield return new WaitForSeconds(0.33f);
+        isShootingActive = false;
     }
 
 
-    void MakeShotgunBlast() {
+    IEnumerator MakeShotgunBlast() {
         GameObject bullet;
         Rigidbody2D rb;
 
         for (int i = 0; i < 10; i++) {
             (bullet, rb) = CreateGenericBullet(1, "PlayerBullet", 3, UnityEngine.Random.Range(-30, 30));
         }
+        yield return new WaitForSeconds(0.75f);
+        isShootingActive = false;
     }
 
 
