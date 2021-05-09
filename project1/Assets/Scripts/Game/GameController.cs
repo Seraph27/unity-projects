@@ -1,24 +1,25 @@
 using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GameController : Singleton<GameController>
 {
-    public int i;
-    public Vector3 level1Pos; //dictionary scenename: pos
+    Dictionary<string, Vector3> savedPositions = new Dictionary<string, Vector3>();
 
-    public void setupGame(){
+    public void setupGame(){ //when loading a new scene
         SpawnEntites entitySpawner = GameObject.FindObjectOfType<SpawnEntites>();
         GameObject player = entitySpawner.spawnPlayer();
         entitySpawner.spawnEnemies(); //get player and put it in right place
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        Vector3 spawnPadLocation = GameObject.FindObjectOfType<SavePositionTile>().transform.position;
 
-        player.transform.position = level1Pos;
+        if (currentSceneName != null && savedPositions.ContainsKey(currentSceneName)) {
+            player.transform.position = savedPositions[currentSceneName];
+        } 
     }
 
     public void savePlayerPositionOnTransition(Vector3 pos){
-        level1Pos = pos;
+        savedPositions[SceneManager.GetActiveScene().name] = pos;
     }
 
-    // override protected void Awake(){
-    //     base.Awake();
-    //     setupGame();
-    // }
 }

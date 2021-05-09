@@ -42,8 +42,6 @@ public class PlayerController : MonoBehaviour
         ren = gameObject.GetComponent<SpriteRenderer>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         Instantiate(cashTextPrefab, transform.position, Quaternion.identity);
-        print(GameController.Instance.i);
-        GameController.Instance.i++;
     }
 
     // Update is called once per frame
