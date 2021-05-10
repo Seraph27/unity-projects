@@ -9,7 +9,7 @@ public class GameController : Singleton<GameController>
     public void setupGame(){ //when loading a new scene
         SpawnEntites entitySpawner = GameObject.FindObjectOfType<SpawnEntites>();
         GameObject player = entitySpawner.spawnPlayer();
-        entitySpawner.spawnEnemies(); //get player and put it in right place
+        entitySpawner.spawnEnemies(); 
         string currentSceneName = SceneManager.GetActiveScene().name;
         Vector3 spawnPadLocation = GameObject.FindObjectOfType<SavePositionTile>().transform.position;
 
