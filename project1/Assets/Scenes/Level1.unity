@@ -8310,8 +8310,8 @@ Tilemap:
   - first: {x: -7, y: 6, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 18
-      m_TileSpriteIndex: 18
+      m_TileIndex: 10
+      m_TileSpriteIndex: 10
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -11002,8 +11002,8 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: f161565c35315634c9741533d7bb1f88, type: 2}
   - m_RefCount: 2
     m_Data: {fileID: 11400000, guid: 0668c54a89a92364799e673b63443683, type: 2}
   - m_RefCount: 1
@@ -11018,7 +11018,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 72fe3c5c8d3abf94bbd1179ec6b85c16, type: 2}
   - m_RefCount: 717
     m_Data: {fileID: 11400000, guid: b490163b1e05f384690c0554201d5d35, type: 2}
-  - m_RefCount: 308
+  - m_RefCount: 307
     m_Data: {fileID: 11400000, guid: 6a97648c233ef3148aef59f3fa6d1e8e, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 609406cb24cb9f443b67405c4a4b2b33, type: 2}
@@ -11045,8 +11045,9 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: -1017706173204352385, guid: efba84aae94639c408045867419b76cf,
+      type: 3}
   - m_RefCount: 2
     m_Data: {fileID: -6946070106619058933, guid: efba84aae94639c408045867419b76cf,
       type: 3}
@@ -11068,7 +11069,7 @@ Tilemap:
   - m_RefCount: 717
     m_Data: {fileID: -6531580382025513940, guid: efba84aae94639c408045867419b76cf,
       type: 3}
-  - m_RefCount: 308
+  - m_RefCount: 307
     m_Data: {fileID: -9017634572401362149, guid: efba84aae94639c408045867419b76cf,
       type: 3}
   - m_RefCount: 1
@@ -11135,8 +11136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dd7b04184b2db144bd942923334874c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 3567551268221341415, guid: d787b27a9b961934fb826741b1b1476c,
-    type: 3}
+  playerPrefab: {fileID: 0}
   boringEnemyPrefab: {fileID: 1273605073673437797, guid: 1eaf8a9e8e66d474bafa52df14ed71df,
     type: 3}
   interestingEnemyPrefab: {fileID: 1273605073673437797, guid: ea29deaaf43f0014eaadee7ea703eedd,
