@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     public GameObject cashTextPrefab;
     bool isShootingActive = false;
     WeaponKind activeWeapon = WeaponKind.PiuPiuLaser;
+    Vector3 playerVelocity;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,12 +45,13 @@ public class PlayerController : MonoBehaviour
         Instantiate(cashTextPrefab, transform.position, Quaternion.identity);
     }
 
+    void FixedUpdate(){
+        rb.velocity = playerVelocity * speed * Time.fixedDeltaTime;
+    }
     // Update is called once per frame
     void Update()
     {
-        var distanceThisFrame = speed * Time.deltaTime;
-        var playerVelocity = new Vector3(0,0,0);
-
+        playerVelocity = new Vector3(0,0,0);
 
         if (Input.GetKey(upKey)){ 
             ren.sprite = back;
@@ -70,7 +72,7 @@ public class PlayerController : MonoBehaviour
             playerVelocity += new Vector3(0,-1,0);
         }
 
-        rb.velocity = playerVelocity.normalized * distanceThisFrame;
+        playerVelocity.Normalize();
 
         if (Input.GetMouseButton(0) && isShootingActive == false) {
             isShootingActive = true;

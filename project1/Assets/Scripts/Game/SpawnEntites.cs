@@ -1,15 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.Tilemaps;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+
+
 
 public class SpawnEntites : MonoBehaviour {
     public GameObject playerPrefab;
     public GameObject boringEnemyPrefab;
     public GameObject interestingEnemyPrefab;
 
-
-    public GameObject spawnPlayer(){
-        GameObject player = null;
-
+    public List<(Vector3, TileBase)> getTilePositions(){
+        var tiles = new List<(Vector3, TileBase)>();
         Tilemap tilemap = GetComponent<Tilemap>();
 
         BoundsInt bounds = tilemap.cellBounds;
@@ -20,14 +24,22 @@ public class SpawnEntites : MonoBehaviour {
                 TileBase tile = tilemap.GetTile(new Vector3Int(x, y, 0));
                 if (tile != null) {
                     Vector3 worldPos = tilemap.CellToWorld(new Vector3Int(x, y, 0));
-
-                    if(tile.name == "tileset1_53"){
-                        player = Instantiate(playerPrefab, worldPos + new Vector3(0.5f, 0.5f, 0), Quaternion.identity);   //blue orb (might be dangerous) since we don't know what run first
-                        player.name = "Player";
-                        player.transform.position = worldPos + new Vector3(0.5f, 0.5f, 0);
-                    }  
+                    tiles.Add((worldPos, tile));
                 }
             }
+        }
+        return tiles;
+    }
+    public GameObject spawnPlayer(){
+        GameObject player = null;
+        var tiles = getTilePositions();
+                
+        foreach ((var worldPos, var tile) in tiles) {
+            if(tile.name == "tileset1_53"){
+                player = Instantiate(playerPrefab, worldPos + new Vector3(0.5f, 0.5f, 0), Quaternion.identity);   //blue orb (might be dangerous) since we don't know what run first
+                player.name = "Player";
+                player.transform.position = worldPos + new Vector3(0.5f, 0.5f, 0);
+            } 
         }
 
         return player;
@@ -44,8 +56,12 @@ public class SpawnEntites : MonoBehaviour {
                 if (tile != null) {
                     Vector3 worldPos = tilemap.CellToWorld(new Vector3Int(x, y, 0));
  
-                    if(tile.name == "tileset1_52"){   
-                        Instantiate(boringEnemyPrefab, worldPos + new Vector3(0.5f, 0.5f, 0), Quaternion.identity);   //blue ring tile
+                    if(tile.name == "tileset1_52"){  
+                        GameObject enemySpawnerGO = new GameObject(); 
+                        enemySpawnerGO.transform.position = worldPos + new Vector3(0.5f, 0.5f, 0);
+                        var enemySpawnerScript = enemySpawnerGO.AddComponent<EnemySpawnerPad>();
+                        enemySpawnerScript.enemyToSpawn = boringEnemyPrefab;
+                        //Instantiate(boringEnemyPrefab, worldPos + new Vector3(0.5f, 0.5f, 0), Quaternion.identity);   //blue ring tile
                     } 
                     if(tile.name == "tileset1_114"){
                         Instantiate(interestingEnemyPrefab, worldPos + new Vector3(0.5f, 0.5f, 0), Quaternion.identity);  //light blue pedestal 
@@ -54,4 +70,5 @@ public class SpawnEntites : MonoBehaviour {
             }
         }        
     }   
+
 }
