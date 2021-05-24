@@ -20,11 +20,7 @@ public class ShiftingEnemy : EnemyController
                 transform.position += randomVec3;
             }
             else{
-                GameObject player = GameObject.Find("Player");
-                if (player != null){
-                    PlayerController playerController = player.GetComponent<PlayerController>();
-                    hpBarScript.ApplyDamage(25 * playerController.damageMultiplier);
-                } 
+                hpBarScript.ApplyDamage(c.gameObject.GetComponent<PlayerBullet>().power);
                 Destroy(c.gameObject);
             }
         }

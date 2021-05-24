@@ -6,7 +6,8 @@ using System.Linq;
 public class GameController : Singleton<GameController>
 {
     Dictionary<string, Vector3> savedPositions = new Dictionary<string, Vector3>();
-    Dictionary<string, GameObject> prefabs;
+    public Dictionary<string, GameObject> prefabs;
+    public SpriteHolder spriteHolder = new SpriteHolder();
 
     public void setupGame(){ //when loading a new scene
 
@@ -28,4 +29,25 @@ public class GameController : Singleton<GameController>
         savedPositions[SceneManager.GetActiveScene().name] = pos;
     }
 
+   
+
+}
+
+public class SpriteHolder{
+    List<Sprite> sprites = new List<Sprite>();
+    public void loadSpritesByName(string path){
+        Sprite[] spriteArr = Resources.LoadAll<Sprite>("Sprites/" + path);
+        // foreach (Sprite sprite in spriteArr) {
+        //     if (!sprites.Contains(x => x.name == sprite.name)) {
+                
+        //     }
+        // }
+        Debug.Log(string.Join(",", sprites.Select(s => s.name)));
+        sprites.AddRange(spriteArr);
+    }
+ 
+
+    public Sprite getSpriteByName(string spriteName){
+        return sprites.First(s => s.name == spriteName);
+    }
 }

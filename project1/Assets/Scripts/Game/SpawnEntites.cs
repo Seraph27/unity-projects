@@ -44,7 +44,7 @@ public class SpawnEntites : MonoBehaviour {
 
         return player;
     }
-    public void spawnEnemies () {
+    public void spawnEnemies() {
         var tiles = getTilePositions();
 
         foreach ((var worldPos, var tile) in tiles) {
@@ -53,7 +53,6 @@ public class SpawnEntites : MonoBehaviour {
                 enemySpawnerGO.transform.position = worldPos + new Vector3(0.5f, 0.5f, 0);
                 var enemySpawnerScript = enemySpawnerGO.AddComponent<EnemySpawnerPad>();
                 enemySpawnerScript.enemyToSpawn = boringEnemyPrefab;
-                enemySpawnerScript.enemySpawned = Instantiate(boringEnemyPrefab, worldPos + new Vector3(0.5f, 0.5f, 0), Quaternion.identity);   //blue ring tile
             } 
             if(tile.name == "tileset1_114"){
                 Instantiate(interestingEnemyPrefab, worldPos + new Vector3(0.5f, 0.5f, 0), Quaternion.identity);  //light blue pedestal 

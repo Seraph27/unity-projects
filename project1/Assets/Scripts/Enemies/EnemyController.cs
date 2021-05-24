@@ -34,11 +34,7 @@ abstract public class EnemyController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D c){  //player dealt dmg
         if (c.gameObject.tag == "PlayerProjectile") {
-            GameObject player = GameObject.Find("Player");
-            if (player != null){
-                PlayerController playerController = player.GetComponent<PlayerController>();
-                hpBarScript.ApplyDamage(25 * playerController.damageMultiplier);
-            } 
+            hpBarScript.ApplyDamage(c.gameObject.GetComponent<PlayerBullet>().power);
             Destroy(c.gameObject);
         }
     }

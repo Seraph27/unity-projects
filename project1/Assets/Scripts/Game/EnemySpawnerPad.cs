@@ -9,27 +9,31 @@ using System.Linq;
 
 public class EnemySpawnerPad : MonoBehaviour {
     public GameObject enemyToSpawn;
-    public GameObject enemySpawned;
-    int spawnCount;
     bool isCoroutineRunning = false;
 
     public void Update(){
-        if(enemySpawned != null){
-            if(!isCoroutineRunning && !enemySpawned.GetComponent<EnemyController>().hpBarScript.IsAlive() && spawnCount < 3){ //not sure if good
+        
+        if(enemyToSpawn != null && !isCoroutineRunning){
                 StartCoroutine(RespawnTimerCoroutine());
-            }
         }
 
     }
 
     IEnumerator RespawnTimerCoroutine(){
         isCoroutineRunning = true;
-        print("started" + spawnCount);
-        yield return new WaitForSeconds(3);
-        enemySpawned = Instantiate(enemyToSpawn, transform.position, Quaternion.identity);
-        spawnCount++;
-        isCoroutineRunning = false;
+        for(int i = 0; i < 3; i++){
+            var enemySpawned = Instantiate(enemyToSpawn, transform.position, Quaternion.identity);
+            var e = enemySpawned.GetComponent<EnemyController>();
 
+            while(e.hpBarScript == null){ // init method in enemy controller so we can make sure that hpbar is ready
+                yield return new WaitForSeconds(1/60);
+            }
+
+            while(e.hpBarScript.IsAlive()){
+                yield return new WaitForSeconds(1/60);
+            }
+            yield return new WaitForSeconds(3);
+        }
     }
 
 }

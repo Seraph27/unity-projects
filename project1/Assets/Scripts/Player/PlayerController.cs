@@ -41,10 +41,11 @@ public class PlayerController : MonoBehaviour
         var hpBar = Instantiate(hpBarPrefab);
         hpBarScript = hpBar.GetComponent<HealthBar>();
         hpBarScript.Initalize(gameObject, 100);
-        front = Resources.Load<Sprite>("frontView");
-        side = Resources.Load<Sprite>("sideView");
-        back = Resources.Load<Sprite>("backView");
-        weaponSheet = Resources.LoadAll<Sprite>("weapons");  
+        GameController.Instance.spriteHolder.loadSpritesByName("playerSprites");
+        GameController.Instance.spriteHolder.loadSpritesByName("weapons");
+        front = GameController.Instance.spriteHolder.getSpriteByName("frontView");
+        side = GameController.Instance.spriteHolder.getSpriteByName("sideView");
+        back = GameController.Instance.spriteHolder.getSpriteByName("backView"); 
         ren = gameObject.GetComponent<SpriteRenderer>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         Instantiate(cashTextPrefab, transform.position, Quaternion.identity);
@@ -84,11 +85,9 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButton(0) && isShootingActive == false) {
             isShootingActive = true;
             if(activeWeapon == WeaponKind.PiuPiuLaser) {
-                damageMultiplier = 1.0f;
                 StartCoroutine(MakePiuPiuBullet()); 
             }
             else {
-                damageMultiplier = 0.3f;
                 StartCoroutine(MakeShotgunBlast()); 
             } 
                 
@@ -114,17 +113,18 @@ public class PlayerController : MonoBehaviour
 
         //drops
         if (c.gameObject.tag == "Powerup_Damage") {
-            damageMultiplier *= 2.0f;
+            damageMultiplier = 2.0f;
             StartCoroutine(ResetDamageMultiplierCoroutine());
             Destroy(c.gameObject);
         }
     }
 
     Sprite getWeaponSprite(){
+
         if(activeWeapon == WeaponKind.PiuPiuLaser){
-            return weaponSheet[0];
+            return GameController.Instance.spriteHolder.getSpriteByName("weapons_0");
         } else if(activeWeapon == WeaponKind.Shotgun) {
-            return weaponSheet[9];
+            return GameController.Instance.spriteHolder.getSpriteByName("weapons_9");
         } else{
             return null;
         }
@@ -139,7 +139,7 @@ public class PlayerController : MonoBehaviour
         GameObject bullet;
         Rigidbody2D rb;
 
-        (bullet, rb) = CreateGenericBullet(1, "PlayerBullet");
+        (bullet, rb) = CreateGenericBullet(25 * damageMultiplier, 1, "PlayerBullet");
         yield return new WaitForSeconds(0.33f);
         isShootingActive = false;
     }
@@ -149,7 +149,7 @@ public class PlayerController : MonoBehaviour
         Rigidbody2D rb;
 
         for (int i = 0; i < 10; i++) {
-            (bullet, rb) = CreateGenericBullet(1, "PlayerBullet", 3, UnityEngine.Random.Range(-30, 30));
+            (bullet, rb) = CreateGenericBullet(10 * damageMultiplier, 1, "PlayerBullet", 3, UnityEngine.Random.Range(-30, 30));
         }
         yield return new WaitForSeconds(0.75f);
         isShootingActive = false;
@@ -158,12 +158,14 @@ public class PlayerController : MonoBehaviour
 
 
     private (GameObject, Rigidbody2D) CreateGenericBullet(
+        float damage,
         float size, 
         string spriteName, 
         float speedMultiplier = 1, 
         float rotationOffset = 0)
     {
         GameObject bullet = new GameObject(spriteName);
+        bullet.AddComponent<PlayerBullet>().power = damage;
         var ren = bullet.AddComponent<SpriteRenderer>();
         Rigidbody2D rb = bullet.AddComponent<Rigidbody2D>();
         var circleCollider = bullet.AddComponent<CircleCollider2D>();
