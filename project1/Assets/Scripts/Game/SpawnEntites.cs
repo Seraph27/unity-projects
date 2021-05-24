@@ -36,7 +36,7 @@ public class SpawnEntites : MonoBehaviour {
                 
         foreach ((var worldPos, var tile) in tiles) {
             if(tile.name == "tileset1_53"){
-                player = Instantiate(playerPrefab, worldPos + new Vector3(0.5f, 0.5f, 0), Quaternion.identity);   //blue orb (might be dangerous) since we don't know what run first
+                player = Instantiate(playerPrefab, worldPos + new Vector3(0.5f, 0.5f, 0), Quaternion.identity);   //blue orb
                 player.name = "Player";
                 player.transform.position = worldPos + new Vector3(0.5f, 0.5f, 0);
             } 
@@ -45,30 +45,19 @@ public class SpawnEntites : MonoBehaviour {
         return player;
     }
     public void spawnEnemies () {
-        Tilemap tilemap = GetComponent<Tilemap>();
+        var tiles = getTilePositions();
 
-        BoundsInt bounds = tilemap.cellBounds;
-        TileBase[] allTiles = tilemap.GetTilesBlock(bounds);
-        Debug.Log("x: " + bounds.size.x + " y: " + bounds.size.y);
-        for (int x = bounds.min.x; x < bounds.max.x; x++) {
-            for (int y = bounds.min.y; y < bounds.max.y; y++) {                                                                               
-                TileBase tile = tilemap.GetTile(new Vector3Int(x, y, 0));
-                if (tile != null) {
-                    Vector3 worldPos = tilemap.CellToWorld(new Vector3Int(x, y, 0));
- 
-                    if(tile.name == "tileset1_52"){  
-                        GameObject enemySpawnerGO = new GameObject(); 
-                        enemySpawnerGO.transform.position = worldPos + new Vector3(0.5f, 0.5f, 0);
-                        var enemySpawnerScript = enemySpawnerGO.AddComponent<EnemySpawnerPad>();
-                        enemySpawnerScript.enemyToSpawn = boringEnemyPrefab;
-                        //Instantiate(boringEnemyPrefab, worldPos + new Vector3(0.5f, 0.5f, 0), Quaternion.identity);   //blue ring tile
-                    } 
-                    if(tile.name == "tileset1_114"){
-                        Instantiate(interestingEnemyPrefab, worldPos + new Vector3(0.5f, 0.5f, 0), Quaternion.identity);  //light blue pedestal 
-                    }                                    
-                } 
-            }
-        }        
+        foreach ((var worldPos, var tile) in tiles) {
+            if(tile.name == "tileset1_52"){  
+                GameObject enemySpawnerGO = new GameObject(); 
+                enemySpawnerGO.transform.position = worldPos + new Vector3(0.5f, 0.5f, 0);
+                var enemySpawnerScript = enemySpawnerGO.AddComponent<EnemySpawnerPad>();
+                enemySpawnerScript.enemyToSpawn = boringEnemyPrefab;
+                enemySpawnerScript.enemySpawned = Instantiate(boringEnemyPrefab, worldPos + new Vector3(0.5f, 0.5f, 0), Quaternion.identity);   //blue ring tile
+            } 
+            if(tile.name == "tileset1_114"){
+                Instantiate(interestingEnemyPrefab, worldPos + new Vector3(0.5f, 0.5f, 0), Quaternion.identity);  //light blue pedestal 
+            }      
+        }                              
     }   
-
 }

@@ -146,6 +146,8 @@ MonoBehaviour:
   cash: 0
   cashTextPrefab: {fileID: 8139157886150115640, guid: 6e2ab13594a3ee447a47448607e051a1,
     type: 3}
+  weaponIconPrefab: {fileID: 174996445486748772, guid: 1f356214148dce049bc34ef891d38ded,
+    type: 3}
 --- !u!50 &3567551268221341403
 Rigidbody2D:
   serializedVersion: 4

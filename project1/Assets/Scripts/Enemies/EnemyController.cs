@@ -7,7 +7,7 @@ abstract public class EnemyController : MonoBehaviour
     protected Rigidbody2D rb;
     public GameObject hpBarPrefab;
     protected GameObject hpBar;
-    protected HealthBar hpBarScript;
+    public HealthBar hpBarScript;
     protected SpriteRenderer ren;
 
 

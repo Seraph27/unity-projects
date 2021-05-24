@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public enum WeaponKind{
     PiuPiuLaser,
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
     Sprite front;
     Sprite side;
     Sprite back;
+    Sprite[] weaponSheet;
     SpriteRenderer ren;
     public Rigidbody2D rb;
     public GameObject bulletPrefab;
@@ -27,9 +29,11 @@ public class PlayerController : MonoBehaviour
     public float damageMultiplier = 1.0f; 
     public int cash;
     public GameObject cashTextPrefab;
+    public GameObject weaponIconPrefab;
     bool isShootingActive = false;
     WeaponKind activeWeapon = WeaponKind.PiuPiuLaser;
     Vector3 playerVelocity;
+    GameObject weaponIcon;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,9 +44,12 @@ public class PlayerController : MonoBehaviour
         front = Resources.Load<Sprite>("frontView");
         side = Resources.Load<Sprite>("sideView");
         back = Resources.Load<Sprite>("backView");
+        weaponSheet = Resources.LoadAll<Sprite>("weapons");  
         ren = gameObject.GetComponent<SpriteRenderer>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         Instantiate(cashTextPrefab, transform.position, Quaternion.identity);
+        weaponIcon = Instantiate(weaponIconPrefab, transform.position, Quaternion.identity);
+        weaponIcon.GetComponentInChildren<Image>().sprite = getWeaponSprite();
     }
 
     void FixedUpdate(){
@@ -94,6 +101,7 @@ public class PlayerController : MonoBehaviour
         //weapon switch
         if (Input.GetKeyDown("1")){ 
             activeWeapon = activeWeapon == WeaponKind.PiuPiuLaser ? WeaponKind.Shotgun : WeaponKind.PiuPiuLaser;
+            weaponIcon.GetComponentInChildren<Image>().sprite = getWeaponSprite();
         }
     }
 
@@ -112,7 +120,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
+    Sprite getWeaponSprite(){
+        if(activeWeapon == WeaponKind.PiuPiuLaser){
+            return weaponSheet[0];
+        } else if(activeWeapon == WeaponKind.Shotgun) {
+            return weaponSheet[9];
+        } else{
+            return null;
+        }
+    }
     IEnumerator ResetDamageMultiplierCoroutine() {
         yield return new WaitForSeconds(5);
         damageMultiplier = 1.0f;
@@ -127,7 +143,6 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.33f);
         isShootingActive = false;
     }
-
 
     IEnumerator MakeShotgunBlast() {
         GameObject bullet;
