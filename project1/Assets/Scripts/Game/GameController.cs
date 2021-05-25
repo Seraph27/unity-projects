@@ -36,18 +36,17 @@ public class GameController : Singleton<GameController>
 public class SpriteHolder{
     List<Sprite> sprites = new List<Sprite>();
     public void loadSpritesByName(string path){
-        Sprite[] spriteArr = Resources.LoadAll<Sprite>("Sprites/" + path);
-        // foreach (Sprite sprite in spriteArr) {
-        //     if (!sprites.Contains(x => x.name == sprite.name)) {
-                
-        //     }
-        // }
-        Debug.Log(string.Join(",", sprites.Select(s => s.name)));
-        sprites.AddRange(spriteArr);
+        Sprite[] newSprites = Resources.LoadAll<Sprite>("Sprites/" + path);
+        foreach (Sprite sprite in newSprites) {
+            if (!sprites.Any(s => s.name == sprite.name)) {
+                sprites.Add(sprite);
+                Debug.Log($"Adding {sprite.name} to sprite holder.");
+            }
+        }
     }
  
 
     public Sprite getSpriteByName(string spriteName){
-        return sprites.First(s => s.name == spriteName);
+        return sprites.Single(s => s.name == spriteName);
     }
 }
