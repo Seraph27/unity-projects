@@ -40,7 +40,7 @@ public class SpriteHolder{
         foreach (Sprite sprite in newSprites) {
             if (!sprites.Any(s => s.name == sprite.name)) {
                 sprites.Add(sprite);
-                Debug.Log($"Adding {sprite.name} to sprite holder.");
+                // Debug.Log($"Adding {sprite.name} to sprite holder.");
             }
         }
     }

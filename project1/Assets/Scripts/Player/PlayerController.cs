@@ -9,6 +9,18 @@ public enum WeaponKind{
     Shotgun,
 }
 
+public class Weapon {
+    public WeaponKind kind;
+    public int damage;
+    public Sprite icon;
+
+    public Weapon(WeaponKind kind, int damage, Sprite icon) {
+        this.kind = kind;
+        this.damage = damage;
+        this.icon = icon;
+    }
+}
+
 public class PlayerController : MonoBehaviour
 {
     public GameObject hpBarPrefab;
@@ -30,10 +42,14 @@ public class PlayerController : MonoBehaviour
     public int cash;
     public GameObject cashTextPrefab;
     public GameObject weaponIconPrefab;
-    bool isShootingActive = false;
-    WeaponKind activeWeapon = WeaponKind.PiuPiuLaser;
+    bool isShootingActiveA = false;
+    bool isShootingActiveB = false;
     Vector3 playerVelocity;
-    GameObject weaponIcon;
+    GameObject weaponIconA;
+    GameObject weaponIconB;
+    List<Weapon> weapons = new List<Weapon>();
+    int activeWeaponIndexA = 0;
+    int activeWeaponIndexB = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,8 +65,13 @@ public class PlayerController : MonoBehaviour
         ren = gameObject.GetComponent<SpriteRenderer>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         Instantiate(cashTextPrefab, transform.position, Quaternion.identity);
-        weaponIcon = Instantiate(weaponIconPrefab, transform.position, Quaternion.identity);
-        weaponIcon.GetComponentInChildren<Image>().sprite = getWeaponSprite();
+        weapons.Add(new Weapon(WeaponKind.PiuPiuLaser, 25, GameController.Instance.spriteHolder.getSpriteByName("weapons_0")));
+        weapons.Add(new Weapon(WeaponKind.Shotgun, 10, GameController.Instance.spriteHolder.getSpriteByName("weapons_9")));
+
+        weaponIconA = Instantiate(weaponIconPrefab, transform.position, Quaternion.identity);
+        weaponIconB = Instantiate(weaponIconPrefab, transform.position, Quaternion.identity);
+        weaponIconA.GetComponentInChildren<Image>().sprite = weapons[activeWeaponIndexA].icon;
+        weaponIconB.GetComponentInChildren<Image>().sprite = weapons[activeWeaponIndexB].icon;
     }
 
     void FixedUpdate(){
@@ -82,13 +103,24 @@ public class PlayerController : MonoBehaviour
 
         playerVelocity.Normalize();
 
-        if (Input.GetMouseButton(0) && isShootingActive == false) {
-            isShootingActive = true;
-            if(activeWeapon == WeaponKind.PiuPiuLaser) {
-                StartCoroutine(MakePiuPiuBullet()); 
+        if (Input.GetMouseButton(0) && isShootingActiveA == false) {
+            isShootingActiveA = true;
+            if(weapons[activeWeaponIndexA].kind == WeaponKind.PiuPiuLaser) {
+                StartCoroutine(MakePiuPiuBullet(true)); 
             }
             else {
-                StartCoroutine(MakeShotgunBlast()); 
+                StartCoroutine(MakeShotgunBlast(true)); 
+            } 
+                
+        }
+
+        if (Input.GetMouseButton(1) && isShootingActiveB == false) {
+            isShootingActiveB = true;
+            if(weapons[activeWeaponIndexB].kind == WeaponKind.PiuPiuLaser) {
+                StartCoroutine(MakePiuPiuBullet(false)); 
+            }
+            else {
+                StartCoroutine(MakeShotgunBlast(false)); 
             } 
                 
         }
@@ -97,11 +129,6 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene("StartScene");
         }
 
-        //weapon switch
-        if (Input.GetKeyDown("1")){ 
-            activeWeapon = activeWeapon == WeaponKind.PiuPiuLaser ? WeaponKind.Shotgun : WeaponKind.PiuPiuLaser;
-            weaponIcon.GetComponentInChildren<Image>().sprite = getWeaponSprite();
-        }
     }
 
     void OnTriggerEnter2D(Collider2D c) { 
@@ -119,32 +146,26 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    Sprite getWeaponSprite(){
-
-        if(activeWeapon == WeaponKind.PiuPiuLaser){
-            return GameController.Instance.spriteHolder.getSpriteByName("weapons_0");
-        } else if(activeWeapon == WeaponKind.Shotgun) {
-            return GameController.Instance.spriteHolder.getSpriteByName("weapons_9");
-        } else{
-            return null;
-        }
-    }
     IEnumerator ResetDamageMultiplierCoroutine() {
         yield return new WaitForSeconds(5);
         damageMultiplier = 1.0f;
     }
     
-    IEnumerator MakePiuPiuBullet()
+    IEnumerator MakePiuPiuBullet(bool isA)
     {
         GameObject bullet;
         Rigidbody2D rb;
 
         (bullet, rb) = CreateGenericBullet(25 * damageMultiplier, 1, "PlayerBullet");
         yield return new WaitForSeconds(0.33f);
-        isShootingActive = false;
+        if(isA){
+            isShootingActiveA = false;
+        } else{
+            isShootingActiveB = false;
+        }
     }
 
-    IEnumerator MakeShotgunBlast() {
+    IEnumerator MakeShotgunBlast(bool isA) {
         GameObject bullet;
         Rigidbody2D rb;
 
@@ -152,7 +173,11 @@ public class PlayerController : MonoBehaviour
             (bullet, rb) = CreateGenericBullet(10 * damageMultiplier, 1, "PlayerBullet", 3, UnityEngine.Random.Range(-30, 30));
         }
         yield return new WaitForSeconds(0.75f);
-        isShootingActive = false;
+        if(isA){
+            isShootingActiveA = false;
+        } else{
+            isShootingActiveB = false;
+        }
     }
 
 
