@@ -3,21 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System;
 
 public enum WeaponKind{
     PiuPiuLaser,
     Shotgun,
+    Flamethrower,
 }
 
 public class Weapon {
     public WeaponKind kind;
     public int damage;
     public Sprite icon;
+    public Func<bool, IEnumerator> makeBulletFunc;
 
-    public Weapon(WeaponKind kind, int damage, Sprite icon) {
+    public Weapon(WeaponKind kind, int damage, string iconName, Func<bool, IEnumerator> makeBulletFunc) {
         this.kind = kind;
         this.damage = damage;
-        this.icon = icon;
+        this.icon = GameController.Instance.spriteHolder.getSpriteByName(iconName);
+        this.makeBulletFunc = makeBulletFunc;
     }
 }
 
@@ -48,7 +52,7 @@ public class PlayerController : MonoBehaviour
     GameObject weaponIconA;
     GameObject weaponIconB;
     List<Weapon> weapons = new List<Weapon>();
-    int activeWeaponIndexA = 0;
+    int activeWeaponIndexA = 2;
     int activeWeaponIndexB = 1;
     // Start is called before the first frame update
     void Start()
@@ -58,6 +62,8 @@ public class PlayerController : MonoBehaviour
         hpBarScript = hpBar.GetComponent<HealthBar>();
         hpBarScript.Initalize(gameObject, 100);
         GameController.Instance.spriteHolder.loadSpritesByName("playerSprites");
+        GameController.Instance.spriteHolder.loadSpritesByName("flame");
+        GameController.Instance.spriteHolder.loadSpritesByName("bullet");
         GameController.Instance.spriteHolder.loadSpritesByName("weapons");
         front = GameController.Instance.spriteHolder.getSpriteByName("frontView");
         side = GameController.Instance.spriteHolder.getSpriteByName("sideView");
@@ -65,8 +71,9 @@ public class PlayerController : MonoBehaviour
         ren = gameObject.GetComponent<SpriteRenderer>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         Instantiate(cashTextPrefab, transform.position, Quaternion.identity);
-        weapons.Add(new Weapon(WeaponKind.PiuPiuLaser, 25, GameController.Instance.spriteHolder.getSpriteByName("weapons_0")));
-        weapons.Add(new Weapon(WeaponKind.Shotgun, 10, GameController.Instance.spriteHolder.getSpriteByName("weapons_9")));
+        weapons.Add(new Weapon(WeaponKind.PiuPiuLaser, 25, "weapons_0", MakePiuPiuBullet));
+        weapons.Add(new Weapon(WeaponKind.Shotgun, 10, "weapons_9", MakeShotgunBlast));
+        weapons.Add(new Weapon(WeaponKind.Flamethrower, 2, "weapons_18", MakeFlamethrowerFlame));
 
         weaponIconA = Instantiate(weaponIconPrefab, transform.position, Quaternion.identity);
         weaponIconB = Instantiate(weaponIconPrefab, transform.position, Quaternion.identity);
@@ -103,27 +110,13 @@ public class PlayerController : MonoBehaviour
 
         playerVelocity.Normalize();
 
-        if (Input.GetMouseButton(0) && isShootingActiveA == false) {
-            isShootingActiveA = true;
-            if(weapons[activeWeaponIndexA].kind == WeaponKind.PiuPiuLaser) {
-                StartCoroutine(MakePiuPiuBullet(true)); 
-            }
-            else {
-                StartCoroutine(MakeShotgunBlast(true)); 
-            } 
-                
-        }
 
-        if (Input.GetMouseButton(1) && isShootingActiveB == false) {
-            isShootingActiveB = true;
-            if(weapons[activeWeaponIndexB].kind == WeaponKind.PiuPiuLaser) {
-                StartCoroutine(MakePiuPiuBullet(false)); 
-            }
-            else {
-                StartCoroutine(MakeShotgunBlast(false)); 
-            } 
-                
-        }
+        //if press "e" slotA = false
+        if (Input.GetMouseButton(0) && isShootingActiveA == false) {
+            //if slotA ac
+            isShootingActiveA = true;
+            StartCoroutine(weapons[activeWeaponIndexA].makeBulletFunc(true)); 
+        } 
 
         if(!hpBarScript.IsAlive()){
             SceneManager.LoadScene("StartScene");
@@ -156,7 +149,7 @@ public class PlayerController : MonoBehaviour
         GameObject bullet;
         Rigidbody2D rb;
 
-        (bullet, rb) = CreateGenericBullet(25 * damageMultiplier, 1, "PlayerBullet");
+        (bullet, rb) = CreateGenericBullet(25 * damageMultiplier, 1, "bullet");
         yield return new WaitForSeconds(0.33f);
         if(isA){
             isShootingActiveA = false;
@@ -170,9 +163,23 @@ public class PlayerController : MonoBehaviour
         Rigidbody2D rb;
 
         for (int i = 0; i < 10; i++) {
-            (bullet, rb) = CreateGenericBullet(10 * damageMultiplier, 1, "PlayerBullet", 3, UnityEngine.Random.Range(-30, 30));
+            (bullet, rb) = CreateGenericBullet(10 * damageMultiplier, 1, "bullet", 3, UnityEngine.Random.Range(-30, 30));
         }
         yield return new WaitForSeconds(0.75f);
+        if(isA){
+            isShootingActiveA = false;
+        } else{
+            isShootingActiveB = false;
+        }
+    }
+
+    IEnumerator MakeFlamethrowerFlame(bool isA){
+        GameObject bullet;
+        Rigidbody2D rb;
+
+        (bullet, rb) = CreateGenericBullet(2 * damageMultiplier, 1, "flame", 0.75f, UnityEngine.Random.Range(-5, 5), 0.5f);
+
+        yield return new WaitForSeconds(0.1f);
         if(isA){
             isShootingActiveA = false;
         } else{
@@ -187,7 +194,8 @@ public class PlayerController : MonoBehaviour
         float size, 
         string spriteName, 
         float speedMultiplier = 1, 
-        float rotationOffset = 0)
+        float rotationOffset = 0,
+        float bulletLife = 0)
     {
         GameObject bullet = new GameObject(spriteName);
         bullet.AddComponent<PlayerBullet>().power = damage;
@@ -195,7 +203,7 @@ public class PlayerController : MonoBehaviour
         Rigidbody2D rb = bullet.AddComponent<Rigidbody2D>();
         var circleCollider = bullet.AddComponent<CircleCollider2D>();
         bullet.tag = "PlayerProjectile";
-        ren.sprite = Resources.Load<Sprite>(spriteName);
+        ren.sprite = GameController.Instance.spriteHolder.getSpriteByName(spriteName); 
         if (damageMultiplier >= 2.0f)
         {
             ren.color = Color.red;
@@ -216,6 +224,9 @@ public class PlayerController : MonoBehaviour
         bullet.transform.rotation = Quaternion.Euler(0, 0, rotationDegrees);
         bullet.transform.position = transform.position + (Vector3)(rotationVector * 1.0f);
         rb.velocity = rotationVector * 10 * speedMultiplier;
+        if(bulletLife > 0){
+            GameObject.Destroy(bullet, bulletLife);
+        }
         return (bullet, rb);
     }
 
