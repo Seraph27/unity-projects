@@ -12,7 +12,7 @@ public enum WeaponKind{
     Flamethrower,
 }
 
-public class Weapon : MonoBehaviour{
+public class Weapon {
     public WeaponKind kind;
     public int damage;
     public Sprite icon;
@@ -35,7 +35,7 @@ public class Weapon : MonoBehaviour{
     }
 
     public static GameObject make_drop(GameObject weaponDropPrefab, Vector3 position, WeaponKind gunType){
-        GameObject go = Instantiate(weaponDropPrefab, position, Quaternion.identity);
+        GameObject go = GameObject.Instantiate(weaponDropPrefab, position, Quaternion.identity);
         go.AddComponent<GunDropController>().gunType = gunType;
         go.GetComponent<SpriteRenderer>().sprite = GameController.Instance.spriteHolder.getSpriteByName(weaponIcons[gunType]);
         go.tag = "Weapon";
