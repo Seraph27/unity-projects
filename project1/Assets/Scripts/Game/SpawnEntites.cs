@@ -31,6 +31,7 @@ public class SpawnEntites : MonoBehaviour {
         }
         return tiles;
     }
+    
     public GameObject spawnPlayer(){
         GameObject player = null;
         var tiles = getTilePositions();

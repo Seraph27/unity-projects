@@ -1,10 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
+using System.Linq;
 
 public class ShiftingEnemy : EnemyController
 {
-
+    List<(Vector3, TileBase)> passable;
+    override protected void Start() {
+        base.Start();
+        passable = GameObject.FindObjectOfType<SpawnEntites>().getTilePositions();
+    }
 
     override public int GetBaseHp(){
         return 200;
@@ -16,8 +22,10 @@ public class ShiftingEnemy : EnemyController
             float triggerChance = Random.Range(0, 100);
             print(triggerChance);
             if(triggerChance > 50){
-                Vector3 randomVec3 = new Vector3(Random.Range(-4f, 4f), Random.Range(-4f, 4f), 0);
-                transform.position += randomVec3;
+                var closeTile = passable.Where(x => (x.Item1 - transform.position).magnitude < 4).ToList();
+                var randomIndex = Random.Range(0, closeTile.Count);
+                Vector3 randomVec3 = closeTile[randomIndex].Item1;
+                transform.position = randomVec3;
             }
             else{
                 hpBarScript.ApplyDamage(c.gameObject.GetComponent<PlayerBullet>().power);
