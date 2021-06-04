@@ -148,6 +148,10 @@ MonoBehaviour:
     type: 3}
   weaponIconPrefab: {fileID: 174996445486748772, guid: 1f356214148dce049bc34ef891d38ded,
     type: 3}
+  iconFramePrefab: {fileID: 4363028151745084828, guid: 70885b2c3cd22874d8d3547514525fd4,
+    type: 3}
+  weaponDropPrefab: {fileID: 2535810492855649084, guid: 89edb6c336b1869449cc1703c1f0ac6f,
+    type: 3}
 --- !u!50 &3567551268221341403
 Rigidbody2D:
   serializedVersion: 4

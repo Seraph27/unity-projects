@@ -10,6 +10,7 @@ TagManager:
   - PlayerProjectile
   - Powerup_Damage
   - Powerup_Health
+  - Weapon
   layers:
   - Default
   - TransparentFX

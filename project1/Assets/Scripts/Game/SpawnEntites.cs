@@ -11,6 +11,7 @@ public class SpawnEntites : MonoBehaviour {
     public GameObject playerPrefab;
     public GameObject boringEnemyPrefab;
     public GameObject interestingEnemyPrefab;
+    public GameObject shiftingEnemyPrefab;
 
     public List<(Vector3, TileBase)> getTilePositions(){
         var tiles = new List<(Vector3, TileBase)>();
@@ -55,8 +56,17 @@ public class SpawnEntites : MonoBehaviour {
                 enemySpawnerScript.enemyToSpawn = boringEnemyPrefab;
             } 
             if(tile.name == "tileset1_114"){
-                Instantiate(interestingEnemyPrefab, worldPos + new Vector3(0.5f, 0.5f, 0), Quaternion.identity);  //light blue pedestal 
+                GameObject enemySpawnerGO = new GameObject(); 
+                enemySpawnerGO.transform.position = worldPos + new Vector3(0.5f, 0.5f, 0);
+                var enemySpawnerScript = enemySpawnerGO.AddComponent<EnemySpawnerPad>();
+                enemySpawnerScript.enemyToSpawn = interestingEnemyPrefab;
             }      
+            if(tile.name == "tileset1_116"){
+                GameObject enemySpawnerGO = new GameObject(); 
+                enemySpawnerGO.transform.position = worldPos + new Vector3(0.5f, 0.5f, 0);
+                var enemySpawnerScript = enemySpawnerGO.AddComponent<EnemySpawnerPad>();
+                enemySpawnerScript.enemyToSpawn = shiftingEnemyPrefab;
+            }  
         }                              
     }   
 }

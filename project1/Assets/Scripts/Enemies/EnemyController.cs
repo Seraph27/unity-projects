@@ -49,7 +49,7 @@ abstract public class EnemyController : MonoBehaviour
 
 ideas:
 just one scene and teleport pads transports player to another area? where they don't see cause everytime i make something on scene 1 i need to copy to scene 2
-
+(DONE)
 
 
 enemy ideas:
@@ -70,7 +70,7 @@ bounce arounds the screen
 
 dashing enemy:
 
-follows the player and dashes through the player when its close enough doing damage
+follows the player and dashes through the player when its close enough doing damage (Done)
 
 earthquake enemy:
 

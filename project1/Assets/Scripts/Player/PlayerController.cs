@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
+using System.Linq;
 
 public enum WeaponKind{
     PiuPiuLaser,
@@ -46,14 +47,18 @@ public class PlayerController : MonoBehaviour
     public int cash;
     public GameObject cashTextPrefab;
     public GameObject weaponIconPrefab;
-    bool isShootingActiveA = false;
-    bool isShootingActiveB = false;
+    public GameObject iconFramePrefab;
+    bool isShootingActive = false;
+    bool isSlotAActive = true;
     Vector3 playerVelocity;
     GameObject weaponIconA;
     GameObject weaponIconB;
+    GameObject iconFrame;
     List<Weapon> weapons = new List<Weapon>();
-    int activeWeaponIndexA = 2;
+    int activeWeaponIndexA = 0;
     int activeWeaponIndexB = 1;
+    public GameObject weaponDropPrefab;
+    GameObject flamethrower;
     // Start is called before the first frame update
     void Start()
     {
@@ -73,12 +78,21 @@ public class PlayerController : MonoBehaviour
         Instantiate(cashTextPrefab, transform.position, Quaternion.identity);
         weapons.Add(new Weapon(WeaponKind.PiuPiuLaser, 25, "weapons_0", MakePiuPiuBullet));
         weapons.Add(new Weapon(WeaponKind.Shotgun, 10, "weapons_9", MakeShotgunBlast));
-        weapons.Add(new Weapon(WeaponKind.Flamethrower, 2, "weapons_18", MakeFlamethrowerFlame));
 
         weaponIconA = Instantiate(weaponIconPrefab, transform.position, Quaternion.identity);
         weaponIconB = Instantiate(weaponIconPrefab, transform.position, Quaternion.identity);
         weaponIconA.GetComponentInChildren<Image>().sprite = weapons[activeWeaponIndexA].icon;
         weaponIconB.GetComponentInChildren<Image>().sprite = weapons[activeWeaponIndexB].icon;
+        weaponIconB.GetComponentInChildren<Image>().transform.position += new Vector3(60, 0, 0);
+        iconFrame = Instantiate(iconFramePrefab, transform.position, Quaternion.identity);
+
+        
+        weapons.Add(new Weapon(WeaponKind.Flamethrower, 2, "weapons_18", MakeFlamethrowerFlame));
+        flamethrower = Instantiate(weaponDropPrefab, transform.position, Quaternion.identity);
+        flamethrower.AddComponent<GunDropController>().gunType = WeaponKind.Flamethrower;
+        flamethrower.GetComponent<SpriteRenderer>().sprite = weapons[2].icon;
+        flamethrower.tag = "Weapon";
+        flamethrower.transform.localScale += new Vector3(7, 7, 0);
     }
 
     void FixedUpdate(){
@@ -111,12 +125,64 @@ public class PlayerController : MonoBehaviour
         playerVelocity.Normalize();
 
 
-        //if press "e" slotA = false
-        if (Input.GetMouseButton(0) && isShootingActiveA == false) {
-            //if slotA ac
-            isShootingActiveA = true;
-            StartCoroutine(weapons[activeWeaponIndexA].makeBulletFunc(true)); 
+        if(Input.GetKeyDown("1")){
+            if(isSlotAActive){
+                iconFrame.GetComponentInChildren<Image>().transform.position += new Vector3(60, 0, 0);
+            } else{
+                iconFrame.GetComponentInChildren<Image>().transform.position -= new Vector3(60, 0, 0);
+            }
+
+            isSlotAActive = !isSlotAActive;
+
+        }
+        if (Input.GetMouseButton(0) && isShootingActive == false) {
+            isShootingActive = true;
+            if(isSlotAActive){
+                StartCoroutine(weapons[activeWeaponIndexA].makeBulletFunc(true)); 
+            } else{
+                StartCoroutine(weapons[activeWeaponIndexB].makeBulletFunc(true)); 
+            }
+
         } 
+
+        //weapon swapping
+        if(Input.GetKeyDown("e")){ 
+            var weaponList = GameObject.FindGameObjectsWithTag("Weapon");        //this or use a collider onTrigger to check. 
+
+            int gunToSwapIndex;
+            GameObject closestWeapon = null;
+            float distance = Mathf.Infinity;
+            Vector3 position = transform.position;
+
+            if(weaponList.Length != 0){
+                
+                foreach (GameObject go in weaponList)
+                {
+                    Vector3 diff = go.transform.position - position;
+                    float curDistance = diff.sqrMagnitude;
+                    if (curDistance < distance)
+                    {
+                        closestWeapon = go;
+                        distance = curDistance;
+                    }
+                }
+            }
+            gunToSwapIndex = weapons.FindIndex(i => i.kind == closestWeapon.GetComponent<GunDropController>().gunType);
+
+            int temp = gunToSwapIndex;
+            if(isSlotAActive){
+                gunToSwapIndex = activeWeaponIndexA;
+                activeWeaponIndexA = temp;
+                weaponIconA.GetComponentInChildren<Image>().sprite = weapons[activeWeaponIndexA].icon;
+            } else{
+                gunToSwapIndex = activeWeaponIndexB;
+                activeWeaponIndexB = temp;
+                weaponIconB.GetComponentInChildren<Image>().sprite = weapons[activeWeaponIndexB].icon;
+            }
+            
+            
+            
+        }
 
         if(!hpBarScript.IsAlive()){
             SceneManager.LoadScene("StartScene");
@@ -151,11 +217,12 @@ public class PlayerController : MonoBehaviour
 
         (bullet, rb) = CreateGenericBullet(25 * damageMultiplier, 1, "bullet");
         yield return new WaitForSeconds(0.33f);
-        if(isA){
-            isShootingActiveA = false;
-        } else{
-            isShootingActiveB = false;
-        }
+        // if(isA){
+        //     isShootingActiveA = false;
+        // } else{
+        //     isShootingActiveB = false;
+        // }
+        isShootingActive = false;
     }
 
     IEnumerator MakeShotgunBlast(bool isA) {
@@ -166,11 +233,12 @@ public class PlayerController : MonoBehaviour
             (bullet, rb) = CreateGenericBullet(10 * damageMultiplier, 1, "bullet", 3, UnityEngine.Random.Range(-30, 30));
         }
         yield return new WaitForSeconds(0.75f);
-        if(isA){
-            isShootingActiveA = false;
-        } else{
-            isShootingActiveB = false;
-        }
+        // if(isA){
+        //     isShootingActiveA = false;
+        // } else{
+        //     isShootingActiveB = false;
+        // }
+        isShootingActive = false;
     }
 
     IEnumerator MakeFlamethrowerFlame(bool isA){
@@ -180,11 +248,12 @@ public class PlayerController : MonoBehaviour
         (bullet, rb) = CreateGenericBullet(2 * damageMultiplier, 1, "flame", 0.75f, UnityEngine.Random.Range(-5, 5), 0.5f);
 
         yield return new WaitForSeconds(0.1f);
-        if(isA){
-            isShootingActiveA = false;
-        } else{
-            isShootingActiveB = false;
-        }
+        // if(isA){
+        //     isShootingActiveA = false;
+        // } else{
+        //     isShootingActiveB = false;
+        // }
+        isShootingActive = false;
     }
 
 

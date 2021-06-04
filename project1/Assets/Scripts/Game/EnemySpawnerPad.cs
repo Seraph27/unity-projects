@@ -14,7 +14,7 @@ public class EnemySpawnerPad : MonoBehaviour {
     public void Update(){
         
         if(enemyToSpawn != null && !isCoroutineRunning){
-                StartCoroutine(RespawnTimerCoroutine());
+            StartCoroutine(RespawnTimerCoroutine());
         }
 
     }
