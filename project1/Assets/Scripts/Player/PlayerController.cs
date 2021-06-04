@@ -12,11 +12,36 @@ public enum WeaponKind{
     Flamethrower,
 }
 
-public class Weapon {
+public class Weapon : MonoBehaviour{
     public WeaponKind kind;
     public int damage;
     public Sprite icon;
     public Func<bool, IEnumerator> makeBulletFunc;
+    public static Dictionary<WeaponKind, string> weaponIcons = new Dictionary<WeaponKind, string>(){
+        {WeaponKind.PiuPiuLaser, "weapons_0"},
+        {WeaponKind.Shotgun, "weapons_9"},
+        {WeaponKind.Flamethrower, "weapons_18"},
+    };
+    public static Weapon make_weapon(WeaponKind kind, PlayerController playerController){
+        if(kind == WeaponKind.PiuPiuLaser){
+            return new Weapon(WeaponKind.PiuPiuLaser, 25, weaponIcons[kind], playerController.MakePiuPiuBullet);
+        } else if(kind == WeaponKind.Shotgun){
+            return new Weapon(WeaponKind.Shotgun, 10, weaponIcons[kind], playerController.MakeShotgunBlast);
+        } else if(kind == WeaponKind.Flamethrower){
+            return new Weapon(WeaponKind.Flamethrower, 2, weaponIcons[kind], playerController.MakeFlamethrowerFlame);
+        } else{
+            throw new NotImplementedException();
+        }
+    }
+
+    public static GameObject make_drop(GameObject weaponDropPrefab, Vector3 position, WeaponKind gunType){
+        GameObject go = Instantiate(weaponDropPrefab, position, Quaternion.identity);
+        go.AddComponent<GunDropController>().gunType = gunType;
+        go.GetComponent<SpriteRenderer>().sprite = GameController.Instance.spriteHolder.getSpriteByName(weaponIcons[gunType]);
+        go.tag = "Weapon";
+        go.transform.localScale += new Vector3(6, 6, 0);
+        return go;
+    }
 
     public Weapon(WeaponKind kind, int damage, string iconName, Func<bool, IEnumerator> makeBulletFunc) {
         this.kind = kind;
@@ -76,8 +101,8 @@ public class PlayerController : MonoBehaviour
         ren = gameObject.GetComponent<SpriteRenderer>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         Instantiate(cashTextPrefab, transform.position, Quaternion.identity);
-        weapons.Add(new Weapon(WeaponKind.PiuPiuLaser, 25, "weapons_0", MakePiuPiuBullet));
-        weapons.Add(new Weapon(WeaponKind.Shotgun, 10, "weapons_9", MakeShotgunBlast));
+        weapons.Add(Weapon.make_weapon(WeaponKind.PiuPiuLaser, this));
+        weapons.Add(Weapon.make_weapon(WeaponKind.Shotgun, this));
 
         weaponIconA = Instantiate(weaponIconPrefab, transform.position, Quaternion.identity);
         weaponIconB = Instantiate(weaponIconPrefab, transform.position, Quaternion.identity);
@@ -86,13 +111,7 @@ public class PlayerController : MonoBehaviour
         weaponIconB.GetComponentInChildren<Image>().transform.position += new Vector3(60, 0, 0);
         iconFrame = Instantiate(iconFramePrefab, transform.position, Quaternion.identity);
 
-        
-        weapons.Add(new Weapon(WeaponKind.Flamethrower, 2, "weapons_18", MakeFlamethrowerFlame));
-        flamethrower = Instantiate(weaponDropPrefab, transform.position, Quaternion.identity);
-        flamethrower.AddComponent<GunDropController>().gunType = WeaponKind.Flamethrower;
-        flamethrower.GetComponent<SpriteRenderer>().sprite = weapons[2].icon;
-        flamethrower.tag = "Weapon";
-        flamethrower.transform.localScale += new Vector3(7, 7, 0);
+        Weapon.make_drop(weaponDropPrefab, transform.position, WeaponKind.Flamethrower);
     }
 
     void FixedUpdate(){
@@ -148,40 +167,40 @@ public class PlayerController : MonoBehaviour
         //weapon swapping
         if(Input.GetKeyDown("e")){ 
             var weaponList = GameObject.FindGameObjectsWithTag("Weapon");        //this or use a collider onTrigger to check. 
-
-            int gunToSwapIndex;
             GameObject closestWeapon = null;
             float distance = Mathf.Infinity;
             Vector3 position = transform.position;
-
-            if(weaponList.Length != 0){
-                
-                foreach (GameObject go in weaponList)
+ 
+            foreach (GameObject go in weaponList)
+            {
+                Vector3 diff = go.transform.position - position;
+                float curDistance = diff.sqrMagnitude;
+                if (curDistance < distance)
                 {
-                    Vector3 diff = go.transform.position - position;
-                    float curDistance = diff.sqrMagnitude;
-                    if (curDistance < distance)
-                    {
-                        closestWeapon = go;
-                        distance = curDistance;
-                    }
+                    closestWeapon = go;
+                    distance = curDistance;
                 }
             }
-            gunToSwapIndex = weapons.FindIndex(i => i.kind == closestWeapon.GetComponent<GunDropController>().gunType);
+            
+            if(closestWeapon != null){
+                var closestWeaponType = closestWeapon.GetComponent<GunDropController>().gunType;
 
-            int temp = gunToSwapIndex;
-            if(isSlotAActive){
-                gunToSwapIndex = activeWeaponIndexA;
-                activeWeaponIndexA = temp;
-                weaponIconA.GetComponentInChildren<Image>().sprite = weapons[activeWeaponIndexA].icon;
-            } else{
-                gunToSwapIndex = activeWeaponIndexB;
-                activeWeaponIndexB = temp;
-                weaponIconB.GetComponentInChildren<Image>().sprite = weapons[activeWeaponIndexB].icon;
+                if(isSlotAActive){
+                    Weapon.make_drop(weaponDropPrefab, transform.position, weapons[activeWeaponIndexA].kind);
+                    weapons[0] = Weapon.make_weapon(closestWeaponType, this);
+                    weaponIconA.GetComponentInChildren<Image>().sprite = weapons[activeWeaponIndexA].icon;
+
+                } else{
+                    Weapon.make_drop(weaponDropPrefab, transform.position, weapons[activeWeaponIndexB].kind);
+                    weapons[1] = Weapon.make_weapon(closestWeaponType, this);
+                    weaponIconB.GetComponentInChildren<Image>().sprite = weapons[activeWeaponIndexB].icon;
+                } 
+
+                GameObject.Destroy(closestWeapon);
             }
             
-            
-            
+
+    
         }
 
         if(!hpBarScript.IsAlive()){
@@ -210,7 +229,7 @@ public class PlayerController : MonoBehaviour
         damageMultiplier = 1.0f;
     }
     
-    IEnumerator MakePiuPiuBullet(bool isA)
+    public IEnumerator MakePiuPiuBullet(bool isA)
     {
         GameObject bullet;
         Rigidbody2D rb;
@@ -225,7 +244,7 @@ public class PlayerController : MonoBehaviour
         isShootingActive = false;
     }
 
-    IEnumerator MakeShotgunBlast(bool isA) {
+    public IEnumerator MakeShotgunBlast(bool isA) {
         GameObject bullet;
         Rigidbody2D rb;
 
@@ -241,7 +260,7 @@ public class PlayerController : MonoBehaviour
         isShootingActive = false;
     }
 
-    IEnumerator MakeFlamethrowerFlame(bool isA){
+    public IEnumerator MakeFlamethrowerFlame(bool isA){
         GameObject bullet;
         Rigidbody2D rb;
 
