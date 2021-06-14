@@ -34,12 +34,16 @@ public class Weapon {
         }
     }
 
-    public static GameObject make_drop(GameObject weaponDropPrefab, Vector3 position, WeaponKind gunType){
-        GameObject go = GameObject.Instantiate(weaponDropPrefab, position, Quaternion.identity);
+    public static GameObject make_drop(Vector3 position, WeaponKind gunType){
+        GameObject go = new GameObject();
+        go.transform.position = position;
+        var ren = go.AddComponent<SpriteRenderer>();
         go.AddComponent<GunDropController>().gunType = gunType;
-        go.GetComponent<SpriteRenderer>().sprite = GameController.Instance.spriteHolder.getSpriteByName(weaponIcons[gunType]);
+        ren.sprite = GameController.Instance.spriteHolder.getSpriteByName(weaponIcons[gunType]);
+        ren.sortingLayerName = "GUI";
         go.tag = "Weapon";
         go.transform.localScale += new Vector3(6, 6, 0);
+        
         return go;
     }
 
@@ -110,8 +114,6 @@ public class PlayerController : MonoBehaviour
         weaponIconB.GetComponentInChildren<Image>().sprite = weapons[activeWeaponIndexB].icon;
         weaponIconB.GetComponentInChildren<Image>().transform.position += new Vector3(60, 0, 0);
         iconFrame = Instantiate(iconFramePrefab, transform.position, Quaternion.identity);
-
-        Weapon.make_drop(weaponDropPrefab, transform.position, WeaponKind.Flamethrower);
     }
 
     void FixedUpdate(){
@@ -186,12 +188,12 @@ public class PlayerController : MonoBehaviour
                 var closestWeaponType = closestWeapon.GetComponent<GunDropController>().gunType;
 
                 if(isSlotAActive){
-                    Weapon.make_drop(weaponDropPrefab, transform.position, weapons[activeWeaponIndexA].kind);
+                    Weapon.make_drop(transform.position, weapons[activeWeaponIndexA].kind);
                     weapons[0] = Weapon.make_weapon(closestWeaponType, this);
                     weaponIconA.GetComponentInChildren<Image>().sprite = weapons[activeWeaponIndexA].icon;
 
                 } else{
-                    Weapon.make_drop(weaponDropPrefab, transform.position, weapons[activeWeaponIndexB].kind);
+                    Weapon.make_drop(transform.position, weapons[activeWeaponIndexB].kind);
                     weapons[1] = Weapon.make_weapon(closestWeaponType, this);
                     weaponIconB.GetComponentInChildren<Image>().sprite = weapons[activeWeaponIndexB].icon;
                 } 

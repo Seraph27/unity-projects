@@ -36,6 +36,8 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Boss\BossController.cs" />
+     <Compile Include="Assets\Scripts\Boss\SpikeController.cs" />
      <Compile Include="Assets\Scripts\Enemies\BoringEnemy.cs" />
      <Compile Include="Assets\Scripts\Enemies\DashEnemy.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyController.cs" />

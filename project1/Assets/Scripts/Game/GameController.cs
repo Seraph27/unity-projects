@@ -8,6 +8,7 @@ public class GameController : Singleton<GameController>
     Dictionary<string, Vector3> savedPositions = new Dictionary<string, Vector3>();
     public Dictionary<string, GameObject> prefabs;
     public SpriteHolder spriteHolder = new SpriteHolder();
+    public GameObject player;
 
     public void setupGame(){ //when loading a new scene
 
@@ -15,7 +16,7 @@ public class GameController : Singleton<GameController>
         
         SpawnEntites entitySpawner = GameObject.FindObjectOfType<SpawnEntites>();
         entitySpawner.playerPrefab = prefabs["Player"];
-        GameObject player = entitySpawner.spawnPlayer();
+        player = entitySpawner.spawnPlayer();
         entitySpawner.spawnEnemies(); 
         string currentSceneName = SceneManager.GetActiveScene().name;
         Vector3 spawnPadLocation = GameObject.FindObjectOfType<SavePositionTile>().transform.position;
@@ -27,6 +28,10 @@ public class GameController : Singleton<GameController>
 
     public void savePlayerPositionOnTransition(Vector3 pos){
         savedPositions[SceneManager.GetActiveScene().name] = pos;
+    }
+
+    public bool isWithPlayer(Collider2D c){
+        return c.gameObject == player;
     }
 
    

@@ -24,7 +24,7 @@ public class SpawnEntites : MonoBehaviour {
             for (int y = bounds.min.y; y < bounds.max.y; y++) {                                                                               
                 TileBase tile = tilemap.GetTile(new Vector3Int(x, y, 0));
                 if (tile != null) {
-                    Vector3 worldPos = tilemap.CellToWorld(new Vector3Int(x, y, 0));
+                    Vector3 worldPos = tilemap.GetCellCenterWorld(new Vector3Int(x, y, 0));
                     tiles.Add((worldPos, tile));
                 }
             }
@@ -38,9 +38,8 @@ public class SpawnEntites : MonoBehaviour {
                 
         foreach ((var worldPos, var tile) in tiles) {
             if(tile.name == "tileset1_53"){
-                player = Instantiate(playerPrefab, worldPos + new Vector3(0.5f, 0.5f, 0), Quaternion.identity);   //blue orb
+                player = Instantiate(playerPrefab, worldPos, Quaternion.identity);   //blue orb
                 player.name = "Player";
-                player.transform.position = worldPos + new Vector3(0.5f, 0.5f, 0);
             } 
         }
 
@@ -52,19 +51,19 @@ public class SpawnEntites : MonoBehaviour {
         foreach ((var worldPos, var tile) in tiles) {
             if(tile.name == "tileset1_52"){  
                 GameObject enemySpawnerGO = new GameObject(); 
-                enemySpawnerGO.transform.position = worldPos + new Vector3(0.5f, 0.5f, 0);
+                enemySpawnerGO.transform.position = worldPos;
                 var enemySpawnerScript = enemySpawnerGO.AddComponent<EnemySpawnerPad>();
                 enemySpawnerScript.enemyToSpawn = boringEnemyPrefab;
             } 
             if(tile.name == "tileset1_114"){
                 GameObject enemySpawnerGO = new GameObject(); 
-                enemySpawnerGO.transform.position = worldPos + new Vector3(0.5f, 0.5f, 0);
+                enemySpawnerGO.transform.position = worldPos;
                 var enemySpawnerScript = enemySpawnerGO.AddComponent<EnemySpawnerPad>();
                 enemySpawnerScript.enemyToSpawn = interestingEnemyPrefab;
             }      
             if(tile.name == "tileset1_116"){
                 GameObject enemySpawnerGO = new GameObject(); 
-                enemySpawnerGO.transform.position = worldPos + new Vector3(0.5f, 0.5f, 0);
+                enemySpawnerGO.transform.position = worldPos;
                 var enemySpawnerScript = enemySpawnerGO.AddComponent<EnemySpawnerPad>();
                 enemySpawnerScript.enemyToSpawn = shiftingEnemyPrefab;
             }  

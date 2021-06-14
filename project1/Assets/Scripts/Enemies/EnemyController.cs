@@ -27,8 +27,9 @@ abstract public class EnemyController : MonoBehaviour
     {
 
         if(hpBarScript.value <= 0){
-            Destroy(gameObject);
             Destroy(hpBar);
+            Destroy(gameObject);
+            
         }
     }
 
