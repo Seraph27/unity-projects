@@ -6,8 +6,6 @@ public class BoringEnemy : EnemyController
 {
     public float speed;
     int direction = 1;
-    public GameObject powerupPrefab;
-    public GameObject weaponDropPrefab;
 
     override public int GetBaseHp(){
         return 200;
@@ -30,7 +28,9 @@ public class BoringEnemy : EnemyController
         rb.velocity = playerVelocity * distanceThisFrame;
 
         if(hpBarScript.value <= 0){
-            Weapon.make_drop(transform.position, WeaponKind.Flamethrower);
+            if(shouldMakeDrop(0.5f)){
+                Weapon.make_drop(transform.position, WeaponKind.Flamethrower);
+            }    
         }
 
       base.Update();

@@ -33,8 +33,13 @@ abstract public class EnemyController : MonoBehaviour
         }
     }
 
+    protected bool shouldMakeDrop(float dropChance) {
+        return Random.Range(0, 1f) <= dropChance;
+    }
+    
+    
     void OnTriggerEnter2D(Collider2D c){  //player dealt dmg
-        if (c.gameObject.tag == "PlayerProjectile") {
+        if (GameController.Instance.isWithPlayerBullet(c)) {
             hpBarScript.ApplyDamage(c.gameObject.GetComponent<PlayerBullet>().power);
             Destroy(c.gameObject);
         }

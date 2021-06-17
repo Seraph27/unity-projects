@@ -18,7 +18,7 @@ public class ShiftingEnemy : EnemyController
     // Update is called once per frame
     void OnTriggerEnter2D(Collider2D c){ 
 
-        if (c.gameObject.tag == "PlayerProjectile") {
+        if (GameController.Instance.isWithPlayerBullet(c)) {
             float triggerChance = Random.Range(0, 100);
             print(triggerChance);
             if(triggerChance > 50){

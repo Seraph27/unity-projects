@@ -26,12 +26,24 @@ public class GameController : Singleton<GameController>
         } 
     }
 
+    public GameObject getPrefabByName(string name){
+        if(prefabs[name] == null){
+            return null;
+        } else{
+            return prefabs[name];
+        }
+    }
+    
     public void savePlayerPositionOnTransition(Vector3 pos){
         savedPositions[SceneManager.GetActiveScene().name] = pos;
     }
 
     public bool isWithPlayer(Collider2D c){
         return c.gameObject == player;
+    }
+
+    public bool isWithPlayerBullet(Collider2D c){
+        return c.gameObject.tag == "PlayerProjectile";
     }
 
    

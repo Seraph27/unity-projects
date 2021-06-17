@@ -35,7 +35,7 @@ public class BossController : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D c){  //player dealt dmg
-        if (c.gameObject.tag == "PlayerProjectile") {
+        if (GameController.Instance.isWithPlayerBullet(c)) {
             hpBarScript.ApplyDamage(c.gameObject.GetComponent<PlayerBullet>().power);
             Destroy(c.gameObject);
         }

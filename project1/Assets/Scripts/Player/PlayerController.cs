@@ -16,7 +16,7 @@ public class Weapon {
     public WeaponKind kind;
     public int damage;
     public Sprite icon;
-    public Func<bool, IEnumerator> makeBulletFunc;
+    public Func<IEnumerator> makeBulletFunc;
     public static Dictionary<WeaponKind, string> weaponIcons = new Dictionary<WeaponKind, string>(){
         {WeaponKind.PiuPiuLaser, "weapons_0"},
         {WeaponKind.Shotgun, "weapons_9"},
@@ -47,7 +47,7 @@ public class Weapon {
         return go;
     }
 
-    public Weapon(WeaponKind kind, int damage, string iconName, Func<bool, IEnumerator> makeBulletFunc) {
+    public Weapon(WeaponKind kind, int damage, string iconName, Func<IEnumerator> makeBulletFunc) {
         this.kind = kind;
         this.damage = damage;
         this.icon = GameController.Instance.spriteHolder.getSpriteByName(iconName);
@@ -159,9 +159,9 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButton(0) && isShootingActive == false) {
             isShootingActive = true;
             if(isSlotAActive){
-                StartCoroutine(weapons[activeWeaponIndexA].makeBulletFunc(true)); 
+                StartCoroutine(weapons[activeWeaponIndexA].makeBulletFunc()); 
             } else{
-                StartCoroutine(weapons[activeWeaponIndexB].makeBulletFunc(true)); 
+                StartCoroutine(weapons[activeWeaponIndexB].makeBulletFunc()); 
             }
 
         } 
@@ -200,9 +200,6 @@ public class PlayerController : MonoBehaviour
 
                 GameObject.Destroy(closestWeapon);
             }
-            
-
-    
         }
 
         if(!hpBarScript.IsAlive()){
@@ -231,22 +228,18 @@ public class PlayerController : MonoBehaviour
         damageMultiplier = 1.0f;
     }
     
-    public IEnumerator MakePiuPiuBullet(bool isA)
+    public IEnumerator MakePiuPiuBullet()
     {
         GameObject bullet;
         Rigidbody2D rb;
 
         (bullet, rb) = CreateGenericBullet(25 * damageMultiplier, 1, "bullet");
         yield return new WaitForSeconds(0.33f);
-        // if(isA){
-        //     isShootingActiveA = false;
-        // } else{
-        //     isShootingActiveB = false;
-        // }
+
         isShootingActive = false;
     }
 
-    public IEnumerator MakeShotgunBlast(bool isA) {
+    public IEnumerator MakeShotgunBlast() {
         GameObject bullet;
         Rigidbody2D rb;
 
@@ -254,30 +247,20 @@ public class PlayerController : MonoBehaviour
             (bullet, rb) = CreateGenericBullet(10 * damageMultiplier, 1, "bullet", 3, UnityEngine.Random.Range(-30, 30));
         }
         yield return new WaitForSeconds(0.75f);
-        // if(isA){
-        //     isShootingActiveA = false;
-        // } else{
-        //     isShootingActiveB = false;
-        // }
+
         isShootingActive = false;
     }
 
-    public IEnumerator MakeFlamethrowerFlame(bool isA){
+    public IEnumerator MakeFlamethrowerFlame(){
         GameObject bullet;
         Rigidbody2D rb;
 
         (bullet, rb) = CreateGenericBullet(2 * damageMultiplier, 1, "flame", 0.75f, UnityEngine.Random.Range(-5, 5), 0.5f);
 
         yield return new WaitForSeconds(0.1f);
-        // if(isA){
-        //     isShootingActiveA = false;
-        // } else{
-        //     isShootingActiveB = false;
-        // }
+
         isShootingActive = false;
     }
-
-
 
     private (GameObject, Rigidbody2D) CreateGenericBullet(
         float damage,
@@ -319,6 +302,4 @@ public class PlayerController : MonoBehaviour
         }
         return (bullet, rb);
     }
-
-   
 }
