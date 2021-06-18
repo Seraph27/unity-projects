@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using System;
 
 public class GameController : Singleton<GameController>
 {
@@ -9,14 +10,23 @@ public class GameController : Singleton<GameController>
     public Dictionary<string, GameObject> prefabs;
     public SpriteHolder spriteHolder = new SpriteHolder();
     public GameObject player;
+    List<WeaponKind> savedWeaponKinds;
+    float savedHealth;
+    PlayerController playerController;
 
     public void setupGame(){ //when loading a new scene
-
+        
         prefabs = Resources.LoadAll<GameObject>("Prefabs").ToDictionary(go => go.name, go => go);
         
         SpawnEntites entitySpawner = GameObject.FindObjectOfType<SpawnEntites>();
         entitySpawner.playerPrefab = prefabs["Player"];
         player = entitySpawner.spawnPlayer();
+        playerController = player.GetComponent<PlayerController>();
+        GameController.Instance.spriteHolder.loadSpritesByName("weapons");    
+
+        playerController.RestorePlayerState(savedWeaponKinds, savedHealth);
+        
+
         entitySpawner.spawnEnemies(); 
         string currentSceneName = SceneManager.GetActiveScene().name;
         Vector3 spawnPadLocation = GameObject.FindObjectOfType<SavePositionTile>().transform.position;
@@ -26,14 +36,20 @@ public class GameController : Singleton<GameController>
         } 
     }
 
+    public void SavePlayerState(){
+        savedWeaponKinds = playerController.weapons.Select(x => x.kind).ToList();
+        savedHealth = playerController.hpBarScript.value;
+    } 
+
     public GameObject getPrefabByName(string name){
-        if(prefabs[name] == null){
-            return null;
-        } else{
+        if(prefabs.ContainsKey(name)){
             return prefabs[name];
+        } else {
+            Debug.Log("couldn't find prefab with name " + name + " typo?");
+            throw new KeyNotFoundException();
         }
     }
-    
+
     public void savePlayerPositionOnTransition(Vector3 pos){
         savedPositions[SceneManager.GetActiveScene().name] = pos;
     }

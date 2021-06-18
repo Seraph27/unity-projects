@@ -29,7 +29,7 @@ public class MissileController : MonoBehaviour
         }
 
         if(c.gameObject.tag == "Player"){
-            player.GetComponent<PlayerController>().hpBarScript.ApplyDamage(0);
+            player.GetComponent<PlayerController>().hpBarScript.ApplyDamage(10);
         }
         Instantiate(explosionAnimationPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);

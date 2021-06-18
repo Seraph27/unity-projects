@@ -11,6 +11,7 @@ public class SceneTransition : MonoBehaviour
         // print(collider.gameObject.name);
         // print(collider.gameObject.tag);
         if(collider.gameObject.tag == "Player"){
+            GameController.Instance.SavePlayerState();
             SceneManager.LoadScene(sceneName);  
         }
         

@@ -83,18 +83,17 @@ public class PlayerController : MonoBehaviour
     GameObject weaponIconA;
     GameObject weaponIconB;
     GameObject iconFrame;
-    List<Weapon> weapons = new List<Weapon>();
+    public List<Weapon> weapons = new List<Weapon>();
     int activeWeaponIndexA = 0;
     int activeWeaponIndexB = 1;
     public GameObject weaponDropPrefab;
     GameObject flamethrower;
     // Start is called before the first frame update
-    void Start()
+    void Init()
     {
         cash = 100;
         var hpBar = Instantiate(hpBarPrefab);
         hpBarScript = hpBar.GetComponent<HealthBar>();
-        hpBarScript.Initalize(gameObject, 100);
         GameController.Instance.spriteHolder.loadSpritesByName("playerSprites");
         GameController.Instance.spriteHolder.loadSpritesByName("flame");
         GameController.Instance.spriteHolder.loadSpritesByName("bullet");
@@ -105,15 +104,33 @@ public class PlayerController : MonoBehaviour
         ren = gameObject.GetComponent<SpriteRenderer>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         Instantiate(cashTextPrefab, transform.position, Quaternion.identity);
-        weapons.Add(Weapon.make_weapon(WeaponKind.PiuPiuLaser, this));
-        weapons.Add(Weapon.make_weapon(WeaponKind.Shotgun, this));
-
         weaponIconA = Instantiate(weaponIconPrefab, transform.position, Quaternion.identity);
         weaponIconB = Instantiate(weaponIconPrefab, transform.position, Quaternion.identity);
-        weaponIconA.GetComponentInChildren<Image>().sprite = weapons[activeWeaponIndexA].icon;
-        weaponIconB.GetComponentInChildren<Image>().sprite = weapons[activeWeaponIndexB].icon;
         weaponIconB.GetComponentInChildren<Image>().transform.position += new Vector3(60, 0, 0);
         iconFrame = Instantiate(iconFramePrefab, transform.position, Quaternion.identity);
+    }
+
+    public void RestorePlayerState(List<WeaponKind> savedWeaponKinds, float savedHealth)
+    {
+        Init();
+        
+        if(savedWeaponKinds == null) {
+            savedWeaponKinds = new List<WeaponKind>();
+            savedWeaponKinds.Add(WeaponKind.PiuPiuLaser);
+            savedWeaponKinds.Add(WeaponKind.Shotgun);
+        }
+        if(savedHealth == 0){
+            savedHealth = 100;
+        }
+        
+        foreach(var weaponKind in savedWeaponKinds){
+            weapons.Add(Weapon.make_weapon(weaponKind, this));
+            
+        }
+        weaponIconA.GetComponentInChildren<Image>().sprite = this.weapons[activeWeaponIndexA].icon;
+        weaponIconB.GetComponentInChildren<Image>().sprite = this.weapons[activeWeaponIndexB].icon;
+
+        hpBarScript.Initalize(gameObject, savedHealth, 100);
     }
 
     void FixedUpdate(){

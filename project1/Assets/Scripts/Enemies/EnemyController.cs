@@ -29,14 +29,11 @@ abstract public class EnemyController : MonoBehaviour
         if(hpBarScript.value <= 0){
             Destroy(hpBar);
             Destroy(gameObject);
-            
+            OnDied();
         }
     }
 
-    protected bool shouldMakeDrop(float dropChance) {
-        return Random.Range(0, 1f) <= dropChance;
-    }
-    
+    virtual protected void OnDied(){}
     
     void OnTriggerEnter2D(Collider2D c){  //player dealt dmg
         if (GameController.Instance.isWithPlayerBullet(c)) {

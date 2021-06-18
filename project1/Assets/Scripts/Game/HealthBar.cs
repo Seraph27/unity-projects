@@ -11,11 +11,19 @@ public class HealthBar : MonoBehaviour
     GameObject objectToFollow;
     public GameObject damageTextPrefab;
 
-    public void Initalize(GameObject objectToFollow, int hp)
+    public void Initalize(GameObject objectToFollow, float hp)
     {
         whitePixel = transform.Find("whitePixel").gameObject;
         this.objectToFollow = objectToFollow;
         maxValue = hp;
+        value = hp;
+    }
+
+    public void Initalize(GameObject objectToFollow, float hp, float max)
+    {
+        whitePixel = transform.Find("whitePixel").gameObject;
+        this.objectToFollow = objectToFollow;
+        maxValue = max;
         value = hp;
     }
 

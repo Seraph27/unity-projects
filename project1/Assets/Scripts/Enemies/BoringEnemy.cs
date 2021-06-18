@@ -24,18 +24,19 @@ public class BoringEnemy : EnemyController
         }
 
         playerVelocity = new Vector3(direction,0,0);
-
         rb.velocity = playerVelocity * distanceThisFrame;
 
-        if(hpBarScript.value <= 0){
-            if(shouldMakeDrop(0.5f)){
-                Weapon.make_drop(transform.position, WeaponKind.Flamethrower);
-            }    
-        }
-
-      base.Update();
+        base.Update();
     }
 
+    protected override void OnDied()
+    {
+        Debug.Log("aduhiw");
+        var chance = Random.value;
+        if(chance > 0.5f){
+            Weapon.make_drop(transform.position, WeaponKind.Flamethrower);
+        }  
+    }
     void OnCollisionEnter2D(Collision2D collision) {
         direction *= -1;
     }

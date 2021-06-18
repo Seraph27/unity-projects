@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
+using System.Linq;
 
 public enum Phase{
     Spike,
@@ -17,13 +19,18 @@ public class BossController : MonoBehaviour
     public GameObject player;
     public GameObject spikePrefab;
     // Start is called before the first frame update
+    List<(Vector3, TileBase)> passable;
+    GameObject missileEnemyPrefab;
     void Start()
     {
         hpBar = Instantiate(hpBarPrefab);
         hpBarScript = hpBar.GetComponent<HealthBar>();
         hpBarScript.Initalize(gameObject, 300); 
         player = GameController.Instance.player;
+        passable = GameObject.FindObjectOfType<SpawnEntites>().getTilePositions();
+        missileEnemyPrefab = GameController.Instance.getPrefabByName("InterestingEnemy");
         StartCoroutine(PhaseCoroutine()); 
+        
         
     }
 
@@ -71,11 +78,18 @@ public class BossController : MonoBehaviour
             Instantiate(spikePrefab, player.transform.position, Quaternion.identity);
             yield return new WaitForSeconds(3);
         }
-
     }
 
+
+
     IEnumerator MinionCoroutine(){
-        yield return new WaitForSeconds(3);
+        while(true){
+            var closeTile = passable.Where(x => (x.Item1 - transform.position).magnitude < 4).ToList();
+            var randomIndex = Random.Range(0, closeTile.Count);
+            Vector3 randomVec3 = closeTile[randomIndex].Item1;
+            Instantiate(missileEnemyPrefab, randomVec3, Quaternion.identity);
+            yield return new WaitForSeconds(3);
+        }
     }
 
     IEnumerator AttackCoroutine(){
