@@ -28,7 +28,7 @@ public class MissileController : MonoBehaviour
             return;
         }
 
-        if(c.gameObject.tag == "Player"){
+        if(GameController.Instance.isWithPlayer(c)){
             player.GetComponent<PlayerController>().hpBarScript.ApplyDamage(10);
         }
         Instantiate(explosionAnimationPrefab, transform.position, Quaternion.identity);

@@ -27,7 +27,7 @@ public class TrailController : MonoBehaviour
             return;
         }
 
-        if(c.gameObject.tag == "Player"){
+        if(GameController.Instance.isWithPlayer(c)){
             player.GetComponent<PlayerController>().hpBarScript.ApplyDamage(50);
         }
         Destroy(gameObject);

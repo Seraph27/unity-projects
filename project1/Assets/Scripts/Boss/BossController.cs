@@ -21,6 +21,7 @@ public class BossController : MonoBehaviour
     // Start is called before the first frame update
     List<(Vector3, TileBase)> passable;
     GameObject missileEnemyPrefab;
+    Sprite fireSprite;
     void Start()
     {
         hpBar = Instantiate(hpBarPrefab);
@@ -29,6 +30,8 @@ public class BossController : MonoBehaviour
         player = GameController.Instance.player;
         passable = GameObject.FindObjectOfType<SpawnEntites>().getTilePositions();
         missileEnemyPrefab = GameController.Instance.getPrefabByName("InterestingEnemy");
+        GameController.Instance.spriteHolder.loadSpritesByName("fire");
+        fireSprite = GameController.Instance.spriteHolder.getSpriteByName("fire");
         StartCoroutine(PhaseCoroutine()); 
         
         
@@ -75,7 +78,9 @@ public class BossController : MonoBehaviour
 
     IEnumerator MakeSpikeCoroutine(){
         while(true){
-            Instantiate(spikePrefab, player.transform.position, Quaternion.identity);
+            var spike = Instantiate(spikePrefab, player.transform.position, Quaternion.identity);
+            var spikeRenderer = spike.GetComponent<SpriteRenderer>();
+            spikeRenderer.sprite = fireSprite;
             yield return new WaitForSeconds(3);
         }
     }

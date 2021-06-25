@@ -14,7 +14,7 @@ public class ShopController : MonoBehaviour
     
 
     void OnTriggerEnter2D(Collider2D c){
-        if(c.gameObject.tag == "Player"){
+        if(GameController.Instance.isWithPlayer(c)){
             print(shopOverlay);
             print(c.gameObject.GetComponent<PlayerController>().cash);
             shopOverlay.SetActive(true);
@@ -22,7 +22,7 @@ public class ShopController : MonoBehaviour
     }
 
     void OnTriggerExit2D(Collider2D c){
-        if(c.gameObject.tag == "Player"){
+        if(GameController.Instance.isWithPlayer(c)){
             shopOverlay.SetActive(false);
         }
     }

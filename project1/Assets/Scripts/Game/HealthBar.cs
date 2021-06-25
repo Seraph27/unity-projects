@@ -10,6 +10,8 @@ public class HealthBar : MonoBehaviour
     public float maxValue, value;
     GameObject objectToFollow;
     public GameObject damageTextPrefab;
+    public Renderer objectToFollowRen;
+    public Gradient gradient;
 
     public void Initalize(GameObject objectToFollow, float hp)
     {
@@ -17,6 +19,7 @@ public class HealthBar : MonoBehaviour
         this.objectToFollow = objectToFollow;
         maxValue = hp;
         value = hp;
+        objectToFollowRen = objectToFollow.GetComponent<Renderer>();
     }
 
     public void Initalize(GameObject objectToFollow, float hp, float max)
@@ -25,6 +28,7 @@ public class HealthBar : MonoBehaviour
         this.objectToFollow = objectToFollow;
         maxValue = max;
         value = hp;
+        objectToFollowRen = objectToFollow.GetComponent<Renderer>();
     }
 
     public bool IsAlive(){
@@ -34,18 +38,24 @@ public class HealthBar : MonoBehaviour
     public void ApplyDamage(float damage)
     {
         value -= damage;
+        var colorAfterDamage = ColorFromGradient(value / maxValue);
+        whitePixel.GetComponent<SpriteRenderer>().color = colorAfterDamage;
         var damageText = Instantiate(damageTextPrefab, transform.position, Quaternion.identity);
         damageText.transform.GetChild(0).GetComponent<TextMeshPro>().SetText(damage.ToString());
         GameObject.Destroy(damageText, 1);
     }
 
+    Color ColorFromGradient (float value){
+        return gradient.Evaluate(value);
+    }
+    
     public void IncreaseHp(int hp){
         maxValue += hp;
         value += hp;
     }
 
     void Update(){
-        var pos = objectToFollow.transform.position + new Vector3(0,-1,0);
+        var pos = objectToFollow.transform.position + new Vector3(0, -(objectToFollowRen.bounds.max.y - objectToFollowRen.bounds.min.y)/2 - 0.5f, 0);
         transform.position = pos;
 
         var ratio = value / maxValue;

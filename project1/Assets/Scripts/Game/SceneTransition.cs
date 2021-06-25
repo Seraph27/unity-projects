@@ -7,10 +7,10 @@ public class SceneTransition : MonoBehaviour
 {
     public string sceneName;
 
-    void OnTriggerEnter2D(Collider2D collider) {
+    void OnTriggerEnter2D(Collider2D c) {
         // print(collider.gameObject.name);
         // print(collider.gameObject.tag);
-        if(collider.gameObject.tag == "Player"){
+        if(GameController.Instance.isWithPlayer(c)){
             GameController.Instance.SavePlayerState();
             SceneManager.LoadScene(sceneName);  
         }

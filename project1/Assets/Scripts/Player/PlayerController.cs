@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Init()
     {
-        cash = 100;
+        cash = 300;
         var hpBar = Instantiate(hpBarPrefab);
         hpBarScript = hpBar.GetComponent<HealthBar>();
         GameController.Instance.spriteHolder.loadSpritesByName("playerSprites");
