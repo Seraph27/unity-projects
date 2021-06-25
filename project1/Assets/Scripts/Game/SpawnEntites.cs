@@ -19,7 +19,6 @@ public class SpawnEntites : MonoBehaviour {
 
         BoundsInt bounds = tilemap.cellBounds;
         TileBase[] allTiles = tilemap.GetTilesBlock(bounds);
-        Debug.Log("x: " + bounds.size.x + " y: " + bounds.size.y);
         for (int x = bounds.min.x; x < bounds.max.x; x++) {
             for (int y = bounds.min.y; y < bounds.max.y; y++) {                                                                               
                 TileBase tile = tilemap.GetTile(new Vector3Int(x, y, 0));

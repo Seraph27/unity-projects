@@ -52,6 +52,8 @@ public class BossController : MonoBehaviour
     }
 
     IEnumerator PhaseCoroutine(){
+        yield return new WaitForSeconds(5);
+
         var spikeCoroutine = StartCoroutine(MakeSpikeCoroutine());
         while(hpBarScript.value > 200){
             yield return new WaitForSeconds(1/60);
@@ -66,6 +68,7 @@ public class BossController : MonoBehaviour
         StopCoroutine(minionCoroutine);
 
         currentPhase = Phase.Attack;
+        GetComponent<Animator>().SetBool("isPhase3", true);
         var attackCoroutine = StartCoroutine(AttackCoroutine());
         while(hpBarScript.value > 0){
             yield return new WaitForSeconds(1/60);

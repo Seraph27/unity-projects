@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using System.Linq;
 using System;
+using UnityEngine.Tilemaps;
 
 public class GameController : Singleton<GameController>
 {
@@ -12,6 +13,7 @@ public class GameController : Singleton<GameController>
     public GameObject player;
     List<WeaponKind> savedWeaponKinds;
     float savedHealth;
+    float savedMaxHealth;
     PlayerController playerController;
 
     public void setupGame(){ //when loading a new scene
@@ -24,7 +26,7 @@ public class GameController : Singleton<GameController>
         playerController = player.GetComponent<PlayerController>();
         GameController.Instance.spriteHolder.loadSpritesByName("weapons");    
 
-        playerController.RestorePlayerState(savedWeaponKinds, savedHealth);
+        playerController.RestorePlayerState(savedWeaponKinds, savedHealth, savedMaxHealth);
         
 
         entitySpawner.spawnEnemies(); 
@@ -39,6 +41,7 @@ public class GameController : Singleton<GameController>
     public void SavePlayerState(){
         savedWeaponKinds = playerController.weapons.Select(x => x.kind).ToList();
         savedHealth = playerController.hpBarScript.value;
+        savedMaxHealth = playerController.hpBarScript.maxValue;
     } 
 
     public GameObject getPrefabByName(string name){
@@ -49,6 +52,23 @@ public class GameController : Singleton<GameController>
             throw new KeyNotFoundException();
         }
     }
+
+    public void deleteTilesWithName(Tilemap mapName, string name){
+        var tiles = new List<(Vector3, TileBase)>();
+        BoundsInt bounds = mapName.cellBounds;
+        for (int x = bounds.min.x; x < bounds.max.x; x++) {
+            for (int y = bounds.min.y; y < bounds.max.y; y++) {                                                                               
+                TileBase tile = mapName.GetTile(new Vector3Int(x, y, 0));
+                if (tile != null) {
+                    Debug.Log("tile to delete" + tile.name);
+                    if(tile.name == name){
+                        mapName.SetTile(new Vector3Int(x, y, 0), null);
+                    }
+                }
+            }
+        }
+    }
+
 
     public void savePlayerPositionOnTransition(Vector3 pos){
         savedPositions[SceneManager.GetActiveScene().name] = pos;

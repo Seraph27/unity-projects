@@ -29,6 +29,8 @@ public class HealthBar : MonoBehaviour
         maxValue = max;
         value = hp;
         objectToFollowRen = objectToFollow.GetComponent<Renderer>();
+        var colorAfterDamage = ColorFromGradient(value / maxValue);
+        whitePixel.GetComponent<SpriteRenderer>().color = colorAfterDamage;
     }
 
     public bool IsAlive(){
@@ -48,14 +50,14 @@ public class HealthBar : MonoBehaviour
     Color ColorFromGradient (float value){
         return gradient.Evaluate(value);
     }
-    
+
     public void IncreaseHp(int hp){
         maxValue += hp;
         value += hp;
     }
 
     void Update(){
-        var pos = objectToFollow.transform.position + new Vector3(0, -(objectToFollowRen.bounds.max.y - objectToFollowRen.bounds.min.y)/2 - 0.5f, 0);
+        var pos = objectToFollow.transform.position; //+ new Vector3(0, -(objectToFollowRen.bounds.max.y - objectToFollowRen.bounds.min.y)/2 - 0.5f, 0);
         transform.position = pos;
 
         var ratio = value / maxValue;
