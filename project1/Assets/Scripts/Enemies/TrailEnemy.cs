@@ -11,7 +11,6 @@ public enum TrailEnemyMode{
 public class TrailEnemy : EnemyController
 {
     public GameObject poisonTrail; 
-    protected PlayerController playerController;
     protected bool isActive = false;
     private List<Transform> playerWaypoints;
     private TrailEnemyMode mode = TrailEnemyMode.Follow;
@@ -31,9 +30,6 @@ public class TrailEnemy : EnemyController
     //     List<int> myfilteredlist = mylist.Where(element => element > 5).ToList();
     //     List<int> mytransformedlist = mylist.Select(element => element * 2);
 
-
-
-        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         playerWaypoints = new List<Transform>();
 
         for(int i = 0; i < 4; i++){

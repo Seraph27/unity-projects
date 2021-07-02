@@ -9,23 +9,24 @@ abstract public class EnemyController : MonoBehaviour
     protected GameObject hpBar;
     public HealthBar hpBarScript;
     protected SpriteRenderer ren;
+    public PlayerController playerController;
 
 
     abstract public int GetBaseHp();
 
-    virtual protected void Start()
+    virtual protected void Start()  
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         hpBar = Instantiate(hpBarPrefab);
         hpBarScript = hpBar.GetComponent<HealthBar>();
         hpBarScript.Initalize(gameObject, GetBaseHp());  
         ren = GetComponent<SpriteRenderer>();
+        playerController = GameController.Instance.player.GetComponent<PlayerController>();
         
     }
 
     virtual protected void Update()
     {
-
         if(hpBarScript.value <= 0){
             Destroy(hpBar);
             Destroy(gameObject);
@@ -33,7 +34,10 @@ abstract public class EnemyController : MonoBehaviour
         }
     }
 
-    virtual protected void OnDied(){}
+    virtual protected void OnDied() {
+        playerController.enemyKills++;
+        Debug.Log(playerController.enemyKills);
+    }
     
     void OnTriggerEnter2D(Collider2D c){  //player dealt dmg
         if (GameController.Instance.isWithPlayerBullet(c)) {

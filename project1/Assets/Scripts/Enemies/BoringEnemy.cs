@@ -31,7 +31,7 @@ public class BoringEnemy : EnemyController
 
     protected override void OnDied()
     {
-        Debug.Log("aduhiw");
+        base.OnDied();
         var chance = Random.value;
         if(chance > 0.5f){
             Weapon.make_drop(transform.position, WeaponKind.Flamethrower);

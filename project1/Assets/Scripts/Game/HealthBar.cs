@@ -57,7 +57,7 @@ public class HealthBar : MonoBehaviour
     }
 
     void Update(){
-        var pos = objectToFollow.transform.position; //+ new Vector3(0, -(objectToFollowRen.bounds.max.y - objectToFollowRen.bounds.min.y)/2 - 0.5f, 0);
+        var pos = objectToFollow.transform.position + new Vector3(0, -(objectToFollowRen.bounds.max.y - objectToFollowRen.bounds.min.y)/2 - 0.5f, 0);
         transform.position = pos;
 
         var ratio = value / maxValue;

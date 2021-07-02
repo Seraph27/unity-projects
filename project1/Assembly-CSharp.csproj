@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\Game\GameLoader.cs" />
      <Compile Include="Assets\Scripts\Game\GunDropController.cs" />
      <Compile Include="Assets\Scripts\Game\HealthBar.cs" />
+     <Compile Include="Assets\Scripts\Game\KeyController.cs" />
      <Compile Include="Assets\Scripts\Game\SavePositionTile.cs" />
      <Compile Include="Assets\Scripts\Game\SceneManagement.cs" />
      <Compile Include="Assets\Scripts\Game\SceneTransition.cs" />

@@ -10,10 +10,15 @@ using System.Linq;
 public class EnemySpawnerPad : MonoBehaviour {
     public GameObject enemyToSpawn;
     bool isCoroutineRunning = false;
+    public int spawnCount;
+    GameObject player;
 
+    private void Start() {
+        player = GameController.Instance.player;
+    }
     public void Update(){
         
-        if(enemyToSpawn != null && !isCoroutineRunning){
+        if(enemyToSpawn != null && !isCoroutineRunning && (transform.position - player.transform.position).magnitude < 4){
             StartCoroutine(RespawnTimerCoroutine());
         }
 
@@ -21,7 +26,7 @@ public class EnemySpawnerPad : MonoBehaviour {
 
     IEnumerator RespawnTimerCoroutine(){
         isCoroutineRunning = true;
-        for(int i = 0; i < 3; i++){
+        for(int i = 0; i < spawnCount; i++){
             var enemySpawned = Instantiate(enemyToSpawn, transform.position, Quaternion.identity);
             var e = enemySpawned.GetComponent<EnemyController>();
 

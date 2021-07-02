@@ -60,7 +60,6 @@ public class GameController : Singleton<GameController>
             for (int y = bounds.min.y; y < bounds.max.y; y++) {                                                                               
                 TileBase tile = mapName.GetTile(new Vector3Int(x, y, 0));
                 if (tile != null) {
-                    Debug.Log("tile to delete" + tile.name);
                     if(tile.name == name){
                         mapName.SetTile(new Vector3Int(x, y, 0), null);
                     }
@@ -81,8 +80,6 @@ public class GameController : Singleton<GameController>
     public bool isWithPlayerBullet(Collider2D c){
         return c.gameObject.tag == "PlayerProjectile";
     }
-
-   
 
 }
 

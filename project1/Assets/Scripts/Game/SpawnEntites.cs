@@ -12,6 +12,8 @@ public class SpawnEntites : MonoBehaviour {
     public GameObject boringEnemyPrefab;
     public GameObject interestingEnemyPrefab;
     public GameObject shiftingEnemyPrefab;
+    public GameObject dashEnemyPrefab;
+    public GameObject trailEnemyPrefab;
 
     public List<(Vector3, TileBase)> getTilePositions(){
         var tiles = new List<(Vector3, TileBase)>();
@@ -53,18 +55,35 @@ public class SpawnEntites : MonoBehaviour {
                 enemySpawnerGO.transform.position = worldPos;
                 var enemySpawnerScript = enemySpawnerGO.AddComponent<EnemySpawnerPad>();
                 enemySpawnerScript.enemyToSpawn = boringEnemyPrefab;
+                enemySpawnerScript.spawnCount = 3;
             } 
             if(tile.name == "tileset1_114"){
                 GameObject enemySpawnerGO = new GameObject(); 
                 enemySpawnerGO.transform.position = worldPos;
                 var enemySpawnerScript = enemySpawnerGO.AddComponent<EnemySpawnerPad>();
                 enemySpawnerScript.enemyToSpawn = interestingEnemyPrefab;
+                enemySpawnerScript.spawnCount = 2;
             }      
             if(tile.name == "tileset1_116"){
                 GameObject enemySpawnerGO = new GameObject(); 
                 enemySpawnerGO.transform.position = worldPos;
                 var enemySpawnerScript = enemySpawnerGO.AddComponent<EnemySpawnerPad>();
                 enemySpawnerScript.enemyToSpawn = shiftingEnemyPrefab;
+                enemySpawnerScript.spawnCount = 1;
+            }  
+            if(tile.name == "tileset1_84"){
+                GameObject enemySpawnerGO = new GameObject(); 
+                enemySpawnerGO.transform.position = worldPos;
+                var enemySpawnerScript = enemySpawnerGO.AddComponent<EnemySpawnerPad>();
+                enemySpawnerScript.enemyToSpawn = dashEnemyPrefab;
+                enemySpawnerScript.spawnCount = 1;
+            }  
+            if(tile.name == "tileset1_85"){
+                GameObject enemySpawnerGO = new GameObject(); 
+                enemySpawnerGO.transform.position = worldPos;
+                var enemySpawnerScript = enemySpawnerGO.AddComponent<EnemySpawnerPad>();
+                enemySpawnerScript.enemyToSpawn = trailEnemyPrefab;
+                enemySpawnerScript.spawnCount = 1;
             }  
         }                              
     }   

@@ -88,6 +88,7 @@ public class PlayerController : MonoBehaviour
     int activeWeaponIndexB = 1;
     public GameObject weaponDropPrefab;
     GameObject flamethrower;
+    public int enemyKills;
     // Start is called before the first frame update
     void Init()
     {
@@ -114,6 +115,8 @@ public class PlayerController : MonoBehaviour
     {
         Init();
         
+        //enemyKills = 0;
+
         if(savedWeaponKinds == null) {
             savedWeaponKinds = new List<WeaponKind>();
             savedWeaponKinds.Add(WeaponKind.PiuPiuLaser);
