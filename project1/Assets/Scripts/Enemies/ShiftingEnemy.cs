@@ -28,7 +28,7 @@ public class ShiftingEnemy : EnemyController
                 transform.position = randomVec3;
             }
             else{
-                hpBarScript.ApplyDamage(c.gameObject.GetComponent<PlayerBullet>().power);
+                hpBarScript.ApplyDamage(c.gameObject.GetComponent<Bullet>().power);
                 Destroy(c.gameObject);
             }
         }

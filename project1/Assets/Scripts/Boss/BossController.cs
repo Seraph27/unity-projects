@@ -46,7 +46,7 @@ public class BossController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D c){  //player dealt dmg
         if (GameController.Instance.isWithPlayerBullet(c)) {
-            hpBarScript.ApplyDamage(c.gameObject.GetComponent<PlayerBullet>().power);
+            hpBarScript.ApplyDamage(c.gameObject.GetComponent<Bullet>().power);
             Destroy(c.gameObject);
         }
     }
@@ -101,6 +101,42 @@ public class BossController : MonoBehaviour
     }
 
     IEnumerator AttackCoroutine(){
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
+        while(true){
+            yield return new WaitForSeconds(1);
+            for(int i = -135; i < 45; i+=6){
+                CreateBossFlame(i);
+            }
+            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(1);
+            for(int i = 45; i < 225; i+=6){
+                CreateBossFlame(i);
+            }
+            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(2);
+        }
+    }
+
+    void CreateBossFlame(int rotationDegrees){
+        GameObject bullet = new GameObject("bossFlame");
+        bullet.AddComponent<Bullet>().power = 10;
+        var ren = bullet.AddComponent<SpriteRenderer>();
+        Rigidbody2D rb = bullet.AddComponent<Rigidbody2D>();
+        var circleCollider = bullet.AddComponent<CircleCollider2D>();
+        bullet.tag = "EnemyProjectile";
+        ren.sprite = GameController.Instance.spriteHolder.getSpriteByName("flame"); 
+        ren.sortingLayerName = "Projectiles";
+        ren.sortingOrder = 0;
+        rb.gravityScale = 0;
+        circleCollider.isTrigger = true;
+        circleCollider.radius = 1 / 10;
+        bullet.transform.localScale = new Vector3(3, 3, 0);
+        var rotationVector =  (Vector2)(Quaternion.Euler(0, 0, rotationDegrees) * Vector2.right);   
+        bullet.transform.rotation = Quaternion.Euler(0, 0, rotationDegrees);
+        bullet.transform.position = transform.position + (Vector3)(rotationVector * 1.0f);
+        rb.velocity = rotationVector * 10;     
+        GameObject.Destroy(bullet, 5);
+
     }
 }

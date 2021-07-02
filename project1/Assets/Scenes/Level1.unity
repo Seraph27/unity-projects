@@ -9886,6 +9886,8 @@ MonoBehaviour:
     type: 3}
   shiftingEnemyPrefab: {fileID: 1735428519091027001, guid: 7dfd31d8a23f5bb4ab6848d69a07cfd0,
     type: 3}
+  dashEnemyPrefab: {fileID: 0}
+  trailEnemyPrefab: {fileID: 0}
 --- !u!1 &1053725642
 GameObject:
   m_ObjectHideFlags: 0
@@ -13627,7 +13629,7 @@ PrefabInstance:
     - target: {fileID: 8618774750369544407, guid: ba9441c68238ee24ea616ae7604c0f38,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.46
+      value: 0.44
       objectReference: {fileID: 0}
     - target: {fileID: 8618774751796077376, guid: ba9441c68238ee24ea616ae7604c0f38,
         type: 3}

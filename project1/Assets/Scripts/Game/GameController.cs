@@ -81,6 +81,10 @@ public class GameController : Singleton<GameController>
         return c.gameObject.tag == "PlayerProjectile";
     }
 
+    public bool isWithNotPassableTile(Collider2D c){
+        return c.gameObject.name == "NotPassable";
+    }
+
 }
 
 public class SpriteHolder{

@@ -114,8 +114,6 @@ public class PlayerController : MonoBehaviour
     public void RestorePlayerState(List<WeaponKind> savedWeaponKinds, float savedHealth, float savedMaxHealth)
     {
         Init();
-        
-        //enemyKills = 0;
 
         if(savedWeaponKinds == null) {
             savedWeaponKinds = new List<WeaponKind>();
@@ -292,7 +290,7 @@ public class PlayerController : MonoBehaviour
         float bulletLife = 0)
     {
         GameObject bullet = new GameObject(spriteName);
-        bullet.AddComponent<PlayerBullet>().power = damage;
+        bullet.AddComponent<Bullet>().power = damage;
         var ren = bullet.AddComponent<SpriteRenderer>();
         Rigidbody2D rb = bullet.AddComponent<Rigidbody2D>();
         var circleCollider = bullet.AddComponent<CircleCollider2D>();
