@@ -31,8 +31,7 @@ public class TrailEnemy : EnemyController
 
         for(int i = 0; i < 4; i++){
             playerWaypoints.Add(playerController.transform.GetChild(i).transform);
-        } 
-        playerWaypoints.Add(playerController.transform.GetChild(0).transform);
+        }
     }
     // Update is called once per frame
     override protected void Update()
@@ -71,14 +70,22 @@ public class TrailEnemy : EnemyController
         } 
             
         if(mode == TrailEnemyMode.Encircle){  //encircle
-            var wayPointVec3 = reorderedList[wayPointIndex].position;
+            
+            Vector3 wayPointVec3;
+            if(wayPointIndex != 4){
+                wayPointVec3 = reorderedList[wayPointIndex].position;
+            } else{
+                wayPointVec3 = reorderedList[0].position;
+            }
+            
             float step = encircleSpeed   * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, new Vector2(wayPointVec3.x, wayPointVec3.y), step);
             
             if((transform.position - wayPointVec3).magnitude < 0.1f) {
                 wayPointIndex++;
+                
             }
-            if(wayPointIndex == reorderedList.Count){
+            if(wayPointIndex == reorderedList.Count + 1){
                 mode = TrailEnemyMode.Follow;
                 timer = 0;
                 stopTrail();
@@ -99,7 +106,8 @@ public class TrailEnemy : EnemyController
     IEnumerator TrailCoroutine() {
         while(true){
             yield return new WaitForSeconds(0.05f);
-            Instantiate(poisonTrail, transform.position, Quaternion.identity);
+            var a = Instantiate(poisonTrail, transform.position, Quaternion.identity);
+            Debug.Log(a.gameObject.name);
             
         }
     }

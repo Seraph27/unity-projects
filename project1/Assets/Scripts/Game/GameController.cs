@@ -83,6 +83,10 @@ public class GameController : Singleton<GameController>
         return c.gameObject == player;
     }
 
+    public bool isWithEnemy(Collider2D c){
+        return c.gameObject.tag == "Enemy";
+    }
+
     public bool isWithPlayerBullet(Collider2D c){
         return c.gameObject.tag == "PlayerProjectile";
     }

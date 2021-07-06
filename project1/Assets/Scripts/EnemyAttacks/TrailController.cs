@@ -5,24 +5,21 @@ using UnityEngine;
 
 public class TrailController : MonoBehaviour
 {
-    public float seconds;
     GameObject player;
-    public GameObject owner;
 
     void Start()
     {
         player = GameController.Instance.player;
-        owner = GameObject.Find("TrailEnemy");
-        GameObject.Destroy(gameObject, seconds);
+        GameObject.Destroy(gameObject, 2);
     }
 
     void OnTriggerEnter2D(Collider2D c){
-        if(c.gameObject == owner){
+        if(GameController.Instance.isWithEnemy(c)){
             return;
         }
 
         if(GameController.Instance.isWithPlayer(c)){
-            player.GetComponent<PlayerController>().hpBarScript.ApplyDamage(50);
+            player.GetComponent<PlayerController>().hpBarScript.ApplyDamage(10);
         }
         Destroy(gameObject);
     }
