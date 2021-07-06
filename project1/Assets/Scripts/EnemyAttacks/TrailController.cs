@@ -13,13 +13,7 @@ public class TrailController : MonoBehaviour
     {
         player = GameController.Instance.player;
         owner = GameObject.Find("TrailEnemy");
-        StartCoroutine(SelfDestruct());     //GameObject.Destroy(gameObject, 5);
-    }
-
-    IEnumerator SelfDestruct()
-    {
-        yield return new WaitForSeconds(seconds);
-        Destroy(gameObject);
+        GameObject.Destroy(gameObject, seconds);
     }
 
     void OnTriggerEnter2D(Collider2D c){

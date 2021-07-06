@@ -22,6 +22,12 @@ public class GameController : Singleton<GameController>
         
         SpawnEntites entitySpawner = GameObject.FindObjectOfType<SpawnEntites>();
         entitySpawner.playerPrefab = prefabs["Player"];
+        entitySpawner.boringEnemyPrefab = prefabs["BoringEnemy"];
+        entitySpawner.interestingEnemyPrefab = prefabs["InterestingEnemy"];
+        entitySpawner.shiftingEnemyPrefab = prefabs["ShiftingEnemy"];
+        entitySpawner.dashEnemyPrefab = prefabs["DashEnemy"];
+        entitySpawner.trailEnemyPrefab = prefabs["TrailEnemy"];
+
         player = entitySpawner.spawnPlayer();
         playerController = player.GetComponent<PlayerController>();
         GameController.Instance.spriteHolder.loadSpritesByName("weapons");    
