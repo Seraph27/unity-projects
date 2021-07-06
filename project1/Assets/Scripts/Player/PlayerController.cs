@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour
         Instantiate(cashTextPrefab, transform.position, Quaternion.identity);
         weaponIconA = Instantiate(weaponIconPrefab, transform.position, Quaternion.identity);
         weaponIconB = Instantiate(weaponIconPrefab, transform.position, Quaternion.identity);
-        weaponIconB.GetComponentInChildren<Image>().transform.position += new Vector3(60, 0, 0);
+        weaponIconB.GetComponentInChildren<Image>().transform.position += new Vector3(Screen.width * 0.07f, 0, 0);
         iconFrame = Instantiate(iconFramePrefab, transform.position, Quaternion.identity);
     }
 
@@ -166,10 +166,12 @@ public class PlayerController : MonoBehaviour
 
 
         if(Input.GetKeyDown("1")){
+            var screenWidth = Screen.width;
             if(isSlotAActive){
-                iconFrame.GetComponentInChildren<Image>().transform.position += new Vector3(60, 0, 0);
+                Debug.Log(Screen.width);
+                iconFrame.GetComponentInChildren<Image>().transform.position += new Vector3(screenWidth * 0.07f, 0, 0);
             } else{
-                iconFrame.GetComponentInChildren<Image>().transform.position -= new Vector3(60, 0, 0);
+                iconFrame.GetComponentInChildren<Image>().transform.position -= new Vector3(screenWidth * 0.07f, 0, 0);
             }
 
             isSlotAActive = !isSlotAActive;
