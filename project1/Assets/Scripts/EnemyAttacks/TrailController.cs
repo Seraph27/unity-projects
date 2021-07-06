@@ -11,7 +11,7 @@ public class TrailController : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.Find("Player");
+        player = GameController.Instance.player;
         owner = GameObject.Find("TrailEnemy");
         StartCoroutine(SelfDestruct());     //GameObject.Destroy(gameObject, 5);
     }

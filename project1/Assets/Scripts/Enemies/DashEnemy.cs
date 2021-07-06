@@ -11,7 +11,6 @@ public enum DashEnemyMode{
 
 public class DashEnemy : EnemyController
 {
-    protected PlayerController playerController;
     protected bool isActive = false;
     private DashEnemyMode mode = DashEnemyMode.Follow;
     private float timer = 0;
@@ -24,8 +23,6 @@ public class DashEnemy : EnemyController
 
     override protected void Start()
     {
-
-        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
 
         base.Start();
     }
@@ -48,13 +45,9 @@ public class DashEnemy : EnemyController
 
         if (mode == DashEnemyMode.Follow){ 
             
+            transform.position += (Vector3)(distanceToPlayer * Time.deltaTime * 0.75f);
 
-            
-
-        
-            transform.position += (Vector3)(distanceToPlayer * 0.005f);
-
-            if(distanceToPlayer.magnitude < 3 && timer > 5){
+            if(distanceToPlayer.magnitude < 3 && timer > 3){
                 timer = 0;
                 mode = DashEnemyMode.Preparing;
                 dashDirection = distanceToPlayer;
@@ -73,7 +66,7 @@ public class DashEnemy : EnemyController
         }
 
         if(mode == DashEnemyMode.Dash){ 
-            transform.position += (Vector3)(dashDirection.normalized * 0.1f);
+            transform.position += (Vector3)(dashDirection.normalized * Time.deltaTime * 20);
             if(distanceToPlayer.magnitude < 0.5 && !hasAppliedDamage){
                 playerController.rb.AddForce(dashDirection.normalized * 2000);   // decouple camera and update camnera controlelealea
                 playerController.hpBarScript.ApplyDamage(20);

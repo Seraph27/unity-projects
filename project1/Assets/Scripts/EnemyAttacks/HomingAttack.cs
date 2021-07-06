@@ -10,7 +10,7 @@ public class HomingAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Player");
+        player = GameController.Instance.player;
     }
 
     // Update is called once per frame
@@ -19,7 +19,7 @@ public class HomingAttack : MonoBehaviour
         reloadDelay += Time.deltaTime;
 
         if(reloadDelay >= 1){
-            if((player.transform.position - transform.position).magnitude < 4){ 
+            if((player.transform.position - transform.position).magnitude < 6){ 
                 GameObject missile = Instantiate(missilePrefab, transform.position, Quaternion.identity);
                 missile.GetComponent<MissileController>().owner = gameObject;
                 reloadDelay = 0;

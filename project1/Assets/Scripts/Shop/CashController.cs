@@ -11,7 +11,7 @@ public class CashController : MonoBehaviour
     PlayerController playerController;
     void Start () {
         cashText = GetComponent<TextMeshProUGUI>();
-        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        playerController = GameController.Instance.player.GetComponent<PlayerController>();
     }
     // Update is called once per frame
     void Update()

@@ -10,7 +10,7 @@ public class MissileController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Player");
+        player = GameController.Instance.player;
     }
 
     // Update is called once per frame
@@ -19,7 +19,7 @@ public class MissileController : MonoBehaviour
 
         var direction = (Vector2)(player.transform.position - transform.position);
         direction.Normalize();
-        transform.position += (Vector3)(direction * 0.02f);
+        transform.position += (Vector3)(direction * Time.deltaTime * 5);
         transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x)*Mathf.Rad2Deg - 90);   
     }
 
