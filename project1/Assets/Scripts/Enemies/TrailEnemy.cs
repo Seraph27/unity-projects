@@ -26,17 +26,13 @@ public class TrailEnemy : EnemyController
 
     override protected void Start()
     {
-    //     List<int> mylist = new List<int>() {5,4,6,3};
-    //     List<int> myfilteredlist = mylist.Where(element => element > 5).ToList();
-    //     List<int> mytransformedlist = mylist.Select(element => element * 2);
-
+        base.Start();
         playerWaypoints = new List<Transform>();
 
         for(int i = 0; i < 4; i++){
             playerWaypoints.Add(playerController.transform.GetChild(i).transform);
         } 
         playerWaypoints.Add(playerController.transform.GetChild(0).transform);
-        base.Start();
     }
     // Update is called once per frame
     override protected void Update()
