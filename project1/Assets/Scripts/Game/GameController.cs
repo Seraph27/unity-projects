@@ -8,6 +8,7 @@ using UnityEngine.Tilemaps;
 public class GameController : Singleton<GameController>
 {
     Dictionary<string, Vector3> savedPositions = new Dictionary<string, Vector3>();
+    List<string> completedScenes = new List<string>();
     public Dictionary<string, GameObject> prefabs;
     public SpriteHolder spriteHolder = new SpriteHolder();
     public GameObject player;
@@ -15,6 +16,7 @@ public class GameController : Singleton<GameController>
     float savedHealth;
     float savedMaxHealth;
     PlayerController playerController;
+    Tilemap notPassable; 
 
     public void setupGame(){ //when loading a new scene
         
@@ -30,6 +32,7 @@ public class GameController : Singleton<GameController>
 
         player = entitySpawner.spawnPlayer();
         playerController = player.GetComponent<PlayerController>();
+        notPassable = GameObject.Find("NotPassable").GetComponent<Tilemap>();
         GameController.Instance.spriteHolder.loadSpritesByName("weapons");    
 
         playerController.RestorePlayerState(savedWeaponKinds, savedHealth, savedMaxHealth);
@@ -42,6 +45,19 @@ public class GameController : Singleton<GameController>
         if (savedPositions.ContainsKey(currentSceneName)) {
             player.transform.position = savedPositions[currentSceneName];
         } 
+
+        foreach (var scene in completedScenes)
+        {
+            Debug.Log(" aaaaa: " + scene);
+        }
+        
+        if(completedScenes != null && completedScenes.Contains(SceneManager.GetActiveScene().name)){
+            deleteTilesWithName(notPassable, "tileset1_66");
+        }
+    }
+
+    public void addCompletedScenes(String sceneName){
+        completedScenes.Add(sceneName);
     }
 
     public void SavePlayerState(){

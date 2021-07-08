@@ -42,7 +42,7 @@ public class Weapon {
         ren.sprite = GameController.Instance.spriteHolder.getSpriteByName(weaponIcons[gunType]);
         ren.sortingLayerName = "GUI";
         go.tag = "Weapon";
-        go.transform.localScale += new Vector3(6, 6, 0);
+        go.transform.localScale += new Vector3(5, 5, 0);
         
         return go;
     }
@@ -168,7 +168,6 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown("1")){
             var screenWidth = Screen.width;
             if(isSlotAActive){
-                Debug.Log(Screen.width);
                 iconFrame.GetComponentInChildren<Image>().transform.position += new Vector3(screenWidth * 0.07f, 0, 0);
             } else{
                 iconFrame.GetComponentInChildren<Image>().transform.position -= new Vector3(screenWidth * 0.07f, 0, 0);

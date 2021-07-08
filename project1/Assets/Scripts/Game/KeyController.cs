@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.SceneManagement;
+
 
 public class KeyController : MonoBehaviour
 {
+    public int killRequiredToUnlock;
     PlayerController playerController; 
     Renderer ren;
     Collider2D c;
@@ -23,7 +26,7 @@ public class KeyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(playerController.enemyKills > 2){
+        if(playerController.enemyKills > killRequiredToUnlock){
            ren.enabled = true;
            c.enabled = true;
         }
