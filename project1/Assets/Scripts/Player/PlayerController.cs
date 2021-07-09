@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
         iconFrame = Instantiate(iconFramePrefab, transform.position, Quaternion.identity);
     }
 
-    public void RestorePlayerState(List<WeaponKind> savedWeaponKinds, float savedHealth, float savedMaxHealth)
+    public void RestorePlayerState(List<WeaponKind> savedWeaponKinds, float savedHealth)
     {
         Init();
 
@@ -121,8 +121,7 @@ public class PlayerController : MonoBehaviour
             savedWeaponKinds.Add(WeaponKind.Shotgun);
         }
         if(savedHealth == 0){
-            savedHealth = 100;
-            savedMaxHealth = 100;
+            savedHealth = GameController.Instance.globalPlayerMaxHealth;
         }
         
         foreach(var weaponKind in savedWeaponKinds){
@@ -132,7 +131,7 @@ public class PlayerController : MonoBehaviour
         weaponIconA.GetComponentInChildren<Image>().sprite = this.weapons[activeWeaponIndexA].icon;
         weaponIconB.GetComponentInChildren<Image>().sprite = this.weapons[activeWeaponIndexB].icon;
 
-        hpBarScript.Initalize(gameObject, savedHealth, savedMaxHealth);
+        hpBarScript.Initalize(gameObject, savedHealth, GameController.Instance.globalPlayerMaxHealth);
     }
 
     void FixedUpdate(){

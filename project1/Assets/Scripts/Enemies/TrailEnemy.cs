@@ -79,7 +79,7 @@ public class TrailEnemy : EnemyController
             }
             
             float step = encircleSpeed   * Time.deltaTime;
-            transform.position = Vector2.MoveTowards(transform.position, new Vector2(wayPointVec3.x, wayPointVec3.y), step);
+            transform.position = Vector2.MoveTowards(transform.position, new Vector2(wayPointVec3.x, wayPointVec3.y), step);  //should move rb directly with Rigidbody.MovePosition()
             
             if((transform.position - wayPointVec3).magnitude < 0.1f) {
                 wayPointIndex++;
@@ -102,6 +102,14 @@ public class TrailEnemy : EnemyController
     void stopTrail(){
         StopCoroutine(co);
     }                                                      
+
+    void OnCollisionEnter2D(Collision2D other) {
+        if(GameController.Instance.isWithNotPassableTile(other.collider)){
+            mode = TrailEnemyMode.Follow;
+            timer = 0;
+            stopTrail();
+        }
+    }
 
     IEnumerator TrailCoroutine() {
         while(true){

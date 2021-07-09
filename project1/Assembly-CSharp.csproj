@@ -71,6 +71,7 @@
      <Compile Include="Assets\Scripts\Projectiles\MissileController.cs" />
      <Compile Include="Assets\Scripts\Shop\CashController.cs" />
      <Compile Include="Assets\Scripts\Shop\IncreaseHpOnClick.cs" />
+     <Compile Include="Assets\Scripts\Shop\IncreasePlayerHealthOnClick.cs" />
      <Compile Include="Assets\Scripts\Shop\ShopController.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />

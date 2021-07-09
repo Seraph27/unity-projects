@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using System.Linq;
 using System;
 using UnityEngine.Tilemaps;
+using System.IO;
 
 public class GameController : Singleton<GameController>
 {
@@ -12,16 +13,40 @@ public class GameController : Singleton<GameController>
     public Dictionary<string, GameObject> prefabs;
     public SpriteHolder spriteHolder = new SpriteHolder();
     public GameObject player;
-    List<WeaponKind> savedWeaponKinds;
+    //these two are saved and restored across levels transitions
+    List<WeaponKind> savedWeaponKinds; 
     float savedHealth;
-    float savedMaxHealth;
+    ////////////////////////////////////
+    public float globalPlayerMaxHealth = 200;
+    public float globalPlayerBaseDamage = 1.0f;
+    ////////////////////////////////////
     PlayerController playerController;
-    Tilemap notPassable; 
+    public Tilemap notPassable; 
+    public Tilemap passable;
+    string gameDataPath;
 
-    public void setupGame(){ //when loading a new scene
+    public void setupGame(){ //when loading a new game scene
+        gameDataPath = Path.Combine(Application.persistentDataPath, "game_data.txt");
+        Debug.Log(Application.persistentDataPath);
+
+        if (System.IO.File.Exists(gameDataPath)) {
+            StreamReader reader = new StreamReader(gameDataPath);
+            globalPlayerMaxHealth = Int32.Parse(reader.ReadLine());
+            
+        } else{
+            saveGlobalsToFile();
+        }
+
+        Debug.Log(globalPlayerMaxHealth);
         
         prefabs = Resources.LoadAll<GameObject>("Prefabs").ToDictionary(go => go.name, go => go);
-        
+
+        if(SceneManager.GetActiveScene().name.Contains("Level")){
+            setupLevel();
+        }
+    }
+
+    public void setupLevel(){
         SpawnEntites entitySpawner = GameObject.FindObjectOfType<SpawnEntites>();
         entitySpawner.playerPrefab = prefabs["Player"];
         entitySpawner.boringEnemyPrefab = prefabs["BoringEnemy"];
@@ -33,9 +58,10 @@ public class GameController : Singleton<GameController>
         player = entitySpawner.spawnPlayer();
         playerController = player.GetComponent<PlayerController>();
         notPassable = GameObject.Find("NotPassable").GetComponent<Tilemap>();
+        passable = GameObject.Find("Passable").GetComponent<Tilemap>();
         GameController.Instance.spriteHolder.loadSpritesByName("weapons");    
 
-        playerController.RestorePlayerState(savedWeaponKinds, savedHealth, savedMaxHealth);
+        playerController.RestorePlayerState(savedWeaponKinds, savedHealth);
         
 
         entitySpawner.spawnEnemies(); 
@@ -45,11 +71,6 @@ public class GameController : Singleton<GameController>
         if (savedPositions.ContainsKey(currentSceneName)) {
             player.transform.position = savedPositions[currentSceneName];
         } 
-
-        foreach (var scene in completedScenes)
-        {
-            Debug.Log(" aaaaa: " + scene);
-        }
         
         if(completedScenes != null && completedScenes.Contains(SceneManager.GetActiveScene().name)){
             deleteTilesWithName(notPassable, "tileset1_66");
@@ -63,8 +84,13 @@ public class GameController : Singleton<GameController>
     public void SavePlayerState(){
         savedWeaponKinds = playerController.weapons.Select(x => x.kind).ToList();
         savedHealth = playerController.hpBarScript.value;
-        savedMaxHealth = playerController.hpBarScript.maxValue;
     } 
+
+    public void saveGlobalsToFile(){
+            StreamWriter writer = new StreamWriter(gameDataPath);
+            writer.WriteLine(globalPlayerMaxHealth.ToString());
+            writer.Close();
+    }
 
     public GameObject getPrefabByName(string name){
         if(prefabs.ContainsKey(name)){
@@ -90,6 +116,10 @@ public class GameController : Singleton<GameController>
         }
     }
 
+    public void changeTileAtPosition(Tilemap mapName, Vector3 worldPosition, TileBase tileToChangeInto){
+        mapName.SetTile(mapName.WorldToCell(worldPosition), tileToChangeInto);
+    }
+    
 
     public void savePlayerPositionOnTransition(Vector3 pos){
         savedPositions[SceneManager.GetActiveScene().name] = pos;

@@ -22,6 +22,8 @@ public class BossController : MonoBehaviour
     List<(Vector3, TileBase)> passable;
     GameObject missileEnemyPrefab;
     Sprite fireSprite;
+    Tilemap p;
+    public TileBase burnedTiles;
     void Start()
     {
         hpBar = Instantiate(hpBarPrefab);
@@ -29,6 +31,7 @@ public class BossController : MonoBehaviour
         hpBarScript.Initalize(gameObject, 300); 
         player = GameController.Instance.player;
         passable = GameObject.FindObjectOfType<SpawnEntites>().getTilePositions();
+        p = GameController.Instance.passable;
         missileEnemyPrefab = GameController.Instance.getPrefabByName("InterestingEnemy");
         GameController.Instance.spriteHolder.loadSpritesByName("fire");
         fireSprite = GameController.Instance.spriteHolder.getSpriteByName("fire");
@@ -40,8 +43,7 @@ public class BossController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        //Debug.Log(currentPhase);
+        
     }
 
     void OnTriggerEnter2D(Collider2D c){  //player dealt dmg
@@ -52,7 +54,17 @@ public class BossController : MonoBehaviour
     }
 
     IEnumerator PhaseCoroutine(){
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(1);
+        for(int x = -5; x < 5; x++){
+            for(int y = -5; y < 5; y++){
+                var randomNum = Random.Range(0, 100);
+                if(randomNum > 50){
+                    GameController.Instance.changeTileAtPosition(p, transform.position + new Vector3(x, y, 0), burnedTiles);                
+                } 
+            }
+        }
+        
+        yield return new WaitForSeconds(4);
 
         var spikeCoroutine = StartCoroutine(MakeSpikeCoroutine());
         while(hpBarScript.value > 200){
@@ -73,8 +85,8 @@ public class BossController : MonoBehaviour
         while(hpBarScript.value > 0){
             yield return new WaitForSeconds(1/60);
         }
-        StopCoroutine(attackCoroutine);
 
+        StopCoroutine(attackCoroutine);
         Destroy(hpBar);
         Destroy(gameObject);
     }
