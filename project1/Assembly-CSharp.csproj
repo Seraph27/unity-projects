@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\Game\DamageTextController.cs" />
      <Compile Include="Assets\Scripts\Game\DeleteWhenOffScreen.cs" />
      <Compile Include="Assets\Scripts\Game\EnemySpawnerPad.cs" />
+     <Compile Include="Assets\Scripts\Game\ExitGameScript.cs" />
      <Compile Include="Assets\Scripts\Game\GameAssets.cs" />
      <Compile Include="Assets\Scripts\Game\GameController.cs" />
      <Compile Include="Assets\Scripts\Game\GameLoader.cs" />
