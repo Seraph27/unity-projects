@@ -290,7 +290,7 @@ public class PlayerController : MonoBehaviour
         float bulletLife = 0)
     {
         GameObject bullet = new GameObject(spriteName);
-        bullet.AddComponent<Bullet>().power = damage;
+        bullet.AddComponent<Bullet>().power = damage * GameController.Instance.globalPlayerBaseDamage;
         var ren = bullet.AddComponent<SpriteRenderer>();
         Rigidbody2D rb = bullet.AddComponent<Rigidbody2D>();
         var circleCollider = bullet.AddComponent<CircleCollider2D>();

@@ -18,7 +18,7 @@ public class GameController : Singleton<GameController>
     float savedHealth;
     ////////////////////////////////////
     public float globalPlayerMaxHealth = 200;
-    public float globalPlayerBaseDamage = 1.0f;
+    public float globalPlayerBaseDamage = 2.0f;
     ////////////////////////////////////
     PlayerController playerController;
     public Tilemap notPassable; 
@@ -27,18 +27,16 @@ public class GameController : Singleton<GameController>
 
     public void setupGame(){ //when loading a new game scene
         gameDataPath = Path.Combine(Application.persistentDataPath, "game_data.txt");
-        Debug.Log(Application.persistentDataPath);
 
         if (System.IO.File.Exists(gameDataPath)) {
             StreamReader reader = new StreamReader(gameDataPath);
             globalPlayerMaxHealth = Int32.Parse(reader.ReadLine());
+            globalPlayerBaseDamage = float.Parse(reader.ReadLine());
             
         } else{
             saveGlobalsToFile();
         }
 
-        Debug.Log(globalPlayerMaxHealth);
-        
         prefabs = Resources.LoadAll<GameObject>("Prefabs").ToDictionary(go => go.name, go => go);
 
         if(SceneManager.GetActiveScene().name.Contains("Level")){
@@ -89,6 +87,7 @@ public class GameController : Singleton<GameController>
     public void saveGlobalsToFile(){
             StreamWriter writer = new StreamWriter(gameDataPath);
             writer.WriteLine(globalPlayerMaxHealth.ToString());
+            writer.WriteLine(globalPlayerBaseDamage.ToString());
             writer.Close();
     }
 
