@@ -21,6 +21,7 @@ public class GameController : Singleton<GameController>
     public Tilemap passable;
     string gameDataPath;
     //public ShopController shopControllerScript;
+    public GameObject mainCamera;
 
     ///////////////GLOBAL ATTRIBUTES/////////////////////
     public float globalPlayerMaxHealth = 200;
@@ -64,6 +65,7 @@ public class GameController : Singleton<GameController>
         notPassable = GameObject.Find("NotPassable").GetComponent<Tilemap>();
         passable = GameObject.Find("Passable").GetComponent<Tilemap>();
         //shopControllerScript = GameObject.FindObjectOfType<ShopController>();
+        mainCamera = GameObject.Find("Main Camera");
         GameController.Instance.spriteHolder.loadSpritesByName("weapons");    
         playerController.RestorePlayerState(savedWeaponKinds, savedHealth);
         

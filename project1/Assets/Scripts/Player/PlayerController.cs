@@ -88,6 +88,7 @@ public class PlayerController : MonoBehaviour
     public GameObject weaponDropPrefab;
     GameObject flamethrower;
     public int enemyKills;
+    public GameObject exitGamePanelPrefab;
     // Start is called before the first frame update
     void Init()
     {
@@ -216,6 +217,14 @@ public class PlayerController : MonoBehaviour
 
                 GameObject.Destroy(closestWeapon);
             }
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            Debug.Log("escaped");
+            gameObject.SetActive(false);
+            var exitGamePanel = Instantiate(exitGamePanelPrefab, Vector3.zero, Quaternion.identity);
+            var c = exitGamePanel.AddComponent<CameraFollowScript>();
+            c.depth = 0;
         }
 
         if(!hpBarScript.IsAlive()){

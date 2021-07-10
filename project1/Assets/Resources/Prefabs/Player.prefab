@@ -143,7 +143,6 @@ MonoBehaviour:
   bulletVelocity: 10
   hpBarScript: {fileID: 0}
   damageMultiplier: 1
-  cash: 0
   cashTextPrefab: {fileID: 8139157886150115640, guid: 6e2ab13594a3ee447a47448607e051a1,
     type: 3}
   weaponIconPrefab: {fileID: 174996445486748772, guid: 1f356214148dce049bc34ef891d38ded,
@@ -153,6 +152,8 @@ MonoBehaviour:
   weaponDropPrefab: {fileID: 2535810492855649084, guid: 89edb6c336b1869449cc1703c1f0ac6f,
     type: 3}
   enemyKills: 0
+  exitGamePanelPrefab: {fileID: 8611423907270678143, guid: 5d36dda1b160d2648b919ad6668464b8,
+    type: 3}
 --- !u!50 &3567551268221341403
 Rigidbody2D:
   serializedVersion: 4
