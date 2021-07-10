@@ -16,15 +16,19 @@ public class GameController : Singleton<GameController>
     //these two are saved and restored across levels transitions
     List<WeaponKind> savedWeaponKinds; 
     float savedHealth;
-    ////////////////////////////////////
-    public float globalPlayerMaxHealth = 200;
-    public float globalPlayerBaseDamage = 2.0f;
-    public int globalPlayerCurrency = 100;
-    ////////////////////////////////////
     PlayerController playerController;
     public Tilemap notPassable; 
     public Tilemap passable;
     string gameDataPath;
+    //public ShopController shopControllerScript;
+
+    ///////////////GLOBAL ATTRIBUTES/////////////////////
+    public float globalPlayerMaxHealth = 200;
+    public float globalPlayerBaseDamage = 2.0f;
+    public int globalPlayerCurrency = 100;
+    ////////////////////////////////////////////////////
+
+
 
     public void setupGame(){ //when loading a new game scene
         gameDataPath = Path.Combine(Application.persistentDataPath, "game_data.txt");
@@ -59,8 +63,8 @@ public class GameController : Singleton<GameController>
         playerController = player.GetComponent<PlayerController>();
         notPassable = GameObject.Find("NotPassable").GetComponent<Tilemap>();
         passable = GameObject.Find("Passable").GetComponent<Tilemap>();
+        //shopControllerScript = GameObject.FindObjectOfType<ShopController>();
         GameController.Instance.spriteHolder.loadSpritesByName("weapons");    
-
         playerController.RestorePlayerState(savedWeaponKinds, savedHealth);
         
 
