@@ -73,7 +73,6 @@ public class PlayerController : MonoBehaviour
     public float bulletVelocity;
     public HealthBar hpBarScript;
     public float damageMultiplier = 1.0f; 
-    public int cash;
     public GameObject cashTextPrefab;
     public GameObject weaponIconPrefab;
     public GameObject iconFramePrefab;
@@ -92,7 +91,6 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Init()
     {
-        cash = 300;
         var hpBar = Instantiate(hpBarPrefab);
         hpBarScript = hpBar.GetComponent<HealthBar>();
         GameController.Instance.spriteHolder.loadSpritesByName("playerSprites");
@@ -104,7 +102,6 @@ public class PlayerController : MonoBehaviour
         back = GameController.Instance.spriteHolder.getSpriteByName("backView"); 
         ren = gameObject.GetComponent<SpriteRenderer>();
         rb = gameObject.GetComponent<Rigidbody2D>();
-        Instantiate(cashTextPrefab, transform.position, Quaternion.identity);
         weaponIconA = Instantiate(weaponIconPrefab, transform.position, Quaternion.identity);
         weaponIconB = Instantiate(weaponIconPrefab, transform.position, Quaternion.identity);
         weaponIconB.GetComponentInChildren<Image>().transform.position += new Vector3(Screen.width * 0.07f, 0, 0);

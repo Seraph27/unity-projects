@@ -19,6 +19,7 @@ public class GameController : Singleton<GameController>
     ////////////////////////////////////
     public float globalPlayerMaxHealth = 200;
     public float globalPlayerBaseDamage = 2.0f;
+    public int globalPlayerCurrency = 100;
     ////////////////////////////////////
     PlayerController playerController;
     public Tilemap notPassable; 
@@ -32,6 +33,7 @@ public class GameController : Singleton<GameController>
             StreamReader reader = new StreamReader(gameDataPath);
             globalPlayerMaxHealth = Int32.Parse(reader.ReadLine());
             globalPlayerBaseDamage = float.Parse(reader.ReadLine());
+            globalPlayerCurrency = Int32.Parse(reader.ReadLine());
             
         } else{
             saveGlobalsToFile();
@@ -88,6 +90,7 @@ public class GameController : Singleton<GameController>
             StreamWriter writer = new StreamWriter(gameDataPath);
             writer.WriteLine(globalPlayerMaxHealth.ToString());
             writer.WriteLine(globalPlayerBaseDamage.ToString());
+             writer.WriteLine(globalPlayerCurrency.ToString());
             writer.Close();
     }
 

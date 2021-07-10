@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -154.4, y: 129.7}
+  m_AnchoredPosition: {x: -208, y: 136}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8139157885535798590
@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 8139157886150115638}
   - component: {fileID: 8139157886150115639}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: CashTextCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

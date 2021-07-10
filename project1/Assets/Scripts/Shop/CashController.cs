@@ -7,15 +7,12 @@ using TMPro;
 public class CashController : MonoBehaviour
 {
     TextMeshProUGUI cashText;
-
-    PlayerController playerController;
     void Start () {
         cashText = GetComponent<TextMeshProUGUI>();
-        playerController = GameController.Instance.player.GetComponent<PlayerController>();
     }
     // Update is called once per frame
     void Update()
     {
-        cashText.text = "" + playerController.cash;
+        cashText.text = "" + GameController.Instance.globalPlayerCurrency;
     }
 }

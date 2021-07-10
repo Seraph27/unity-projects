@@ -1,29 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ShopController : MonoBehaviour
 {
-    public GameObject shopOverlayPrefab;
-    GameObject shopOverlay;
+    public GameObject cashTextPrefab;
+    GameObject shopIconObjectPrefab;
+    
+    private void Start() {
+        Instantiate(cashTextPrefab, transform.position, Quaternion.identity);
 
-    void Start(){
-        shopOverlay = Instantiate(shopOverlayPrefab, Vector3.zero, Quaternion.identity, Camera.main.transform);
-        shopOverlay.SetActive(false);
+        shopIconObjectPrefab = GameController.Instance.getPrefabByName("ShopIcon");
+        var shopPlayerHealthObject = Instantiate(shopIconObjectPrefab, transform.position, Quaternion.identity);
+        var shopHealthEffectScript = shopPlayerHealthObject.AddComponent<IncreasePlayerHealthOnClick>();
+        var textMesh = shopPlayerHealthObject.transform.GetComponentInChildren<TextMeshPro>();
+        textMesh.SetText("Cost: " + shopHealthEffectScript.itemCost);
+        if(GameController.Instance.globalPlayerCurrency < shopHealthEffectScript.itemCost){
+            textMesh.color = Color.red;
+        } else{
+            textMesh.color = Color.green;
+        }
+
+
+        
     }
     
-
-    void OnTriggerEnter2D(Collider2D c){
-        if(GameController.Instance.isWithPlayer(c)){
-            print(shopOverlay);
-            print(c.gameObject.GetComponent<PlayerController>().cash);
-            shopOverlay.SetActive(true);
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D c){
-        if(GameController.Instance.isWithPlayer(c)){
-            shopOverlay.SetActive(false);
-        }
-    }
 }
