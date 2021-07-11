@@ -160,6 +160,7 @@ MonoBehaviour:
   player: {fileID: 0}
   spikePrefab: {fileID: 1736686640411226566, guid: 72caeca06a1c41d4c9d4650a312aadab,
     type: 3}
+  burnedTiles: {fileID: 11400000, guid: 8d0a458aadb17a14eac9611cec51684a, type: 2}
 --- !u!95 &6358683972834769511
 Animator:
   serializedVersion: 3

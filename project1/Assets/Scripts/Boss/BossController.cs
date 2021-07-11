@@ -19,10 +19,10 @@ public class BossController : MonoBehaviour
     public GameObject player;
     public GameObject spikePrefab;
     // Start is called before the first frame update
-    List<(Vector3, TileBase)> passable;
+    List<(Vector3, TileBase)> passableTiles;
     GameObject missileEnemyPrefab;
     Sprite fireSprite;
-    Tilemap p;
+    Tilemap passable;
     public TileBase burnedTiles;
     void Start()
     {
@@ -30,8 +30,8 @@ public class BossController : MonoBehaviour
         hpBarScript = hpBar.GetComponent<HealthBar>();
         hpBarScript.Initalize(gameObject, 300); 
         player = GameController.Instance.player;
-        passable = GameObject.FindObjectOfType<SpawnEntites>().getTilePositions();
-        p = GameController.Instance.passable;
+        passableTiles = GameObject.FindObjectOfType<SpawnEntites>().getTilePositions();
+        passable = GameController.Instance.passable;
         missileEnemyPrefab = GameController.Instance.getPrefabByName("InterestingEnemy");
         GameController.Instance.spriteHolder.loadSpritesByName("fire");
         fireSprite = GameController.Instance.spriteHolder.getSpriteByName("fire");
@@ -55,11 +55,11 @@ public class BossController : MonoBehaviour
 
     IEnumerator PhaseCoroutine(){
         yield return new WaitForSeconds(1);
-        for(int x = -5; x < 5; x++){
-            for(int y = -5; y < 5; y++){
+        for(int x = -10; x < 10; x++){
+            for(int y = -10; y < 10; y++){
                 var randomNum = Random.Range(0, 100);
-                if(randomNum > 50){
-                    GameController.Instance.changeTileAtPosition(p, transform.position + new Vector3(x, y, 0), burnedTiles);                
+                if(randomNum > 80){
+                    GameController.Instance.changeTileAtPosition(passable, transform.position + new Vector3(x, y, 0), burnedTiles);                
                 } 
             }
         }
@@ -104,7 +104,7 @@ public class BossController : MonoBehaviour
 
     IEnumerator MinionCoroutine(){
         while(true){
-            var closeTile = passable.Where(x => (x.Item1 - transform.position).magnitude < 4).ToList();
+            var closeTile = passableTiles.Where(x => (x.Item1 - transform.position).magnitude < 4).ToList();
             var randomIndex = Random.Range(0, closeTile.Count);
             Vector3 randomVec3 = closeTile[randomIndex].Item1;
             Instantiate(missileEnemyPrefab, randomVec3, Quaternion.identity);

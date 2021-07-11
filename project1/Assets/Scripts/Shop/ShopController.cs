@@ -12,16 +12,20 @@ public class ShopController : MonoBehaviour
         Instantiate(cashTextPrefab, transform.position, Quaternion.identity);
 
         shopObjectPrefab = GameController.Instance.getPrefabByName("ShopIcon");
-        
+        GameController.Instance.spriteHolder.loadSpritesByName("weapons");
+        var shopPlayerDamageIcon = GameController.Instance.spriteHolder.getSpriteByName("weapons_1");
+        var shopPlayerHealthIcon = GameController.Instance.spriteHolder.getSpriteByName("weapons_3");
         //add hp
         var shopPlayerHealthObject = createShopObject<IncreasePlayerHealthOnClick>(new Vector3(0, 0, 0));
         var shopPlayerHealthScript = shopPlayerHealthObject.GetComponent<IncreasePlayerHealthOnClick>();
         setUpText(shopPlayerHealthObject, shopPlayerHealthScript.itemCost); 
+        shopPlayerHealthObject.GetComponent<SpriteRenderer>().sprite = shopPlayerHealthIcon;
 
         //add dmg
         var shopPlayerDamageObject = createShopObject<IncreasePlayerDamageOnClick>(new Vector3(2.5f, 0, 0));
         var shopPlayerDamageScript = shopPlayerDamageObject.GetComponent<IncreasePlayerDamageOnClick>();
         setUpText(shopPlayerDamageObject, shopPlayerDamageScript.itemCost); 
+        shopPlayerDamageObject.GetComponent<SpriteRenderer>().sprite = shopPlayerDamageIcon;
 
         
     }
