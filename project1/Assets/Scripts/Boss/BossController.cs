@@ -26,6 +26,7 @@ public class BossController : MonoBehaviour
     public TileBase burnedTiles;
     void Start()
     {
+        
         hpBar = Instantiate(hpBarPrefab);
         hpBarScript = hpBar.GetComponent<HealthBar>();
         hpBarScript.Initalize(gameObject, 300); 
@@ -35,6 +36,7 @@ public class BossController : MonoBehaviour
         missileEnemyPrefab = GameController.Instance.getPrefabByName("InterestingEnemy");
         GameController.Instance.spriteHolder.loadSpritesByName("fire");
         fireSprite = GameController.Instance.spriteHolder.getSpriteByName("fire");
+        passable.CompressBounds();
         StartCoroutine(PhaseCoroutine()); 
         
         
@@ -55,8 +57,8 @@ public class BossController : MonoBehaviour
 
     IEnumerator PhaseCoroutine(){
         yield return new WaitForSeconds(1);
-        for(int x = -10; x < 10; x++){
-            for(int y = -10; y < 10; y++){
+        for(int x = -14; x <= 14; x++){
+            for(int y = -14; y <= 13; y++){
                 var randomNum = Random.Range(0, 100);
                 if(randomNum > 80){
                     GameController.Instance.changeTileAtPosition(passable, transform.position + new Vector3(x, y, 0), burnedTiles);                
@@ -104,10 +106,12 @@ public class BossController : MonoBehaviour
 
     IEnumerator MinionCoroutine(){
         while(true){
-            var closeTile = passableTiles.Where(x => (x.Item1 - transform.position).magnitude < 4).ToList();
+            var closeTile = passableTiles.Where(x => (x.Item1 - transform.position).magnitude > 4 && (x.Item1 - transform.position).magnitude < 8).ToList();
             var randomIndex = Random.Range(0, closeTile.Count);
             Vector3 randomVec3 = closeTile[randomIndex].Item1;
-            Instantiate(missileEnemyPrefab, randomVec3, Quaternion.identity);
+            var bossMinions = Instantiate(missileEnemyPrefab, randomVec3, Quaternion.identity);
+            bossMinions.transform.localScale *= 1.5f;
+            bossMinions.GetComponent<HomingAttack>().missileRange = 10;
             yield return new WaitForSeconds(3);
         }
     }
@@ -116,13 +120,13 @@ public class BossController : MonoBehaviour
         yield return new WaitForSeconds(2);
         while(true){
             yield return new WaitForSeconds(1);
-            for(int i = -135; i < 45; i+=6){
+            for(int i = -135; i < 45; i+=8){
                 CreateBossFlame(i);
             }
             yield return new WaitForSeconds(1);
             yield return new WaitForSeconds(2);
             yield return new WaitForSeconds(1);
-            for(int i = 45; i < 225; i+=6){
+            for(int i = 45; i < 225; i+=8){
                 CreateBossFlame(i);
             }
             yield return new WaitForSeconds(1);

@@ -66,6 +66,7 @@ public class GameController : Singleton<GameController>
         passable = GameObject.Find("Passable").GetComponent<Tilemap>();
         //shopControllerScript = GameObject.FindObjectOfType<ShopController>();
         mainCamera = GameObject.Find("Main Camera");
+        mainCamera.GetComponent<Camera>().orthographicSize = 7;
         GameController.Instance.spriteHolder.loadSpritesByName("weapons");    
         playerController.RestorePlayerState(savedWeaponKinds, savedHealth);
         

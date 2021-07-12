@@ -7,6 +7,7 @@ public class HomingAttack : MonoBehaviour
     public GameObject missilePrefab;
     GameObject player;
     float reloadDelay;
+    public int missileRange = 6;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +20,7 @@ public class HomingAttack : MonoBehaviour
         reloadDelay += Time.deltaTime;
 
         if(reloadDelay >= 1){
-            if((player.transform.position - transform.position).magnitude < 6){ 
+            if((player.transform.position - transform.position).magnitude < missileRange){ 
                 GameObject missile = Instantiate(missilePrefab, transform.position, Quaternion.identity);
                 missile.GetComponent<MissileController>().owner = gameObject;
                 reloadDelay = 0;
