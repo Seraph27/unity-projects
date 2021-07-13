@@ -13,7 +13,7 @@ public class HealthBar : MonoBehaviour
     public Renderer objectToFollowRen;
     public Gradient gradient;
 
-    public void Initalize(GameObject objectToFollow, float hp)
+    public void Initalize(GameObject objectToFollow, float hp) //for everything else
     {
         whitePixel = transform.Find("whitePixel").gameObject;
         this.objectToFollow = objectToFollow;
@@ -22,7 +22,7 @@ public class HealthBar : MonoBehaviour
         objectToFollowRen = objectToFollow.GetComponent<Renderer>();
     }
 
-    public void Initalize(GameObject objectToFollow, float hp, float max)
+    public void Initalize(GameObject objectToFollow, float hp, float max) //for player
     {
         whitePixel = transform.Find("whitePixel").gameObject;
         this.objectToFollow = objectToFollow;

@@ -52,6 +52,7 @@ public class BossTrigger : MonoBehaviour
         
         hasSpawnedBoss = true;
         dragonBoss = Instantiate(bossPrefab, triggerPos + new Vector3(0, 5, 0), Quaternion.identity);
+        dragonBoss.name = "dragonBoss";
 
     }
 }

@@ -136,7 +136,7 @@ MonoBehaviour:
   rightKey: d
   leftKey: a
   downKey: s
-  speed: 500
+  speed: 400
   rb: {fileID: 0}
   bulletPrefab: {fileID: 6737834693707832142, guid: eb9580e16e8ba3f4cab55c519af9f000,
     type: 3}

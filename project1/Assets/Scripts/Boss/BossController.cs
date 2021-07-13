@@ -12,9 +12,9 @@ public enum Phase{
 
 public class BossController : MonoBehaviour
 {
-    public GameObject hpBarPrefab;
-    protected GameObject hpBar;
-    public HealthBar hpBarScript;
+    // public GameObject hpBarPrefab;
+    // protected GameObject hpBar;
+    // public HealthBar hpBarScript;
     public Phase currentPhase = Phase.Spike;
     public GameObject player;
     public GameObject spikePrefab;
@@ -24,19 +24,35 @@ public class BossController : MonoBehaviour
     Sprite fireSprite;
     Tilemap passable;
     public TileBase burnedTiles;
+    GameObject bossHealthBar;
+    public GameObject bossHpBarPrefab;
+    protected GameObject bossHpBar;
+    public BossHealthBar bossHpBarScript;
+
     void Start()
     {
         
-        hpBar = Instantiate(hpBarPrefab);
-        hpBarScript = hpBar.GetComponent<HealthBar>();
-        hpBarScript.Initalize(gameObject, 300); 
+        // hpBar = Instantiate(hpBarPrefab);
+        // hpBarScript = hpBar.GetComponent<HealthBar>();
+        // hpBarScript.Initalize(gameObject, 300); 
         player = GameController.Instance.player;
         passableTiles = GameObject.FindObjectOfType<SpawnEntites>().getTilePositions();
         passable = GameController.Instance.passable;
         missileEnemyPrefab = GameController.Instance.getPrefabByName("InterestingEnemy");
         GameController.Instance.spriteHolder.loadSpritesByName("fire");
         fireSprite = GameController.Instance.spriteHolder.getSpriteByName("fire");
-        passable.CompressBounds();
+
+        //Screen Health Bar
+        bossHpBarPrefab = GameController.Instance.getPrefabByName("bossHealthBarParent");
+        bossHpBar = Instantiate(bossHpBarPrefab, Vector3.zero, Quaternion.identity);
+        bossHpBar.name = "bossHpBar";
+        var bossHpBarChild = bossHpBar.transform.GetChild(0).gameObject;
+        bossHpBarScript = bossHpBarChild.AddComponent<BossHealthBar>();
+        bossHpBarScript.Initalize(3000);
+
+        var cameraFollowScript = bossHpBar.AddComponent<CameraFollowScript>();
+        cameraFollowScript.depth = 1;
+
         StartCoroutine(PhaseCoroutine()); 
         
         
@@ -50,7 +66,7 @@ public class BossController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D c){  //player dealt dmg
         if (GameController.Instance.isWithPlayerBullet(c)) {
-            hpBarScript.ApplyDamage(c.gameObject.GetComponent<Bullet>().power);
+            bossHpBarScript.ApplyDamage(c.gameObject.GetComponent<Bullet>().power);
             Destroy(c.gameObject);
         }
     }
@@ -69,14 +85,14 @@ public class BossController : MonoBehaviour
         yield return new WaitForSeconds(4);
 
         var spikeCoroutine = StartCoroutine(MakeSpikeCoroutine());
-        while(hpBarScript.value > 200){
+        while(bossHpBarScript.value > bossHpBarScript.maxValue * 0.75f){
             yield return new WaitForSeconds(1/60);
         }
         StopCoroutine(spikeCoroutine);
 
         currentPhase = Phase.Minions;
         var minionCoroutine = StartCoroutine(MinionCoroutine());
-        while(hpBarScript.value > 100){
+        while(bossHpBarScript.value > bossHpBarScript.maxValue * 0.5f){
             yield return new WaitForSeconds(1/60);
         }
         StopCoroutine(minionCoroutine);
@@ -84,12 +100,12 @@ public class BossController : MonoBehaviour
         currentPhase = Phase.Attack;
         GetComponent<Animator>().SetBool("isPhase3", true);
         var attackCoroutine = StartCoroutine(AttackCoroutine());
-        while(hpBarScript.value > 0){
+        while(bossHpBarScript.value > 0){
             yield return new WaitForSeconds(1/60);
         }
 
         StopCoroutine(attackCoroutine);
-        Destroy(hpBar);
+        Destroy(bossHpBar);
         Destroy(gameObject);
     }
 
