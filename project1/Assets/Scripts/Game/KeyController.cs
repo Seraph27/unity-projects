@@ -34,7 +34,7 @@ public class KeyController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(GameController.Instance.isWithPlayer(other)){
-            GameController.Instance.deleteTilesWithName(tilemap, "tileset1_66");
+            GameController.Instance.swapTilesWithName(tilemap, "tileset1_66");
             Destroy(gameObject);
         }
     }

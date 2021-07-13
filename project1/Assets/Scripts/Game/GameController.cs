@@ -80,7 +80,7 @@ public class GameController : Singleton<GameController>
         } 
         
         if(completedScenes != null && completedScenes.Contains(SceneManager.GetActiveScene().name)){
-            deleteTilesWithName(notPassable, "tileset1_66");
+            swapTilesWithName(notPassable, "tileset1_66");
         }
     }
 
@@ -110,20 +110,20 @@ public class GameController : Singleton<GameController>
         }
     }
 
-    public void deleteTilesWithName(Tilemap mapName, string name){
-        var tiles = new List<(Vector3, TileBase)>();
+    public void swapTilesWithName(Tilemap mapName, string name, TileBase tileToChangeInto = null){ //default will be delete
         BoundsInt bounds = mapName.cellBounds;
         for (int x = bounds.min.x; x < bounds.max.x; x++) {
             for (int y = bounds.min.y; y < bounds.max.y; y++) {                                                                               
                 TileBase tile = mapName.GetTile(new Vector3Int(x, y, 0));
                 if (tile != null) {
                     if(tile.name == name){
-                        mapName.SetTile(new Vector3Int(x, y, 0), null);
+                        mapName.SetTile(new Vector3Int(x, y, 0), tileToChangeInto);
                     }
                 }
             }
         }
     }
+
 
     public void changeTileAtPosition(Tilemap mapName, Vector3 worldPosition, TileBase tileToChangeInto){
         mapName.SetTile(mapName.WorldToCell(worldPosition), tileToChangeInto);

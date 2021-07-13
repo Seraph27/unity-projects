@@ -28,19 +28,17 @@ public class BossController : MonoBehaviour
     public GameObject bossHpBarPrefab;
     protected GameObject bossHpBar;
     public BossHealthBar bossHpBarScript;
+    public GameObject portal;
 
     void Start()
     {
-        
-        // hpBar = Instantiate(hpBarPrefab);
-        // hpBarScript = hpBar.GetComponent<HealthBar>();
-        // hpBarScript.Initalize(gameObject, 300); 
         player = GameController.Instance.player;
         passableTiles = GameObject.FindObjectOfType<SpawnEntites>().getTilePositions();
         passable = GameController.Instance.passable;
         missileEnemyPrefab = GameController.Instance.getPrefabByName("InterestingEnemy");
         GameController.Instance.spriteHolder.loadSpritesByName("fire");
         fireSprite = GameController.Instance.spriteHolder.getSpriteByName("fire");
+        portal = GameController.Instance.getPrefabByName("portal");
 
         //Screen Health Bar
         bossHpBarPrefab = GameController.Instance.getPrefabByName("bossHealthBarParent");
@@ -105,6 +103,9 @@ public class BossController : MonoBehaviour
         }
 
         StopCoroutine(attackCoroutine);
+
+        GameController.Instance.swapTilesWithName(GameController.Instance.notPassable, "tileset1_68");
+        Instantiate(portal, new Vector3(-1.5f, 33.5f, 0), Quaternion.identity);
         Destroy(bossHpBar);
         Destroy(gameObject);
     }
