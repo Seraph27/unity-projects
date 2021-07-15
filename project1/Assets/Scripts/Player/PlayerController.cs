@@ -238,10 +238,15 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D c) { 
         //boring enemy bombs //should remove sometime this is not good
-        // if (c.gameObject.tag == "EnemyProjectile") {
-        //     hpBarScript.ApplyDamage(0); 
-        //     Destroy(c.gameObject);
-        // }
+        if (c.gameObject.tag == "BoringEnemyAttack") {
+            hpBarScript.ApplyDamage(10); 
+            Destroy(c.gameObject);
+        }
+
+        if(c.gameObject.tag == "DragonFire"){
+            hpBarScript.ApplyDamage(50); 
+            Destroy(c.gameObject);
+        }
 
         //drops
         if (c.gameObject.tag == "Powerup_Damage") {

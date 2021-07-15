@@ -16,12 +16,12 @@ public class SpikeController : MonoBehaviour
     IEnumerator SpikeCoroutine(){
         Debug.Log("RUNNING");
         yield return new WaitForSeconds(1);
-        ren.color = Color.yellow;
-        for(int i = 0; i < 10; i++){
+        ren.color = Color.red;
+        for(int i = 0; i < 5; i++){
             if(isInSpike){
-                GameController.Instance.player.GetComponent<PlayerController>().hpBarScript.ApplyDamage(10);
+                GameController.Instance.player.GetComponent<PlayerController>().hpBarScript.ApplyDamage(30);
             }
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.2f);
         }
         Destroy(gameObject);
 

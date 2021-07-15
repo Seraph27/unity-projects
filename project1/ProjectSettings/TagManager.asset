@@ -52,17 +52,17 @@ TagManager:
   - name: TileMaps
     uniqueID: 2743703339
     locked: 0
-  - name: Characters
-    uniqueID: 2912926623
-    locked: 0
   - name: Drops
     uniqueID: 3806071731
+    locked: 0
+  - name: Projectiles
+    uniqueID: 1531833457
     locked: 0
   - name: HealthBars
     uniqueID: 2781621689
     locked: 0
-  - name: Projectiles
-    uniqueID: 1531833457
+  - name: Characters
+    uniqueID: 2912926623
     locked: 0
   - name: GUI
     uniqueID: 135463201

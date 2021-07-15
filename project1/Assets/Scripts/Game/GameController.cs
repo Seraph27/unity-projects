@@ -37,6 +37,7 @@ public class GameController : Singleton<GameController>
     public void setupGame(){ //when loading a new game scene
         gameDataPath = Path.Combine(Application.persistentDataPath, "game_data.txt");
 
+        Debug.Log(gameDataPath);
         if (System.IO.File.Exists(gameDataPath)) {
             StreamReader reader = new StreamReader(gameDataPath);
             globalPlayerMaxHealth = Int32.Parse(reader.ReadLine());

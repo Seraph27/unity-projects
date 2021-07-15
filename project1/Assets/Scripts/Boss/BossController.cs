@@ -21,7 +21,6 @@ public class BossController : MonoBehaviour
     // Start is called before the first frame update
     List<(Vector3, TileBase)> passableTiles;
     GameObject missileEnemyPrefab;
-    Sprite fireSprite;
     Tilemap passable;
     public TileBase burnedTiles;
     GameObject bossHealthBar;
@@ -36,8 +35,6 @@ public class BossController : MonoBehaviour
         passableTiles = GameObject.FindObjectOfType<SpawnEntites>().getTilePositions();
         passable = GameController.Instance.passable;
         missileEnemyPrefab = GameController.Instance.getPrefabByName("InterestingEnemy");
-        GameController.Instance.spriteHolder.loadSpritesByName("fire");
-        fireSprite = GameController.Instance.spriteHolder.getSpriteByName("fire");
         portal = GameController.Instance.getPrefabByName("portal");
 
         //Screen Health Bar
@@ -46,7 +43,7 @@ public class BossController : MonoBehaviour
         bossHpBar.name = "bossHpBar";
         var bossHpBarChild = bossHpBar.transform.GetChild(0).gameObject;
         bossHpBarScript = bossHpBarChild.AddComponent<BossHealthBar>();
-        bossHpBarScript.Initalize(3000);
+        bossHpBarScript.Initalize(5000);
 
         var cameraFollowScript = bossHpBar.AddComponent<CameraFollowScript>();
         cameraFollowScript.depth = 1;
@@ -67,6 +64,7 @@ public class BossController : MonoBehaviour
             bossHpBarScript.ApplyDamage(c.gameObject.GetComponent<Bullet>().power, c.gameObject.GetComponent<Bullet>().isCritBullet);
             Destroy(c.gameObject);
         }
+        Debug.Log(c.gameObject.name);
     }
 
     IEnumerator PhaseCoroutine(){
@@ -112,10 +110,11 @@ public class BossController : MonoBehaviour
 
     IEnumerator MakeSpikeCoroutine(){
         while(true){
-            var spike = Instantiate(spikePrefab, player.transform.position, Quaternion.identity);
-            var spikeRenderer = spike.GetComponent<SpriteRenderer>();
-            spikeRenderer.sprite = fireSprite;
-            yield return new WaitForSeconds(3);
+            for(int i = 0; i < 1; i++){
+                var randomVec3 = new Vector3(Random.Range(-3, 3), Random.Range(-3, 3), 0);
+                Instantiate(spikePrefab, player.transform.position + randomVec3, Quaternion.identity);
+            }
+            yield return new WaitForSeconds(0.5f);
         }
     }
 
@@ -157,13 +156,14 @@ public class BossController : MonoBehaviour
         var ren = bullet.AddComponent<SpriteRenderer>();
         Rigidbody2D rb = bullet.AddComponent<Rigidbody2D>();
         var circleCollider = bullet.AddComponent<CircleCollider2D>();
-        bullet.tag = "EnemyProjectile";
+        bullet.tag = "DragonFire";
         ren.sprite = GameController.Instance.spriteHolder.getSpriteByName("flame"); 
         ren.sortingLayerName = "Projectiles";
         ren.sortingOrder = 0;
         rb.gravityScale = 0;
         circleCollider.isTrigger = true;
-        circleCollider.radius = 1 / 10;
+        circleCollider.radius = 0.2f;
+        circleCollider.offset = new Vector2(0.2f, 0);
         bullet.transform.localScale = new Vector3(3, 3, 0);
         var rotationVector =  (Vector2)(Quaternion.Euler(0, 0, rotationDegrees) * Vector2.right);   
         bullet.transform.rotation = Quaternion.Euler(0, 0, rotationDegrees);

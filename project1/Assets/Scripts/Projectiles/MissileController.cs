@@ -31,7 +31,8 @@ public class MissileController : MonoBehaviour
         if(GameController.Instance.isWithPlayer(c)){
             player.GetComponent<PlayerController>().hpBarScript.ApplyDamage(10);
         }
-        Instantiate(explosionAnimationPrefab, transform.position, Quaternion.identity);
+        var explosion = Instantiate(explosionAnimationPrefab, transform.position, Quaternion.identity);
+        Destroy(explosion, 2);
         Destroy(gameObject);
 
 
