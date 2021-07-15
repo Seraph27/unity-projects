@@ -27,15 +27,24 @@ public class BossHealthBar : MonoBehaviour
         bossHealthText = transform.parent.GetChild(1).gameObject.GetComponent<TextMeshPro>();
     }
 
-    public void ApplyDamage(float damage)
+    public void ApplyDamage(float damage, bool isCritBullet)
     {
         value -= damage;
         StartCoroutine(changeColorOnDmgCoroutine());
         
         var damageText = Instantiate(damageTextPrefab, dragonBoss.transform.position + new Vector3(0, -16, 0), Quaternion.identity);
+
         var damageTextTMP = damageText.GetComponentInChildren<TextMeshPro>();
+        damageTextTMP.color = Color.yellow;
         damageTextTMP.fontSize = 250;
         damageTextTMP.SetText(damage.ToString());
+
+        if(isCritBullet){
+            Color critColor;
+            if (ColorUtility.TryParseHtmlString("#ff903b", out critColor))
+            damageTextTMP.color = critColor;
+            damageTextTMP.fontSize = 300;
+        }
         GameObject.Destroy(damageText, 1);
     }
 

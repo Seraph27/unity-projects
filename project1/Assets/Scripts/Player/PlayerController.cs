@@ -62,7 +62,6 @@ public class PlayerController : MonoBehaviour
     public string rightKey;
     public string leftKey;
     public string downKey;
-    public float speed;
     Sprite front;
     Sprite side;
     Sprite back;
@@ -89,6 +88,8 @@ public class PlayerController : MonoBehaviour
     GameObject flamethrower;
     public int enemyKills;
     public GameObject exitGamePanelPrefab;
+    float playerCritChance;
+    float playerCritMultiplier;
     // Start is called before the first frame update
     void Init()
     {
@@ -107,6 +108,8 @@ public class PlayerController : MonoBehaviour
         weaponIconB = Instantiate(weaponIconPrefab, transform.position, Quaternion.identity);
         weaponIconB.GetComponentInChildren<Image>().transform.position += new Vector3(Screen.width * 0.07f, 0, 0);
         iconFrame = Instantiate(iconFramePrefab, transform.position, Quaternion.identity);
+        playerCritChance = GameController.Instance.globalPlayerCritChance;
+        playerCritMultiplier = GameController.Instance.globalPlayerCritMultiplier;
     }
 
     public void RestorePlayerState(List<WeaponKind> savedWeaponKinds, float savedHealth)
@@ -133,7 +136,7 @@ public class PlayerController : MonoBehaviour
     }
 
     void FixedUpdate(){
-        rb.velocity = playerVelocity * speed * Time.fixedDeltaTime;
+        rb.velocity = playerVelocity * GameController.Instance.globalPlayerSpeed * Time.fixedDeltaTime;
     }
     // Update is called once per frame
     void Update()
@@ -234,11 +237,11 @@ public class PlayerController : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D c) { 
-        //bullets
-        if (c.gameObject.tag == "EnemyProjectile") {
-            hpBarScript.ApplyDamage(0); 
-            Destroy(c.gameObject);
-        }
+        //boring enemy bombs //should remove sometime this is not good
+        // if (c.gameObject.tag == "EnemyProjectile") {
+        //     hpBarScript.ApplyDamage(0); 
+        //     Destroy(c.gameObject);
+        // }
 
         //drops
         if (c.gameObject.tag == "Powerup_Damage") {
@@ -258,7 +261,7 @@ public class PlayerController : MonoBehaviour
         GameObject bullet;
         Rigidbody2D rb;
 
-        (bullet, rb) = CreateGenericBullet(25 * damageMultiplier, 1, "bullet");
+        (bullet, rb) = CreateGenericBullet(25 * damageMultiplier, playerCritChance, playerCritMultiplier, 1, "bullet", 2);
         yield return new WaitForSeconds(0.33f);
 
         isShootingActive = false;
@@ -269,7 +272,7 @@ public class PlayerController : MonoBehaviour
         Rigidbody2D rb;
 
         for (int i = 0; i < 10; i++) {
-            (bullet, rb) = CreateGenericBullet(10 * damageMultiplier, 1, "bullet", 3, UnityEngine.Random.Range(-30, 30));
+            (bullet, rb) = CreateGenericBullet(10 * damageMultiplier, playerCritChance, playerCritMultiplier, 1, "bullet", 0.5f, 2, UnityEngine.Random.Range(-30, 30));
         }
         yield return new WaitForSeconds(0.75f);
 
@@ -280,7 +283,7 @@ public class PlayerController : MonoBehaviour
         GameObject bullet;
         Rigidbody2D rb;
 
-        (bullet, rb) = CreateGenericBullet(2 * damageMultiplier, 1, "flame", 0.75f, UnityEngine.Random.Range(-5, 5), 0.5f);
+        (bullet, rb) = CreateGenericBullet(2 * damageMultiplier, playerCritChance, playerCritMultiplier, 1, "flame", 0.5f, 0.75f, UnityEngine.Random.Range(-5, 5));
 
         yield return new WaitForSeconds(0.1f);
 
@@ -289,14 +292,30 @@ public class PlayerController : MonoBehaviour
 
     private (GameObject, Rigidbody2D) CreateGenericBullet(
         float damage,
+        float playerCritChance,
+        float playerCritMultiplier,
         float size, 
         string spriteName, 
+        float bulletLife = 0,
         float speedMultiplier = 1, 
-        float rotationOffset = 0,
-        float bulletLife = 0)
+        float rotationOffset = 0
+        )
     {
         GameObject bullet = new GameObject(spriteName);
-        bullet.AddComponent<Bullet>().power = damage * GameController.Instance.globalPlayerBaseDamage;
+
+        var bulletDamage = damage * GameController.Instance.globalPlayerBaseDamage;
+        var num = UnityEngine.Random.value;
+
+        var bulletScript = bullet.AddComponent<Bullet>();
+        var isCritActive = playerCritChance < num;
+        if(isCritActive){
+            bulletScript.isCritBullet = true;
+            bulletDamage *= playerCritMultiplier; 
+        }
+        
+        bulletScript.power = bulletDamage;
+        
+
         var ren = bullet.AddComponent<SpriteRenderer>();
         Rigidbody2D rb = bullet.AddComponent<Rigidbody2D>();
         var circleCollider = bullet.AddComponent<CircleCollider2D>();

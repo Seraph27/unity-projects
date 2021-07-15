@@ -37,13 +37,23 @@ public class HealthBar : MonoBehaviour
         return value > 0;  //true if its alive
     }
 
-    public void ApplyDamage(float damage)
+    public void ApplyDamage(float damage, bool isCritBullet = false)
     {
         value -= damage;
         var colorAfterDamage = ColorFromGradient(value / maxValue);
         whitePixel.GetComponent<SpriteRenderer>().color = colorAfterDamage;
+
+        //dmg text
         var damageText = Instantiate(damageTextPrefab, transform.position, Quaternion.identity);
-        damageText.transform.GetChild(0).GetComponent<TextMeshPro>().SetText(damage.ToString());
+        var damageTextTMP = damageText.GetComponentInChildren<TextMeshPro>();
+        damageTextTMP.color = Color.yellow;
+        damageTextTMP.SetText(damage.ToString());
+        if(isCritBullet){
+            Color critColor;
+            if (ColorUtility.TryParseHtmlString("#ff903b", out critColor))
+            damageTextTMP.color = critColor;
+            damageTextTMP.fontSize = 220;
+        }
         GameObject.Destroy(damageText, 1);
     }
 

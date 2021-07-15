@@ -26,6 +26,9 @@ public class GameController : Singleton<GameController>
     ///////////////GLOBAL ATTRIBUTES/////////////////////
     public float globalPlayerMaxHealth = 200;
     public float globalPlayerBaseDamage = 2.0f;
+    public float globalPlayerCritChance = 0.5f;
+    public float globalPlayerCritMultiplier = 1.5f;
+    public int globalPlayerSpeed = 400;
     public int globalPlayerCurrency = 100;
     ////////////////////////////////////////////////////
 
@@ -38,6 +41,9 @@ public class GameController : Singleton<GameController>
             StreamReader reader = new StreamReader(gameDataPath);
             globalPlayerMaxHealth = Int32.Parse(reader.ReadLine());
             globalPlayerBaseDamage = float.Parse(reader.ReadLine());
+            globalPlayerCritChance = float.Parse(reader.ReadLine());
+            globalPlayerCritMultiplier = float.Parse(reader.ReadLine());
+            globalPlayerSpeed = Int32.Parse(reader.ReadLine());
             globalPlayerCurrency = Int32.Parse(reader.ReadLine());
             
         } else{
@@ -97,7 +103,10 @@ public class GameController : Singleton<GameController>
             StreamWriter writer = new StreamWriter(gameDataPath);
             writer.WriteLine(globalPlayerMaxHealth.ToString());
             writer.WriteLine(globalPlayerBaseDamage.ToString());
-             writer.WriteLine(globalPlayerCurrency.ToString());
+            writer.WriteLine(globalPlayerCritChance.ToString());
+            writer.WriteLine(globalPlayerCritMultiplier.ToString());
+            writer.WriteLine(globalPlayerSpeed.ToString());
+            writer.WriteLine(globalPlayerCurrency.ToString());
             writer.Close();
     }
 
