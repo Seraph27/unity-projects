@@ -33,9 +33,14 @@ public class GameController : Singleton<GameController>
     //public ShopController shopControllerScript;
     public GameObject mainCamera;
     public GlobalAttributes globalAttributes;
+    public List<string> levelNames;
+    public Dictionary<string, List<string>> allLevels;
+    public int currentLevelIndex;
+    public bool portalOpensAtStart;
 
 
     public void setupGame(){ //when loading a new game scene
+        Debug.Log("i am being called");
         gameDataPath = Path.Combine(Application.persistentDataPath, "game_data.txt");
 
         Debug.Log(gameDataPath);
@@ -51,9 +56,23 @@ public class GameController : Singleton<GameController>
 
         prefabs = Resources.LoadAll<GameObject>("Prefabs").ToDictionary(go => go.name, go => go);
 
+        allLevels = new Dictionary<string, List<string>>();
+        allLevels["easy"] = new List<string>(){"Level1"};
+        allLevels["medium"] = new List<string>(){"Level2", "Level4"};
+        allLevels["hard"] = new List<string>(){"Level5"};
+        if(levelNames == null){
+            levelNames = new List<string>();              
+            levelNames.Add(allLevels["easy"].RandomElement());
+            levelNames.Add(allLevels["medium"].RandomElement());
+            levelNames.Add(allLevels["hard"].RandomElement());
+            Debug.Log(string.Join(", ", levelNames));
+        } 
+
         if(SceneManager.GetActiveScene().name.Contains("Level")){
             setupLevel();
         }
+
+        
     }
 
     public void setupLevel(){
@@ -74,17 +93,17 @@ public class GameController : Singleton<GameController>
         mainCamera.GetComponent<Camera>().orthographicSize = 7;
         GameController.Instance.spriteHolder.loadSpritesByName("weapons");    
         playerController.RestorePlayerState(savedWeaponKinds, savedHealth);
+
         
 
         entitySpawner.spawnEnemies(); 
         string currentSceneName = SceneManager.GetActiveScene().name;
-        Vector3 spawnPadLocation = GameObject.FindObjectOfType<SavePositionTile>().transform.position;
 
         if (savedPositions.ContainsKey(currentSceneName)) {
             player.transform.position = savedPositions[currentSceneName];
         } 
         
-        if(completedScenes != null && completedScenes.Contains(SceneManager.GetActiveScene().name)){
+        if((completedScenes != null && completedScenes.Contains(SceneManager.GetActiveScene().name)) || portalOpensAtStart){
             swapTilesWithName(notPassable, "tileset1_66");
         }
     }

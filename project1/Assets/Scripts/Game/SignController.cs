@@ -24,11 +24,15 @@ public class SignController : MonoBehaviour
 
     
     // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Space) && (transform.position - player.transform.position).magnitude < 2){
-            Debug.Log("ahdiwudaiduahwiudwadadad");
-            sign.SetActive(true);      
-        }
+    private void OnTriggerEnter2D(Collider2D other) {   
+        if(GameController.Instance.isWithPlayer(other)){
+            sign.SetActive(true);    
+        }  
+    }
+
+    private void OnTriggerExit2D(Collider2D other) {   
+        if(GameController.Instance.isWithPlayer(other)){
+            sign.SetActive(false);    
+        }       
     }
 }

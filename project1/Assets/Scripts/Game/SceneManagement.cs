@@ -6,9 +6,16 @@ using UnityEngine.SceneManagement;
 public class SceneManagement : MonoBehaviour
 {
     public string sceneName;
-
+    public bool LoadFirstLevel;
+    
     void OnMouseDown() {
-        SceneManager.LoadScene(sceneName);
+        if(LoadFirstLevel){
+            SceneManager.LoadScene(GameController.Instance.levelNames[0]);
+        }  else{
+            SceneManager.LoadScene(sceneName);
+        }
+
+        
     }
 
 
