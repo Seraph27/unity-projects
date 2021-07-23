@@ -8,12 +8,18 @@ public class ShopItem{
     public Func<bool> onSuccessfulPurchaseHandler;
     public Sprite icon; 
     public int cost;
+    public float costScale;
+    public int currentItemLevel;
+    public int maxItemLevel;
 
-    public ShopItem(Func<bool> onSuccessfulPurchaseHandler, Sprite icon, int cost)
+    public ShopItem(Func<bool> onSuccessfulPurchaseHandler, Sprite icon, int cost, float costScale, int maxItemLevel)
     {
         this.onSuccessfulPurchaseHandler = onSuccessfulPurchaseHandler;
         this.icon = icon;
         this.cost = cost;
+        this.costScale = costScale;
+        this.currentItemLevel = 0;
+        this.maxItemLevel = maxItemLevel;
     }
 
 }
@@ -35,13 +41,17 @@ public class ShopController : MonoBehaviour
         shopItems.Add(new ShopItem(
             () => {GameController.Instance.globalAttributes.globalPlayerMaxHealth += 20; return true;},
             shopPlayerHealthIcon,
-            30 
+            30,
+            1.15f,
+            10
         ));
 
         shopItems.Add(new ShopItem(
             () => {GameController.Instance.globalAttributes.globalPlayerBaseDamage += 0.1f; return true;},
             shopPlayerDamageIcon,
-            100 
+            100,
+            1.15f,
+            10
         ));
 
         Vector3 offset = Vector3.zero;

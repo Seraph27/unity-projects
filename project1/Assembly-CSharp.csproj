@@ -63,6 +63,7 @@
      <Compile Include="Assets\Scripts\Game\SavePositionTile.cs" />
      <Compile Include="Assets\Scripts\Game\SceneManagement.cs" />
      <Compile Include="Assets\Scripts\Game\SceneTransition.cs" />
+     <Compile Include="Assets\Scripts\Game\SignController.cs" />
      <Compile Include="Assets\Scripts\Game\Singleton.cs" />
      <Compile Include="Assets\Scripts\Game\SpawnEntites.cs" />
      <Compile Include="Assets\Scripts\Game\TilemapScript.cs" />

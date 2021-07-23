@@ -42,6 +42,7 @@ public class GameController : Singleton<GameController>
         if (System.IO.File.Exists(gameDataPath)) {
             string str = File.ReadAllText(gameDataPath);
             globalAttributes = JsonUtility.FromJson<GlobalAttributes>(str);
+            Debug.Log(globalAttributes.globalPlayerBaseDamage);
 
         } else{
             globalAttributes = new GlobalAttributes();

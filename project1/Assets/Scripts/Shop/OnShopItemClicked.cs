@@ -13,20 +13,23 @@ public class OnShopItemClicked : MonoBehaviour
     }
     // Start is called before the first frame update
     private void OnMouseDown() {
-        if(GameController.Instance.globalAttributes.globalPlayerCurrency >= shopItem.cost){
+        Debug.Log(GameController.Instance.globalAttributes.globalPlayerCurrency);
+        if(GameController.Instance.globalAttributes.globalPlayerCurrency >= shopItem.cost && shopItem.currentItemLevel < shopItem.maxItemLevel){
             shopItem.onSuccessfulPurchaseHandler();
             GameController.Instance.globalAttributes.globalPlayerCurrency -= shopItem.cost;
-            // itemCost = (int)((float)itemCost * 1.15f);
-            updateIconAndText();
+            shopItem.cost = (int)((float)shopItem.cost * shopItem.costScale);
+            shopItem.currentItemLevel++;
             GameController.Instance.saveGlobalsToFile();
         }
+        updateIconAndText();
         
     }
 
     public void updateIconAndText(){
         var textMesh = transform.GetComponentInChildren<TextMeshPro>();
-        textMesh.SetText("Cost: " + shopItem.cost);       
-        if(GameController.Instance.globalAttributes.globalPlayerCurrency < shopItem.cost){
+        textMesh.SetText("Cost: " + shopItem.cost + "\nLv. " + shopItem.currentItemLevel + " / " + shopItem.maxItemLevel); 
+
+        if(GameController.Instance.globalAttributes.globalPlayerCurrency < shopItem.cost || shopItem.currentItemLevel >= shopItem.maxItemLevel){
             textMesh.color = Color.red;
         } else{
             textMesh.color = Color.green;
