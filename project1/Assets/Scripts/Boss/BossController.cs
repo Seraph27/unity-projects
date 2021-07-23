@@ -48,15 +48,15 @@ public class BossController : MonoBehaviour
         var cameraFollowScript = bossHpBar.AddComponent<CameraFollowScript>();
         cameraFollowScript.depth = 1;
 
-        StartCoroutine(PhaseCoroutine()); 
-        
-        
+        StartCoroutine(PhaseCoroutine());
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(passable.GetTile(Vector3Int.FloorToInt(player.transform.position)).name == "ProjectUtumno_full_384"){
+            Debug.Log("ahhhh");
+        }
     }
 
     void OnTriggerEnter2D(Collider2D c){  //player dealt dmg
@@ -72,7 +72,7 @@ public class BossController : MonoBehaviour
         for(int x = -14; x <= 14; x++){
             for(int y = -14; y <= 13; y++){
                 var randomNum = Random.Range(0, 100);
-                if(randomNum > 80){
+                if(randomNum > 85){
                     GameController.Instance.changeTileAtPosition(passable, transform.position + new Vector3(x, y, 0), burnedTiles);                
                 } 
             }

@@ -12,6 +12,8 @@ TagManager:
   - Powerup_Health
   - Weapon
   - PadToNextLevel
+  - BoringEnemyAttack
+  - DragonFire
   layers:
   - Default
   - TransparentFX

@@ -11,6 +11,10 @@ public class ExitGameScript : MonoBehaviour
 
     void doExitGame() {
         Debug.Log("EXITING");
+        #if UNITY_EDITOR 
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
         Application.Quit();
+        #endif
     }
 }

@@ -6,6 +6,16 @@ using System;
 using UnityEngine.Tilemaps;
 using System.IO;
 
+public class GlobalAttributes{
+    public float globalPlayerMaxHealth = 200;
+    public float globalPlayerBaseDamage = 2.0f;
+    public float globalPlayerCritChance = 0.5f;
+    public float globalPlayerCritMultiplier = 1.5f;
+    public int globalPlayerSpeed = 400;
+    public int globalPlayerCurrency = 100;
+   
+}
+    
 public class GameController : Singleton<GameController>
 {
     Dictionary<string, Vector3> savedPositions = new Dictionary<string, Vector3>();
@@ -22,16 +32,7 @@ public class GameController : Singleton<GameController>
     string gameDataPath;
     //public ShopController shopControllerScript;
     public GameObject mainCamera;
-
-    ///////////////GLOBAL ATTRIBUTES/////////////////////
-    public float globalPlayerMaxHealth = 200;
-    public float globalPlayerBaseDamage = 2.0f;
-    public float globalPlayerCritChance = 0.5f;
-    public float globalPlayerCritMultiplier = 1.5f;
-    public int globalPlayerSpeed = 400;
-    public int globalPlayerCurrency = 100;
-    ////////////////////////////////////////////////////
-
+    public GlobalAttributes globalAttributes;
 
 
     public void setupGame(){ //when loading a new game scene
@@ -39,16 +40,12 @@ public class GameController : Singleton<GameController>
 
         Debug.Log(gameDataPath);
         if (System.IO.File.Exists(gameDataPath)) {
-            StreamReader reader = new StreamReader(gameDataPath);
-            globalPlayerMaxHealth = Int32.Parse(reader.ReadLine());
-            globalPlayerBaseDamage = float.Parse(reader.ReadLine());
-            globalPlayerCritChance = float.Parse(reader.ReadLine());
-            globalPlayerCritMultiplier = float.Parse(reader.ReadLine());
-            globalPlayerSpeed = Int32.Parse(reader.ReadLine());
-            globalPlayerCurrency = Int32.Parse(reader.ReadLine());
-            
+            string str = File.ReadAllText(gameDataPath);
+            globalAttributes = JsonUtility.FromJson<GlobalAttributes>(str);
+
         } else{
-            saveGlobalsToFile();
+            globalAttributes = new GlobalAttributes();
+            saveGlobalsToFile(); 
         }
 
         prefabs = Resources.LoadAll<GameObject>("Prefabs").ToDictionary(go => go.name, go => go);
@@ -101,14 +98,7 @@ public class GameController : Singleton<GameController>
     } 
 
     public void saveGlobalsToFile(){
-            StreamWriter writer = new StreamWriter(gameDataPath);
-            writer.WriteLine(globalPlayerMaxHealth.ToString());
-            writer.WriteLine(globalPlayerBaseDamage.ToString());
-            writer.WriteLine(globalPlayerCritChance.ToString());
-            writer.WriteLine(globalPlayerCritMultiplier.ToString());
-            writer.WriteLine(globalPlayerSpeed.ToString());
-            writer.WriteLine(globalPlayerCurrency.ToString());
-            writer.Close();
+        File.WriteAllText(gameDataPath, JsonUtility.ToJson(globalAttributes, true));
     }
 
     public GameObject getPrefabByName(string name){

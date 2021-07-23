@@ -108,8 +108,8 @@ public class PlayerController : MonoBehaviour
         weaponIconB = Instantiate(weaponIconPrefab, transform.position, Quaternion.identity);
         weaponIconB.GetComponentInChildren<Image>().transform.position += new Vector3(Screen.width * 0.07f, 0, 0);
         iconFrame = Instantiate(iconFramePrefab, transform.position, Quaternion.identity);
-        playerCritChance = GameController.Instance.globalPlayerCritChance;
-        playerCritMultiplier = GameController.Instance.globalPlayerCritMultiplier;
+        playerCritChance = GameController.Instance.globalAttributes.globalPlayerCritChance;
+        playerCritMultiplier = GameController.Instance.globalAttributes.globalPlayerCritMultiplier;
     }
 
     public void RestorePlayerState(List<WeaponKind> savedWeaponKinds, float savedHealth)
@@ -122,7 +122,7 @@ public class PlayerController : MonoBehaviour
             savedWeaponKinds.Add(WeaponKind.Shotgun);
         }
         if(savedHealth == 0){
-            savedHealth = GameController.Instance.globalPlayerMaxHealth;
+            savedHealth = GameController.Instance.globalAttributes.globalPlayerMaxHealth;
         }
         
         foreach(var weaponKind in savedWeaponKinds){
@@ -132,11 +132,11 @@ public class PlayerController : MonoBehaviour
         weaponIconA.GetComponentInChildren<Image>().sprite = this.weapons[activeWeaponIndexA].icon;
         weaponIconB.GetComponentInChildren<Image>().sprite = this.weapons[activeWeaponIndexB].icon;
 
-        hpBarScript.Initalize(gameObject, savedHealth, GameController.Instance.globalPlayerMaxHealth);
+        hpBarScript.Initalize(gameObject, savedHealth, GameController.Instance.globalAttributes.globalPlayerMaxHealth);
     }
 
     void FixedUpdate(){
-        rb.velocity = playerVelocity * GameController.Instance.globalPlayerSpeed * Time.fixedDeltaTime;
+        rb.velocity = playerVelocity * GameController.Instance.globalAttributes.globalPlayerSpeed * Time.fixedDeltaTime;
     }
     // Update is called once per frame
     void Update()
@@ -308,7 +308,7 @@ public class PlayerController : MonoBehaviour
     {
         GameObject bullet = new GameObject(spriteName);
 
-        var bulletDamage = damage * GameController.Instance.globalPlayerBaseDamage;
+        var bulletDamage = damage * GameController.Instance.globalAttributes.globalPlayerBaseDamage;
         var num = UnityEngine.Random.value;
 
         var bulletScript = bullet.AddComponent<Bullet>();

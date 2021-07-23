@@ -13,6 +13,6 @@ public class CashController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        cashText.text = "" + GameController.Instance.globalPlayerCurrency;
+        cashText.text = "" + GameController.Instance.globalAttributes.globalPlayerCurrency;
     }
 }
