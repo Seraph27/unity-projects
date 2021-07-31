@@ -58,7 +58,7 @@ public class GameController : Singleton<GameController>
 
         allLevels = new Dictionary<string, List<string>>();
         allLevels["easy"] = new List<string>(){"Level1"};
-        allLevels["medium"] = new List<string>(){"Level2", "Level4"};
+        allLevels["medium"] = new List<string>(){"Level2A", "Level4A"};
         allLevels["hard"] = new List<string>(){"Level5"};
         if(levelNames == null){
             levelNames = new List<string>();              
