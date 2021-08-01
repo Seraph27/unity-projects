@@ -57,14 +57,16 @@ public class GameController : Singleton<GameController>
         prefabs = Resources.LoadAll<GameObject>("Prefabs").ToDictionary(go => go.name, go => go);
 
         allLevels = new Dictionary<string, List<string>>();
-        allLevels["easy"] = new List<string>(){"Level1"};
-        allLevels["medium"] = new List<string>(){"Level2A", "Level4A"};
-        allLevels["hard"] = new List<string>(){"Level5"};
+        allLevels["lvl1"] = new List<string>(){"Level1"};
+        allLevels["lvl2"] = new List<string>(){"Level2A", "Level2B"};
+        allLevels["lvl3"] = new List<string>(){"Level3A", "Level4A"};
+        allLevels["boss"] = new List<string>(){"Level5"};
         if(levelNames == null){
             levelNames = new List<string>();              
-            levelNames.Add(allLevels["easy"].RandomElement());
-            levelNames.Add(allLevels["medium"].RandomElement());
-            levelNames.Add(allLevels["hard"].RandomElement());
+            levelNames.Add(allLevels["lvl1"].RandomElement());
+            levelNames.Add(allLevels["lvl2"].RandomElement());
+            levelNames.Add(allLevels["lvl3"].RandomElement());
+            levelNames.Add(allLevels["boss"].RandomElement());
             Debug.Log(string.Join(", ", levelNames));
         } 
 
