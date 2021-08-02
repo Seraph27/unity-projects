@@ -152,7 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a784a34bca357944bb2e4cd2dc6444c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  depth: -10
+  offsetRelativeToPlayer: {x: 0, y: 0, z: 0}
 --- !u!81 &198985732
 AudioListener:
   m_ObjectHideFlags: 0
