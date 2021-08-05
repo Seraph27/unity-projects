@@ -36,6 +36,7 @@ abstract public class EnemyController : MonoBehaviour
 
     virtual protected void OnDied() {
         playerController.enemyKills++;
+        GameController.totalEnemyKills++;
         Debug.Log(playerController.enemyKills);
     }
     

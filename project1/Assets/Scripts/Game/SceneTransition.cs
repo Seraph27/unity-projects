@@ -16,7 +16,7 @@ public class SceneTransition : MonoBehaviour
 
     IEnumerator LoadLevel(){
         transition.SetTrigger("Start");
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1f);
 
         if(this.tag == "PadToNextLevel"){
 
@@ -24,11 +24,14 @@ public class SceneTransition : MonoBehaviour
             GameController.Instance.currentLevelIndex++;
             Debug.Log(GameController.Instance.currentLevelIndex);
             SceneManager.LoadScene(GameController.Instance.levelNames[GameController.Instance.currentLevelIndex]); 
+        } else if(this.tag == "EndScenePortal"){
+            SceneManager.LoadScene("EndScene"); 
         } else{
             GameController.Instance.currentLevelIndex--;
             Debug.Assert(GameController.Instance.currentLevelIndex >= 0, "negative level index");
             Debug.Log(GameController.Instance.currentLevelIndex);
             SceneManager.LoadScene(GameController.Instance.levelNames[GameController.Instance.currentLevelIndex]); 
-        }   
+        }  
+
     }
 }

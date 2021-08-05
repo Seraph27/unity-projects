@@ -15,6 +15,7 @@ public class GlobalAttributes{
     public int globalPlayerCurrency = 100;
    
 }
+
     
 public class GameController : Singleton<GameController>
 {
@@ -36,11 +37,10 @@ public class GameController : Singleton<GameController>
     public List<string> levelNames;
     public Dictionary<string, List<string>> allLevels;
     public int currentLevelIndex;
-    public bool portalOpensAtStart;
-
+    public bool portalOpensAtStart = true;
+    public static int totalEnemyKills;
 
     public void setupGame(){ //when loading a new game scene
-        Debug.Log("i am being called");
         gameDataPath = Path.Combine(Application.persistentDataPath, "game_data.txt");
 
         Debug.Log(gameDataPath);
@@ -62,6 +62,7 @@ public class GameController : Singleton<GameController>
         allLevels["lvl3"] = new List<string>(){"Level3A", "Level3B"};
         allLevels["lvl4"] = new List<string>(){"Level4A"};
         allLevels["boss"] = new List<string>(){"Level5"};
+        
         if(levelNames == null){
             levelNames = new List<string>();              
             levelNames.Add(allLevels["lvl1"].RandomElement());

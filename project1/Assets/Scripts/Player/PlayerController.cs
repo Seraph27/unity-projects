@@ -86,7 +86,8 @@ public class PlayerController : MonoBehaviour
     int activeWeaponIndexB = 1;
     public GameObject weaponDropPrefab;
     GameObject flamethrower;
-    public int enemyKills;
+    public int enemyKills; //kill for each scene used to unlock next lvl
+    //public int totalEnemyKills; //kills each run
     public GameObject exitGamePanelPrefab;
     float playerCritChance;
     float playerCritMultiplier;
@@ -124,7 +125,8 @@ public class PlayerController : MonoBehaviour
         if(savedHealth == 0){
             savedHealth = GameController.Instance.globalAttributes.globalPlayerMaxHealth;
         }
-        
+
+
         foreach(var weaponKind in savedWeaponKinds){
             weapons.Add(Weapon.make_weapon(weaponKind, this));
             

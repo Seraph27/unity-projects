@@ -14,6 +14,7 @@ TagManager:
   - PadToNextLevel
   - BoringEnemyAttack
   - DragonFire
+  - EndScenePortal
   layers:
   - Default
   - TransparentFX

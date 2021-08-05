@@ -37764,6 +37764,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8618774750369544404, guid: ba9441c68238ee24ea616ae7604c0f38,
+        type: 3}
+      propertyPath: m_TagString
+      value: PadToNextLevel
+      objectReference: {fileID: 0}
     - target: {fileID: 8618774750369544406, guid: ba9441c68238ee24ea616ae7604c0f38,
         type: 3}
       propertyPath: sceneName
