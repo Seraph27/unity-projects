@@ -18,12 +18,15 @@ public class EndScreenController : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         var textObject = Instantiate(textObjectPrefab, transform.position, Quaternion.identity);
         var tmp = textObject.GetComponentInChildren<TextMeshProUGUI>();
-        tmp.SetText("Enemy Killed: " + GameController.totalEnemyKills + "\n\n\n"
-        + "-------------------------\n"
-        + "Coins Earned: " + GameController.totalEnemyKills * 10
-        );
 
-        Debug.Log(tmp);
+        var totalCoinsEarned = GameController.totalEnemyKills * 10;
+        tmp.SetText("Enemy Killed: " + GameController.totalEnemyKills + " x10\n\n\n"
+        + "-------------------------\n"
+        + "Coins Earned: " + totalCoinsEarned);
+
+
+        GameController.Instance.globalAttributes.globalPlayerCurrency += totalCoinsEarned;
+        GameController.Instance.saveGlobalsToFile();
 
         
     }

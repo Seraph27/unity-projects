@@ -60,15 +60,15 @@ public class GameController : Singleton<GameController>
         allLevels["lvl1"] = new List<string>(){"Level1"};
         allLevels["lvl2"] = new List<string>(){"Level2A", "Level2B"};
         allLevels["lvl3"] = new List<string>(){"Level3A", "Level3B"};
-        allLevels["lvl4"] = new List<string>(){"Level4A"};
+        allLevels["lvl4"] = new List<string>(){"Level4A", "Level4B"};
         allLevels["boss"] = new List<string>(){"Level5"};
         
         if(levelNames == null){
             levelNames = new List<string>();              
             levelNames.Add(allLevels["lvl1"].RandomElement());
-            levelNames.Add(allLevels["lvl2"].RandomElement());
-            levelNames.Add(allLevels["lvl3"].RandomElement());
-            levelNames.Add(allLevels["lvl4"].RandomElement());
+            // levelNames.Add(allLevels["lvl2"].RandomElement());
+            // levelNames.Add(allLevels["lvl3"].RandomElement());
+            // levelNames.Add(allLevels["lvl4"].RandomElement());
             levelNames.Add(allLevels["boss"].RandomElement());
             Debug.Log(string.Join(", ", levelNames));
         } 
