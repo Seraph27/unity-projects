@@ -103,7 +103,8 @@ public class BossController : MonoBehaviour
         StopCoroutine(attackCoroutine);
 
         GameController.Instance.swapTilesWithName(GameController.Instance.notPassable, "tileset1_68");
-        Instantiate(portal, new Vector3(-1.5f, 33.5f, 0), Quaternion.identity);
+        var potral = Instantiate(portal, new Vector3(-1.5f, 33.5f, 0), Quaternion.identity);
+        potral.AddComponent<EndScreenController>();
         Destroy(bossHpBar);
         Destroy(gameObject);
     }
