@@ -15,7 +15,8 @@ public class GlobalAttributes{
     public int globalPlayerCurrency = 100;
 
     public int globalPlayerMaxHealthLevel = 0;
-   
+    public int globalPlayerBaseDamageLevel = 0;
+    public int globalPlayerSpeedLevel = 0;
 }
 
     
@@ -24,6 +25,9 @@ public class GameController : Singleton<GameController>
     Dictionary<string, Vector3> savedPositions = new Dictionary<string, Vector3>();
     List<string> completedScenes = new List<string>();
     public Dictionary<string, GameObject> prefabs;
+    public Dictionary<string, AudioClip> audioClips;
+    public Dictionary<string, AudioSource> audioSources;
+    public GameObject audioParent;
     public SpriteHolder spriteHolder = new SpriteHolder();
     public GameObject player;
     //these two are saved and restored across levels transitions
@@ -57,6 +61,8 @@ public class GameController : Singleton<GameController>
         }
 
         prefabs = Resources.LoadAll<GameObject>("Prefabs").ToDictionary(go => go.name, go => go);
+        audioClips = Resources.LoadAll<AudioClip>("Audio").ToDictionary(clip => clip.name, clip => clip);
+        
 
         allLevels = new Dictionary<string, List<string>>();
         allLevels["lvl1"] = new List<string>(){"Level1"};
@@ -75,7 +81,13 @@ public class GameController : Singleton<GameController>
             Debug.Log(string.Join(", ", levelNames));
         } 
 
+        if(audioParent == null){
+            
+            setupAudio();
+        }
+        
         if(SceneManager.GetActiveScene().name.Contains("Level")){
+            
             setupLevel();
         }
 
@@ -113,6 +125,27 @@ public class GameController : Singleton<GameController>
         if((completedScenes != null && completedScenes.Contains(SceneManager.GetActiveScene().name)) || portalOpensAtStart){
             swapTilesWithName(notPassable, "tileset1_66");
         }
+    }
+
+    public void setupAudio(){
+        audioSources = new Dictionary<string, AudioSource>();
+        audioParent = new GameObject("AudioParent");
+        audioParent.transform.parent = gameObject.transform;
+
+        void makeAudio(string audioName) {
+            GameObject pistolSoundEffect = new GameObject(audioName);
+            audioSources[audioName] = pistolSoundEffect.AddComponent<AudioSource>();
+            audioSources[audioName].clip = audioClips[audioName];
+            audioSources[audioName].playOnAwake = false;
+            pistolSoundEffect.transform.parent = audioParent.transform;
+        }
+
+        makeAudio("PistolSoundEffect");
+        
+    }
+
+    public void playAudio(string audioName){
+        audioSources[audioName].Play();
     }
 
     public void addCompletedScenes(String sceneName){

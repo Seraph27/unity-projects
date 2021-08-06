@@ -12,7 +12,7 @@ public class ShopItem{
     public int currentItemLevel;
     public int maxItemLevel;
 
-    public ShopItem(Func<bool> onSuccessfulPurchaseHandler, Sprite icon, int cost, float costScale,int currentItemLevel, int maxItemLevel)
+    public ShopItem(Func<bool> onSuccessfulPurchaseHandler, Sprite icon, int cost, float costScale, int currentItemLevel, int maxItemLevel)
     {
         this.onSuccessfulPurchaseHandler = onSuccessfulPurchaseHandler;
         this.icon = icon;
@@ -41,9 +41,9 @@ public class ShopController : MonoBehaviour
         List<ShopItem> shopItems = new List<ShopItem>();
         shopItems.Add(new ShopItem(
             () => {
-            GameController.Instance.globalAttributes.globalPlayerMaxHealth += 20;
-            GameController.Instance.globalAttributes.globalPlayerMaxHealthLevel++;
-            return true;
+                GameController.Instance.globalAttributes.globalPlayerMaxHealth += 20;
+                GameController.Instance.globalAttributes.globalPlayerMaxHealthLevel++;
+                return true;
             },
             shopPlayerHealthIcon,
             30,
@@ -52,21 +52,32 @@ public class ShopController : MonoBehaviour
             10
         ));
 
-        // shopItems.Add(new ShopItem(
-        //     () => {GameController.Instance.globalAttributes.globalPlayerBaseDamage += 0.1f; return true;},
-        //     shopPlayerDamageIcon,
-        //     100,
-        //     1.15f,
-        //     10
-        // ));
+        shopItems.Add(new ShopItem(
+            () => {
+                GameController.Instance.globalAttributes.globalPlayerBaseDamage += 0.1f;
+                GameController.Instance.globalAttributes.globalPlayerBaseDamageLevel++;
+                return true;
+            },
+            shopPlayerDamageIcon,
+            100,
+            1.15f,
+            GameController.Instance.globalAttributes.globalPlayerBaseDamageLevel,
+            10
+        ));
 
-        // shopItems.Add(new ShopItem(
-        //     () => {GameController.Instance.globalAttributes.globalPlayerSpeed += 20; return true;},
-        //     shopPlayerSpeedIcon,
-        //     100,
-        //     1.15f,
-        //     10
-        // ));
+        shopItems.Add(new ShopItem(
+            () => {
+                GameController.Instance.globalAttributes.globalPlayerSpeed += 20; 
+                GameController.Instance.globalAttributes.globalPlayerSpeedLevel++;
+                return true;
+            },
+
+            shopPlayerSpeedIcon,
+            100,
+            1.15f,
+            GameController.Instance.globalAttributes.globalPlayerSpeedLevel,
+            10
+        ));
 
         Vector3 offset = Vector3.zero;
         foreach (var shopitem in shopItems) {

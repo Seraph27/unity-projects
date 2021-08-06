@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1382040673
-  m_SortingLayer: 2
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f5b9f526b203b0c4897351d308947f24, type: 3}
   m_Color: {r: 0.98160696, g: 1, b: 0, a: 1}
@@ -97,14 +97,14 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
+  m_Mass: 10
+  m_LinearDrag: 2
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &1273605073673437796
 BoxCollider2D:
@@ -146,6 +146,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpBarPrefab: {fileID: 6703622591148104126, guid: 959a8f42eed72dd4c813d8e2c18b6577,
     type: 3}
+  hpBarScript: {fileID: 0}
+  playerController: {fileID: 0}
 --- !u!114 &-6542092094800783500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,3 +162,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   missilePrefab: {fileID: 4684865681563795438, guid: 316d0e4549a38474db65b28f97b16fca,
     type: 3}
+  missileRange: 6
