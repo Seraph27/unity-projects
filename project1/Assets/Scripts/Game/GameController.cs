@@ -13,6 +13,8 @@ public class GlobalAttributes{
     public float globalPlayerCritMultiplier = 1.5f;
     public int globalPlayerSpeed = 400;
     public int globalPlayerCurrency = 100;
+
+    public int globalPlayerMaxHealthLevel = 0;
    
 }
 
