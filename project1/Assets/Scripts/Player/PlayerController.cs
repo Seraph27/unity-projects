@@ -24,7 +24,7 @@ public class Weapon {
     };
     public static Weapon make_weapon(WeaponKind kind, PlayerController playerController){
         if(kind == WeaponKind.PiuPiuLaser){
-            return new Weapon(WeaponKind.PiuPiuLaser, 25, weaponIcons[kind], playerController.MakePiuPiuBullet);
+            return new Weapon(WeaponKind.PiuPiuLaser, 25, weaponIcons[kind], playerController.MakeLaserBeam);
         } else if(kind == WeaponKind.Shotgun){
             return new Weapon(WeaponKind.Shotgun, 10, weaponIcons[kind], playerController.MakeShotgunBlast);
         } else if(kind == WeaponKind.Flamethrower){
@@ -300,7 +300,11 @@ public class PlayerController : MonoBehaviour
 
 
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction, 10f);
+        var line = GameObject.Find("LineLaser").GetComponent<LineRenderer>();
         if(hits.Length > 1){ //(use linerenderer to show cast)
+            line.SetPosition(0, transform.position);
+            line.SetPosition(1, hits[1].point);
+            
             Debug.Log(hits[1].transform.gameObject.name);
         }
         yield return new WaitForSeconds(0.1f);
