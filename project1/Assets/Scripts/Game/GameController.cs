@@ -133,14 +133,15 @@ public class GameController : Singleton<GameController>
         audioParent.transform.parent = gameObject.transform;
 
         void makeAudio(string audioName) {
-            GameObject pistolSoundEffect = new GameObject(audioName);
-            audioSources[audioName] = pistolSoundEffect.AddComponent<AudioSource>();
+            GameObject soundEffectChild = new GameObject(audioName);
+            audioSources[audioName] = soundEffectChild.AddComponent<AudioSource>();
             audioSources[audioName].clip = audioClips[audioName];
             audioSources[audioName].playOnAwake = false;
-            pistolSoundEffect.transform.parent = audioParent.transform;
+            soundEffectChild.transform.parent = audioParent.transform;
         }
 
         makeAudio("PistolSoundEffect");
+        makeAudio("ShotgunSoundEffect");
         
     }
 

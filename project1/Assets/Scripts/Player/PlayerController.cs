@@ -273,29 +273,37 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.33f);
 
         isShootingActive = false;
-        // var worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);  //bullet shooting
-        // var direction = (Vector3)(worldMousePos - transform.position) * 10;
-        // Debug.DrawRay(transform.position, direction, Color.red, 1f);
-        // Debug.Log("shoot");
 
-
-        // RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction, 10f);
-        // if(hits.Length > 1){ (use linerenderer to show cast)
-        //     Debug.Log(hits[1].transform.gameObject.name);
-        // }
-        // yield return new WaitForSeconds(0.1f);
-        // isShootingActive = false;
     }
 
     public IEnumerator MakeShotgunBlast() {
         GameObject bullet;
         Rigidbody2D rb;
+        GameController.Instance.playAudio("ShotgunSoundEffect"); 
 
         for (int i = 0; i < 10; i++) {
             (bullet, rb) = CreateGenericBullet(10 * damageMultiplier, playerCritChance, playerCritMultiplier, 1, "bullet", 0.5f, 2, UnityEngine.Random.Range(-30, 30));
         }
         yield return new WaitForSeconds(0.75f);
 
+        isShootingActive = false;
+    }
+
+    public IEnumerator MakeLaserBeam(){
+
+        //GameController.Instance.playAudio("ShotgunSoundEffect"); 
+
+        var worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);  //bullet shooting
+        var direction = (Vector3)(worldMousePos - transform.position) * 10;
+        Debug.DrawRay(transform.position, direction, Color.red, 1f);
+        Debug.Log("shoot");
+
+
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction, 10f);
+        if(hits.Length > 1){ //(use linerenderer to show cast)
+            Debug.Log(hits[1].transform.gameObject.name);
+        }
+        yield return new WaitForSeconds(0.1f);
         isShootingActive = false;
     }
 
