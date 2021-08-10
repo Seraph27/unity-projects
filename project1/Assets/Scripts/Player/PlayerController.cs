@@ -91,6 +91,8 @@ public class PlayerController : MonoBehaviour
     public GameObject exitGamePanelPrefab;
     float playerCritChance;
     float playerCritMultiplier;
+    GameObject linePrefab;
+    LineRenderer lineRenderer;
     // Start is called before the first frame update
     void Init()
     {
@@ -111,6 +113,9 @@ public class PlayerController : MonoBehaviour
         iconFrame = Instantiate(iconFramePrefab, transform.position, Quaternion.identity);
         playerCritChance = GameController.Instance.globalAttributes.globalPlayerCritChance;
         playerCritMultiplier = GameController.Instance.globalAttributes.globalPlayerCritMultiplier;
+        linePrefab = GameController.Instance.getPrefabByName("LineLaser");
+        lineRenderer = Instantiate(linePrefab, Vector3.zero, Quaternion.identity).GetComponent<LineRenderer>();
+        lineRenderer.enabled = false;
     }
 
     public void RestorePlayerState(List<WeaponKind> savedWeaponKinds, float savedHealth)
@@ -295,19 +300,36 @@ public class PlayerController : MonoBehaviour
 
         var worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);  //bullet shooting
         var direction = (Vector3)(worldMousePos - transform.position) * 10;
+        Debug.Log(direction);
         Debug.DrawRay(transform.position, direction, Color.red, 1f);
         Debug.Log("shoot");
 
+        lineRenderer.enabled = true;
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction, 110f);
+        
+        var gradient = new Gradient();
+        Color startColor = Color.red;
+        Color endColor = Color.yellow;
+        float alpha = 1.0f;
+        gradient.SetKeys(
+            new GradientColorKey[] { new GradientColorKey(startColor, 0.0f), new GradientColorKey(endColor, 1.0f) },
+            new GradientAlphaKey[] { new GradientAlphaKey(alpha, 0.0f), new GradientAlphaKey(alpha, 1.0f) }
+        );
+        lineRenderer.colorGradient = gradient; 
 
-        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction, 10f);
-        var line = GameObject.Find("LineLaser").GetComponent<LineRenderer>();
         if(hits.Length > 1){ //(use linerenderer to show cast)
-            line.SetPosition(0, transform.position);
-            line.SetPosition(1, hits[1].point);
+            var target = hits[1];
+            lineRenderer.SetPosition(0, transform.position);
+            lineRenderer.SetPosition(1, target.point);
             
-            Debug.Log(hits[1].transform.gameObject.name);
+            if(GameController.Instance.isWithEnemy(target.collider)){
+                var targetHealthScript = target.collider.gameObject.GetComponent<EnemyController>().hpBarScript;
+                targetHealthScript.ApplyDamage(10);
+                
+            }
+            
         }
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.11f);
         isShootingActive = false;
     }
 

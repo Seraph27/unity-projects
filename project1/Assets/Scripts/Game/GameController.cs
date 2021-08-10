@@ -45,6 +45,7 @@ public class GameController : Singleton<GameController>
     public int currentLevelIndex;
     public bool portalOpensAtStart = true;
     public static int totalEnemyKills;
+    public GameObject globalLight2D;
 
     public void setupGame(){ //when loading a new game scene
         gameDataPath = Path.Combine(Application.persistentDataPath, "game_data.txt");
@@ -91,7 +92,8 @@ public class GameController : Singleton<GameController>
             setupLevel();
         }
 
-        
+        globalLight2D = getPrefabByName("Global Light 2D");  
+        Instantiate(globalLight2D, Vector3.zero, Quaternion.identity);
     }
 
     public void setupLevel(){
