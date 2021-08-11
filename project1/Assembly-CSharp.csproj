@@ -44,10 +44,13 @@
      <Compile Include="Assets\Scripts\Enemies\DashEnemy.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyController.cs" />
      <Compile Include="Assets\Scripts\Enemies\InterestingEnemy.cs" />
+     <Compile Include="Assets\Scripts\Enemies\MeteorEnemy.cs" />
      <Compile Include="Assets\Scripts\Enemies\ShiftingEnemy.cs" />
      <Compile Include="Assets\Scripts\Enemies\TrailEnemy.cs" />
      <Compile Include="Assets\Scripts\EnemyAttacks\BasicEnemyAttack.cs" />
      <Compile Include="Assets\Scripts\EnemyAttacks\HomingAttack.cs" />
+     <Compile Include="Assets\Scripts\EnemyAttacks\MeteorAttack.cs" />
+     <Compile Include="Assets\Scripts\EnemyAttacks\MeteorController.cs" />
      <Compile Include="Assets\Scripts\EnemyAttacks\TrailController.cs" />
      <Compile Include="Assets\Scripts\Game\CameraFollowScript.cs" />
      <Compile Include="Assets\Scripts\Game\DeleteWhenOffScreen.cs" />

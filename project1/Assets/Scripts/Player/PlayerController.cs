@@ -329,7 +329,7 @@ public class PlayerController : MonoBehaviour
             }
             
         }
-        yield return new WaitForSeconds(0.11f);
+        yield return new WaitForSeconds(0.05f);
         isShootingActive = false;
     }
 

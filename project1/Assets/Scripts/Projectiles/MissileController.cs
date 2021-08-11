@@ -5,12 +5,13 @@ using UnityEngine;
 public class MissileController : MonoBehaviour
 {
     GameObject player;
-    public GameObject explosionAnimationPrefab;
+    GameObject explosionAnimationPrefab;
     public GameObject owner;
     // Start is called before the first frame update
     void Start()
     {
         player = GameController.Instance.player;
+        explosionAnimationPrefab = GameController.Instance.getPrefabByName("explosionAnimation");
     }
 
     // Update is called once per frame
