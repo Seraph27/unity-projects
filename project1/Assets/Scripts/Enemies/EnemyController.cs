@@ -5,7 +5,7 @@ using UnityEngine;
 abstract public class EnemyController : MonoBehaviour
 {
     protected Rigidbody2D rb;
-    public GameObject hpBarPrefab;
+    GameObject hpBarPrefab;
     protected GameObject hpBar;
     public HealthBar hpBarScript;
     protected SpriteRenderer ren;
@@ -17,6 +17,7 @@ abstract public class EnemyController : MonoBehaviour
     virtual protected void Start()  
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+        hpBarPrefab = GameController.Instance.getPrefabByName("HealthBar");
         hpBar = Instantiate(hpBarPrefab);
         hpBarScript = hpBar.GetComponent<HealthBar>();
         hpBarScript.Initalize(gameObject, GetBaseHp());  

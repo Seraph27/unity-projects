@@ -25601,9 +25601,8 @@ GameObject:
   - component: {fileID: 8268177913784052943}
   - component: {fileID: 8268177913784052940}
   - component: {fileID: 8268177913784052944}
-  - component: {fileID: 8268177913784052945}
   m_Layer: 0
-  m_Name: MeteorEnemy
+  m_Name: TankEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25689,24 +25688,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8268177913784052941}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b73e8b5df09da404686f0961f4cc34c8, type: 3}
+  m_Script: {fileID: 11500000, guid: 9deade1ce87b92441ab185697bbba355, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpBarPrefab: {fileID: 6703622591148104126, guid: 959a8f42eed72dd4c813d8e2c18b6577,
-    type: 3}
+  hpBarPrefab: {fileID: 0}
   hpBarScript: {fileID: 0}
   playerController: {fileID: 0}
---- !u!114 &8268177913784052945
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8268177913784052941}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcc8b72fe44ec2749846dec5ddbbf8b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  astroidPrefab: {fileID: 4307743807531855719, guid: 0ab53520c9095b74394865e096136d85,
-    type: 3}

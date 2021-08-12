@@ -9,6 +9,7 @@ public class MeteorAttack : MonoBehaviour
     public GameObject astroidPrefab;
     GameObject player;
     float reloadDelay;
+    int meteorRange = 8;
 
     void Start()
     {
@@ -20,10 +21,13 @@ public class MeteorAttack : MonoBehaviour
     IEnumerator attackReload(){
         while(true){
             yield return new WaitForSeconds(1.5f);
-            var randomVec3 = new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), 0);
-            var astroid = Instantiate(astroidPrefab, player.transform.position + randomVec3 + new Vector3(0, 5, 0), Quaternion.identity);
-            astroid.GetComponent<Rigidbody2D>().AddForce(Vector2.down);
-            GameObject.Destroy(astroid, 1.5f);
+            if((player.transform.position - transform.position).magnitude < meteorRange){
+                var randomVec3 = new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), 0);
+                var astroid = Instantiate(astroidPrefab, player.transform.position + randomVec3 + new Vector3(0, 5, 0), Quaternion.identity);
+                astroid.GetComponent<Rigidbody2D>().AddForce(Vector2.down);
+                GameObject.Destroy(astroid, 1.5f);
+            }
+            
         }     
     }
 }
