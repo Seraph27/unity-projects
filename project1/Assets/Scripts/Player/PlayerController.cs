@@ -10,6 +10,7 @@ public enum WeaponKind{
     PiuPiuLaser,
     Shotgun,
     Flamethrower,
+    Laser
 }
 
 public class Weapon {
@@ -21,15 +22,18 @@ public class Weapon {
         {WeaponKind.PiuPiuLaser, "weapons_0"},
         {WeaponKind.Shotgun, "weapons_9"},
         {WeaponKind.Flamethrower, "weapons_18"},
+        {WeaponKind.Laser, "weapons_18"},
     };
     public static Weapon make_weapon(WeaponKind kind, PlayerController playerController){
         if(kind == WeaponKind.PiuPiuLaser){
-            return new Weapon(WeaponKind.PiuPiuLaser, 25, weaponIcons[kind], playerController.MakeLaserBeam);
-        } else if(kind == WeaponKind.Shotgun){
+            return new Weapon(WeaponKind.PiuPiuLaser, 25, weaponIcons[kind], playerController.MakePiuPiuBullet);
+        }   else if(kind == WeaponKind.Shotgun){
             return new Weapon(WeaponKind.Shotgun, 10, weaponIcons[kind], playerController.MakeShotgunBlast);
-        } else if(kind == WeaponKind.Flamethrower){
+        }   else if(kind == WeaponKind.Flamethrower){
             return new Weapon(WeaponKind.Flamethrower, 2, weaponIcons[kind], playerController.MakeFlamethrowerFlame);
-        } else{
+        }   else if(kind == WeaponKind.Laser){
+            return new Weapon(WeaponKind.Laser, 10, weaponIcons[kind], playerController.MakeLaserBeam);
+        }   else{
             throw new NotImplementedException();
         }
     }
@@ -123,8 +127,8 @@ public class PlayerController : MonoBehaviour
         Init();
 
         if(savedWeaponKinds == null) {
-            savedWeaponKinds = new List<WeaponKind>();
-            savedWeaponKinds.Add(WeaponKind.PiuPiuLaser);
+            savedWeaponKinds = new List<WeaponKind>();  //starting weapons here
+            savedWeaponKinds.Add(WeaponKind.Laser); 
             savedWeaponKinds.Add(WeaponKind.Shotgun);
         }
         if(savedHealth == 0){
@@ -331,6 +335,7 @@ public class PlayerController : MonoBehaviour
         }
         yield return new WaitForSeconds(0.05f);
         isShootingActive = false;
+        lineRenderer.enabled = false;
     }
 
     public IEnumerator MakeFlamethrowerFlame(){

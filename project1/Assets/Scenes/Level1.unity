@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -238,7 +238,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -19940,6 +19940,8 @@ MonoBehaviour:
   shiftingEnemyPrefab: {fileID: 0}
   dashEnemyPrefab: {fileID: 0}
   trailEnemyPrefab: {fileID: 0}
+  meteorEnemyPrefab: {fileID: 0}
+  tankEnemyPrefab: {fileID: 0}
 --- !u!1 &1024582671
 GameObject:
   m_ObjectHideFlags: 0

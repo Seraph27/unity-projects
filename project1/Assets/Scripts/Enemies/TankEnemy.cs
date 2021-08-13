@@ -19,7 +19,7 @@ public class TankEnemy : EnemyController
     GameObject shockwave;
 
     override public int GetBaseHp(){
-        return 200;
+        return 500;
     }
 
     override protected void Start()
@@ -54,7 +54,7 @@ public class TankEnemy : EnemyController
             if(!hasAttacked){
                 shockwave = Instantiate(shockWavePrefab, transform.position, Quaternion.identity);
                 StartCoroutine(ShockWaveSpreadCoroutine());
-                GameObject.Destroy(shockwave, 2);
+                
                 hasAttacked = true;
             }
 
@@ -68,6 +68,7 @@ public class TankEnemy : EnemyController
     }
 
     IEnumerator ShockWaveSpreadCoroutine(){
+        GameObject.Destroy(shockwave, 2);
         while(true){
             Debug.Log("started3");
             shockwave.transform.localScale += new Vector3(0.1f, 0.1f, 0);

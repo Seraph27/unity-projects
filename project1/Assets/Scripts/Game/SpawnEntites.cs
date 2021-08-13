@@ -14,7 +14,9 @@ public class SpawnEntites : MonoBehaviour {
     public GameObject shiftingEnemyPrefab;
     public GameObject dashEnemyPrefab;
     public GameObject trailEnemyPrefab;
-
+    public GameObject meteorEnemyPrefab;
+    public GameObject tankEnemyPrefab;
+    
     public List<(Vector3, TileBase)> getTilePositions(){
         var tiles = new List<(Vector3, TileBase)>();
         Tilemap tilemap = GetComponent<Tilemap>();
@@ -82,6 +84,20 @@ public class SpawnEntites : MonoBehaviour {
                 enemySpawnerGO.transform.position = worldPos;
                 var enemySpawnerScript = enemySpawnerGO.AddComponent<EnemySpawnerPad>();
                 enemySpawnerScript.enemyToSpawn = trailEnemyPrefab;
+                enemySpawnerScript.spawnCount = 1;
+            }  
+            if(tile.name == "tileset1_136"){     
+                GameObject enemySpawnerGO = new GameObject(); 
+                enemySpawnerGO.transform.position = worldPos;
+                var enemySpawnerScript = enemySpawnerGO.AddComponent<EnemySpawnerPad>();
+                enemySpawnerScript.enemyToSpawn = meteorEnemyPrefab;
+                enemySpawnerScript.spawnCount = 1;
+            }  
+            if(tile.name == "tileset1_137"){
+                GameObject enemySpawnerGO = new GameObject(); 
+                enemySpawnerGO.transform.position = worldPos;
+                var enemySpawnerScript = enemySpawnerGO.AddComponent<EnemySpawnerPad>();
+                enemySpawnerScript.enemyToSpawn = tankEnemyPrefab;
                 enemySpawnerScript.spawnCount = 1;
             }  
         }                              

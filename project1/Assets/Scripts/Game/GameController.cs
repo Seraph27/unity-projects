@@ -54,8 +54,6 @@ public class GameController : Singleton<GameController>
         if (System.IO.File.Exists(gameDataPath)) {
             string str = File.ReadAllText(gameDataPath);
             globalAttributes = JsonUtility.FromJson<GlobalAttributes>(str);
-            Debug.Log(globalAttributes.globalPlayerBaseDamage);
-
         } else{
             globalAttributes = new GlobalAttributes();
             saveGlobalsToFile(); 
@@ -104,6 +102,8 @@ public class GameController : Singleton<GameController>
         entitySpawner.shiftingEnemyPrefab = prefabs["ShiftingEnemy"];
         entitySpawner.dashEnemyPrefab = prefabs["DashEnemy"];
         entitySpawner.trailEnemyPrefab = prefabs["TrailEnemy"];
+        entitySpawner.meteorEnemyPrefab = prefabs["MeteorEnemy"];
+        entitySpawner.tankEnemyPrefab = prefabs["TankEnemy"];
 
         player = entitySpawner.spawnPlayer();
         playerController = player.GetComponent<PlayerController>();
