@@ -13,4 +13,13 @@ public class InterestingEnemy : EnemyController
     {
         base.Update();
     }
+
+    protected override void OnDied()
+    {
+        base.OnDied();
+        var chance = Random.value;
+        if(chance > 0.1f){
+            Weapon.make_drop(transform.position, WeaponKind.Flamethrower);
+        }  
+    }
 }

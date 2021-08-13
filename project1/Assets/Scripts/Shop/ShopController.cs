@@ -76,7 +76,7 @@ public class ShopController : MonoBehaviour
             100,
             1.15f,
             GameController.Instance.globalAttributes.globalPlayerSpeedLevel,
-            10
+            5
         ));
 
         Vector3 offset = Vector3.zero;

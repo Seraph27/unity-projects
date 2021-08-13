@@ -10,13 +10,14 @@ public class SignController : MonoBehaviour
     public GameObject signPrefab;
     public GameObject player;
     public GameObject sign;
+    public string signText;
     // Start is called before the first frame update
     void Start()
     {
         signPrefab = GameController.Instance.getPrefabByName("Sign");
         sign = Instantiate(signPrefab, transform.position, Quaternion.identity);
         var textMesh = sign.GetComponentInChildren<TextMeshPro>();
-        textMesh.SetText("You might have to defeat some enemies for the key to the next level to show up"); 
+        textMesh.SetText(signText); 
         sign.SetActive(false);
         player = GameController.Instance.player;
 

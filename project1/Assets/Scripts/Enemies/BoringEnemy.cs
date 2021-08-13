@@ -29,14 +29,14 @@ public class BoringEnemy : EnemyController
         base.Update();
     }
 
-    protected override void OnDied()
-    {
-        base.OnDied();
-        var chance = Random.value;
-        if(chance > 0.5f){
-            Weapon.make_drop(transform.position, WeaponKind.Flamethrower);
-        }  
-    }
+    // protected override void OnDied()
+    // {
+    //     base.OnDied();
+    //     var chance = Random.value;
+    //     if(chance > 0.5f){
+    //         Weapon.make_drop(transform.position, WeaponKind.Flamethrower);
+    //     }  
+    // }
     void OnCollisionEnter2D(Collision2D collision) {
         direction *= -1;
     }
