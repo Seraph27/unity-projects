@@ -9,7 +9,8 @@ public class ShockwaveController : MonoBehaviour
     void Start()
     {
         player = GameController.Instance.player;
-
+        StartCoroutine(ShockWaveSpreadCoroutine());
+        GameObject.Destroy(gameObject, 2);
     }
 
     void OnTriggerEnter2D(Collider2D c){
@@ -17,5 +18,16 @@ public class ShockwaveController : MonoBehaviour
         if(GameController.Instance.isWithPlayer(c)){
             player.GetComponent<PlayerController>().hpBarScript.ApplyDamage(50);
         }
+    }
+
+    IEnumerator ShockWaveSpreadCoroutine(){
+        
+        while(true){
+            Debug.Log("started3");
+            transform.localScale += new Vector3(0.1f, 0.1f, 0);
+            yield return new WaitForSeconds(0.01f);
+        }
+        
+
     }
 }

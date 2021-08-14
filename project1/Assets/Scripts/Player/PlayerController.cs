@@ -97,6 +97,8 @@ public class PlayerController : MonoBehaviour
     float playerCritMultiplier;
     GameObject linePrefab;
     LineRenderer lineRenderer;
+    GameObject onScreenHealthBarPrefab;
+    OnScreenHealthBarController onScreenHealthBarScript;
     // Start is called before the first frame update
     void Init()
     {
@@ -120,6 +122,8 @@ public class PlayerController : MonoBehaviour
         linePrefab = GameController.Instance.getPrefabByName("LineLaser");
         lineRenderer = Instantiate(linePrefab, Vector3.zero, Quaternion.identity).GetComponent<LineRenderer>();
         lineRenderer.enabled = false;
+        onScreenHealthBarPrefab = GameController.Instance.getPrefabByName("OnScreenHealth");
+        Instantiate(onScreenHealthBarPrefab, Vector3.zero, Quaternion.identity);
     }
 
     public void RestorePlayerState(List<WeaponKind> savedWeaponKinds, float savedHealth)
@@ -241,8 +245,8 @@ public class PlayerController : MonoBehaviour
             c.depth = 0;
         }
 
-        if(!hpBarScript.IsAlive()){
-            SceneManager.LoadScene("StartScene");
+        if(!hpBarScript.IsAlive()){   //player dies
+            SceneManager.LoadScene("EndScene"); 
         }
 
     }

@@ -56,7 +56,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 3536417959275046133, guid: f31dd5cd652a47b4499bf541d966f811, type: 2}
+  - {fileID: 8330454250685540251, guid: d5087de3a1ed9ad40974b54b1282bba3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -75,7 +75,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 135463201
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
 --- !u!222 &8246646583664738837
 CanvasRenderer:
@@ -104,10 +104,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: udhaiwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f31dd5cd652a47b4499bf541d966f811, type: 2}
-  m_sharedMaterial: {fileID: 3536417959275046133, guid: f31dd5cd652a47b4499bf541d966f811,
+  m_fontAsset: {fileID: 11400000, guid: d5087de3a1ed9ad40974b54b1282bba3, type: 2}
+  m_sharedMaterial: {fileID: 8330454250685540251, guid: d5087de3a1ed9ad40974b54b1282bba3,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -244,7 +244,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 135463201
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: acf8b642c9b6f064fa86495081feef2a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

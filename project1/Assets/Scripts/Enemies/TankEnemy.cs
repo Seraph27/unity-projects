@@ -53,7 +53,6 @@ public class TankEnemy : EnemyController
         if(mode == TankEnemyMode.SmashAttack){ 
             if(!hasAttacked){
                 shockwave = Instantiate(shockWavePrefab, transform.position, Quaternion.identity);
-                StartCoroutine(ShockWaveSpreadCoroutine());
                 
                 hasAttacked = true;
             }
@@ -67,14 +66,5 @@ public class TankEnemy : EnemyController
         base.Update();
     }
 
-    IEnumerator ShockWaveSpreadCoroutine(){
-        GameObject.Destroy(shockwave, 2);
-        while(true){
-            Debug.Log("started3");
-            shockwave.transform.localScale += new Vector3(0.1f, 0.1f, 0);
-            yield return new WaitForSeconds(0.01f);
-        }
-        
 
-    }
 }

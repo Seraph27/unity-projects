@@ -17,7 +17,7 @@ public class OnShopItemClicked : MonoBehaviour
         if(GameController.Instance.globalAttributes.globalPlayerCurrency >= shopItem.cost && shopItem.currentItemLevel < shopItem.maxItemLevel){
             shopItem.onSuccessfulPurchaseHandler();
             GameController.Instance.globalAttributes.globalPlayerCurrency -= shopItem.cost;
-            shopItem.cost = (int)((float)shopItem.cost * shopItem.costScale);
+            shopItem.cost = Mathf.RoundToInt(shopItem.cost * shopItem.costScale);
             shopItem.currentItemLevel++;
             GameController.Instance.saveGlobalsToFile();
         }

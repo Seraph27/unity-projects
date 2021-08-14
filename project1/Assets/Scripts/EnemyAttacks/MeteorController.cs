@@ -6,22 +6,23 @@ public class MeteorController : MonoBehaviour
 {
 
     GameObject player;
-    GameObject explosionAnimationPrefab;
+    ParticleSystem explosion;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameController.Instance.player;
-        explosionAnimationPrefab = GameController.Instance.getPrefabByName("explosionAnimation");
+        explosion = transform.Find("MeteorExplosion").GetComponent<ParticleSystem>();
     }
 
     void OnCollisionEnter2D(Collision2D other) {
-        GameObject.Destroy(gameObject);
+        GetComponent<CapsuleCollider2D>().enabled = false;
+        GetComponent<Rigidbody2D>().gravityScale = 0;
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         if(GameController.Instance.isWithPlayer(other.collider)){
             player.GetComponent<PlayerController>().hpBarScript.ApplyDamage(100);
         }
-        var explosion = Instantiate(explosionAnimationPrefab, transform.position, Quaternion.identity);
-        explosion.transform.localScale += new Vector3(2, 2, 0);
-        Destroy(explosion, 2);
+        explosion.Play();
+        GameObject.Destroy(gameObject, 2);
     }
 }
