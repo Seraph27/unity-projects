@@ -185,9 +185,8 @@ public class PlayerWeaponController : MonoBehaviour
         (bullet, rb) = CreateGenericBullet(10 * damageMultiplier, playerCritChance, playerCritMultiplier, 1, "bullet", 2, 0.75f);
 
         bullet.AddComponent<Grenade>();
+        Destroy(bullet.GetComponent<Bullet>());
         yield return new WaitForSeconds(1);
-        
-
         isShootingActive = false;
     }
 
@@ -245,7 +244,7 @@ public class PlayerWeaponController : MonoBehaviour
         bullet.transform.position = transform.position + (Vector3)(rotationVector * 1.0f);
         rb.velocity = rotationVector * 10 * speedMultiplier;
         if(bulletLife > 0){
-            //GameObject.Destroy(bullet, bulletLife);
+            GameObject.Destroy(bullet, bulletLife);
         }
         return (bullet, rb);
     }

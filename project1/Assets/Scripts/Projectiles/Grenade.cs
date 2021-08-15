@@ -26,14 +26,16 @@ public class Grenade : Bullet
     }
 
     override protected void OnTriggerEnter2D(Collider2D other) {
-        meteorExplosion.Play();
+        
         base.OnTriggerEnter2D(other);
+        meteorExplosion.Play();
         Debug.Log("DWAHOUI");
     }
 
     override protected void OnCollisionEnter2D(Collision2D other) {
-        meteorExplosion.Play();
+        
         base.OnCollisionEnter2D(other);
+        meteorExplosion.Play();
         Debug.Log("DWAHOUI");
     }
 
