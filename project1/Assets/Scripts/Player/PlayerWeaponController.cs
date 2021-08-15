@@ -68,7 +68,7 @@ public class PlayerWeaponController : MonoBehaviour
     PlayerController playerController;
     float playerCritChance;
     float playerCritMultiplier;
-    public float damageMultiplier = 1.0f; 
+    float damageMultiplier = 1.0f; 
     bool isShootingActive = false;
 
     private void Start() {
@@ -158,6 +158,17 @@ public class PlayerWeaponController : MonoBehaviour
     }
 
     public IEnumerator MakeFlamethrowerFlame(){
+        GameObject bullet;
+        Rigidbody2D rb;
+
+        (bullet, rb) = CreateGenericBullet(2 * damageMultiplier, playerCritChance, playerCritMultiplier, 1, "flame", 0.5f, 0.75f, UnityEngine.Random.Range(-5, 5));
+
+        yield return new WaitForSeconds(0.1f);
+
+        isShootingActive = false;
+    }
+
+    public IEnumerator MakeGrenadeLauncher(){
         GameObject bullet;
         Rigidbody2D rb;
 

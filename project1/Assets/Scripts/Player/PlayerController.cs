@@ -24,7 +24,6 @@ public class PlayerController : MonoBehaviour
     public GameObject bulletPrefab;
     public float bulletVelocity;
     public HealthBar hpBarScript;
-    public float damageMultiplier = 1.0f; 
     public GameObject cashTextPrefab;
     public GameObject weaponIconPrefab;
     public GameObject iconFramePrefab;
@@ -73,8 +72,8 @@ public class PlayerController : MonoBehaviour
 
         if(savedWeaponKinds == null) {
             savedWeaponKinds = new List<WeaponKind>();  //starting weapons here
-            savedWeaponKinds.Add(WeaponKind.Flamethrower); 
-            savedWeaponKinds.Add(WeaponKind.PiuPiuLaser);
+            savedWeaponKinds.Add(WeaponKind.Shotgun); 
+            savedWeaponKinds.Add(WeaponKind.Laser);
         }
         if(savedHealth == 0){
             savedHealth = GameController.Instance.globalAttributes.globalPlayerMaxHealth;
@@ -123,10 +122,11 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKeyDown("1")){
             var screenWidth = Screen.width;
+            var iconFramePos = iconFrame.GetComponentInChildren<Image>().transform.position;
             if(isSlotAActive){
-                iconFrame.GetComponentInChildren<Image>().transform.position += new Vector3(screenWidth * 0.07f, 0, 0);
+                iconFramePos += new Vector3(screenWidth * 0.07f, 0, 0);
             } else{
-                iconFrame.GetComponentInChildren<Image>().transform.position -= new Vector3(screenWidth * 0.07f, 0, 0);
+                iconFramePos -= new Vector3(screenWidth * 0.07f, 0, 0);
             }
 
             isSlotAActive = !isSlotAActive;
@@ -194,17 +194,5 @@ public class PlayerController : MonoBehaviour
             hpBarScript.ApplyDamage(50); 
             Destroy(c.gameObject);
         }
-
-        //drops
-        if (c.gameObject.tag == "Powerup_Damage") {
-            damageMultiplier = 2.0f;
-            StartCoroutine(ResetDamageMultiplierCoroutine());
-            Destroy(c.gameObject);
-        }
-    }
-
-    IEnumerator ResetDamageMultiplierCoroutine() {
-        yield return new WaitForSeconds(5);
-        damageMultiplier = 1.0f;
     }
 }
