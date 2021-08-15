@@ -12,6 +12,7 @@ public enum WeaponKind{
     Shotgun,
     Flamethrower,
     Laser,
+    GrenadeLauncher,
 
 }
 
@@ -24,7 +25,8 @@ public class Weapon {
         {WeaponKind.PiuPiuLaser, "weapons_0"},
         {WeaponKind.Shotgun, "weapons_9"},
         {WeaponKind.Flamethrower, "weapons_18"},
-        {WeaponKind.Laser, "weapons_18"},
+        {WeaponKind.Laser, "weapons_16"},
+        {WeaponKind.GrenadeLauncher, "weapons_6"}
     };
     public static Weapon make_weapon(WeaponKind kind, PlayerWeaponController playerWeaponController){
         if(kind == WeaponKind.PiuPiuLaser){
@@ -35,6 +37,8 @@ public class Weapon {
             return new Weapon(WeaponKind.Flamethrower, 2, weaponIcons[kind], playerWeaponController.MakeFlamethrowerFlame);
         }   else if(kind == WeaponKind.Laser){
             return new Weapon(WeaponKind.Laser, 10, weaponIcons[kind], playerWeaponController.MakeLaserBeam);
+        }   else if(kind == WeaponKind.GrenadeLauncher){
+            return new Weapon(WeaponKind.GrenadeLauncher, 10, weaponIcons[kind], playerWeaponController.MakeGrenadeLauncher);
         }   else{
             throw new NotImplementedException();
         }
@@ -70,6 +74,9 @@ public class PlayerWeaponController : MonoBehaviour
     float playerCritMultiplier;
     float damageMultiplier = 1.0f; 
     bool isShootingActive = false;
+    
+    
+    
 
     private void Start() {
         linePrefab = GameController.Instance.getPrefabByName("LineLaser");
@@ -78,6 +85,7 @@ public class PlayerWeaponController : MonoBehaviour
         playerController = GetComponent<PlayerController>();
         playerCritChance = GameController.Instance.globalAttributes.globalPlayerCritChance;
         playerCritMultiplier = GameController.Instance.globalAttributes.globalPlayerCritMultiplier;
+        
     }
     
     private void Update() {
@@ -90,6 +98,8 @@ public class PlayerWeaponController : MonoBehaviour
             }
 
         } 
+        
+
     }
     public IEnumerator MakePiuPiuBullet()
     {
@@ -172,19 +182,23 @@ public class PlayerWeaponController : MonoBehaviour
         GameObject bullet;
         Rigidbody2D rb;
 
-        (bullet, rb) = CreateGenericBullet(2 * damageMultiplier, playerCritChance, playerCritMultiplier, 1, "flame", 0.5f, 0.75f, UnityEngine.Random.Range(-5, 5));
+        (bullet, rb) = CreateGenericBullet(10 * damageMultiplier, playerCritChance, playerCritMultiplier, 1, "bullet", 2, 0.75f);
 
-        yield return new WaitForSeconds(0.1f);
+        bullet.AddComponent<Grenade>();
+        yield return new WaitForSeconds(1);
+        
 
         isShootingActive = false;
     }
 
+
+   
     private (GameObject, Rigidbody2D) CreateGenericBullet(
         float damage,
         float playerCritChance,
         float playerCritMultiplier,
         float size, 
-        string spriteName, 
+        string spriteName,                //REMEMBER TO HAVE SPRITE READY
         float bulletLife = 0,
         float speedMultiplier = 1, 
         float rotationOffset = 0
@@ -231,8 +245,9 @@ public class PlayerWeaponController : MonoBehaviour
         bullet.transform.position = transform.position + (Vector3)(rotationVector * 1.0f);
         rb.velocity = rotationVector * 10 * speedMultiplier;
         if(bulletLife > 0){
-            GameObject.Destroy(bullet, bulletLife);
+            //GameObject.Destroy(bullet, bulletLife);
         }
         return (bullet, rb);
     }
+
 }

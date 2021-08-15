@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     Vector3 playerVelocity;
     GameObject weaponIconA;
     GameObject weaponIconB;
-    GameObject iconFrame;
+    public GameObject iconFrame;
     public List<Weapon> weapons = new List<Weapon>();
     public int activeWeaponIndexA = 0;
     public int activeWeaponIndexB = 1;
@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
 
         if(savedWeaponKinds == null) {
             savedWeaponKinds = new List<WeaponKind>();  //starting weapons here
-            savedWeaponKinds.Add(WeaponKind.Shotgun); 
+            savedWeaponKinds.Add(WeaponKind.GrenadeLauncher); 
             savedWeaponKinds.Add(WeaponKind.Laser);
         }
         if(savedHealth == 0){
@@ -122,9 +122,11 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKeyDown("1")){
             var screenWidth = Screen.width;
-            var iconFramePos = iconFrame.GetComponentInChildren<Image>().transform.position;
+            var iconFramePos = iconFrame.transform.GetChild(0).transform.position;
+            Debug.Log(iconFramePos);
             if(isSlotAActive){
                 iconFramePos += new Vector3(screenWidth * 0.07f, 0, 0);
+                Debug.Log(iconFramePos);
             } else{
                 iconFramePos -= new Vector3(screenWidth * 0.07f, 0, 0);
             }
@@ -132,7 +134,6 @@ public class PlayerController : MonoBehaviour
             isSlotAActive = !isSlotAActive;
 
         }
-
         //weapon swapping
         if(Input.GetKeyDown("e")){ 
             var weaponList = GameObject.FindGameObjectsWithTag("Weapon");        //this or use a collider onTrigger to check. 

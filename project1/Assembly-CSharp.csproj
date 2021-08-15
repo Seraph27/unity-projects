@@ -74,12 +74,12 @@
      <Compile Include="Assets\Scripts\Game\SignController.cs" />
      <Compile Include="Assets\Scripts\Game\Singleton.cs" />
      <Compile Include="Assets\Scripts\Game\SpawnEntites.cs" />
-     <Compile Include="Assets\Scripts\Game\TilemapScript.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerWeaponController.cs" />
      <Compile Include="Assets\Scripts\Projectiles\BombController.cs" />
      <Compile Include="Assets\Scripts\Projectiles\Bullet.cs" />
      <Compile Include="Assets\Scripts\Projectiles\BulletController.cs" />
+     <Compile Include="Assets\Scripts\Projectiles\Grenade.cs" />
      <Compile Include="Assets\Scripts\Projectiles\MissileController.cs" />
      <Compile Include="Assets\Scripts\Shop\CashController.cs" />
      <Compile Include="Assets\Scripts\Shop\OnShopItemClicked.cs" />
