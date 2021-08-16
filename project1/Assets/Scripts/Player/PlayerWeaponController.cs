@@ -74,6 +74,7 @@ public class PlayerWeaponController : MonoBehaviour
     float playerCritMultiplier;
     float damageMultiplier = 1.0f; 
     bool isShootingActive = false;
+    GameObject grenadePrefab;
     
     
     
@@ -85,7 +86,7 @@ public class PlayerWeaponController : MonoBehaviour
         playerController = GetComponent<PlayerController>();
         playerCritChance = GameController.Instance.globalAttributes.globalPlayerCritChance;
         playerCritMultiplier = GameController.Instance.globalAttributes.globalPlayerCritMultiplier;
-        
+        grenadePrefab = GameController.Instance.getPrefabByName("Grenade");
     }
     
     private void Update() {
@@ -182,10 +183,8 @@ public class PlayerWeaponController : MonoBehaviour
         GameObject bullet;
         Rigidbody2D rb;
 
-        (bullet, rb) = CreateGenericBullet(10 * damageMultiplier, playerCritChance, playerCritMultiplier, 1, "bullet", 2, 0.75f);
-
-        bullet.AddComponent<Grenade>();
-        Destroy(bullet.GetComponent<Bullet>());
+        (bullet, rb) = CreateGrenade(10 * damageMultiplier, playerCritChance, playerCritMultiplier, 2, "bullet", 2, 0.75f);
+        
         yield return new WaitForSeconds(1);
         isShootingActive = false;
     }
@@ -247,6 +246,46 @@ public class PlayerWeaponController : MonoBehaviour
             GameObject.Destroy(bullet, bulletLife);
         }
         return (bullet, rb);
+    }
+
+
+    private (GameObject, Rigidbody2D) CreateGrenade(
+        float damage,
+        float playerCritChance,
+        float playerCritMultiplier,
+        float size, 
+        string spriteName,                //REMEMBER TO HAVE SPRITE READY
+        float bulletLife = 0,
+        float speedMultiplier = 1, 
+        float rotationOffset = 0
+        )
+    {
+        var grenade = Instantiate(grenadePrefab, transform.position, Quaternion.identity);
+        var grenadeScript = grenade.GetComponent<Grenade>();
+        var bulletDamage = damage * GameController.Instance.globalAttributes.globalPlayerBaseDamage;
+        var num = UnityEngine.Random.value;
+        var isCritActive = playerCritChance < num;
+        if(isCritActive){
+            grenadeScript.isCritBullet = true;
+            bulletDamage *= playerCritMultiplier; 
+        }
+        
+        grenadeScript.power = bulletDamage;
+        var rb = grenade.GetComponent<Rigidbody2D>();
+        rb.gravityScale = 0;
+        var worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);  //bullet shooting
+        var direction = (Vector2)(worldMousePos - transform.position);
+        direction.Normalize();
+        var rotationDegrees = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + rotationOffset;
+        var rotationVector =  (Vector2)(Quaternion.Euler(0, 0, rotationDegrees) * Vector2.right);
+        grenade.transform.rotation = Quaternion.Euler(0, 0, rotationDegrees);
+        grenade.transform.position = transform.position + (Vector3)(rotationVector * 1.0f);
+        rb.velocity = rotationVector * 10 * speedMultiplier;
+        if(bulletLife > 0){
+            GameObject.Destroy(grenade, bulletLife);
+        }
+        return (grenade, rb);
+
     }
 
 }

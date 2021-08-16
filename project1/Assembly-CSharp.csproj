@@ -81,6 +81,7 @@
      <Compile Include="Assets\Scripts\Projectiles\BulletController.cs" />
      <Compile Include="Assets\Scripts\Projectiles\Grenade.cs" />
      <Compile Include="Assets\Scripts\Projectiles\MissileController.cs" />
+     <Compile Include="Assets\Scripts\Projectiles\PlayerShockwave.cs" />
      <Compile Include="Assets\Scripts\Shop\CashController.cs" />
      <Compile Include="Assets\Scripts\Shop\OnShopItemClicked.cs" />
      <Compile Include="Assets\Scripts\Shop\ShopController.cs" />

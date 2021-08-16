@@ -2,49 +2,65 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grenade : Bullet
+public class Grenade : MonoBehaviour
 {
-    GameObject meteorExplosionPrefab;
     ParticleSystem meteorExplosion;
-    GameObject grenadeParent;
+    public float power;
+    public bool isCritBullet;
+    GameObject grenade;
+    Coroutine explodeCoroutine;
+    GameObject playerShockwavePrefab;
+    PlayerShockwave playerShockwave;
+    bool hasExplode = false;
 
     private void Start() {
-
+        
+        explodeCoroutine = StartCoroutine(ExplodeCoroutine());
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        StartCoroutine(GrenadeCoroutine(rb));
+        StartCoroutine(GrenadeCoroutine(rb));   
 
-        grenadeParent = GameController.Instance.getPrefabByName("EmptyGameObject");
-        var grenadeShell = Instantiate(grenadeParent, transform.position, Quaternion.identity);
-        transform.parent = grenadeShell.transform;
-
-        meteorExplosionPrefab = GameController.Instance.getPrefabByName("MeteorExplosion");
-        var meteorExplosionObject = Instantiate(meteorExplosionPrefab, transform.position, Quaternion.identity);
-        meteorExplosionObject.transform.parent = grenadeShell.transform;
-        meteorExplosion = meteorExplosionObject.GetComponent<ParticleSystem>();
+        playerShockwave = GetComponentInChildren<PlayerShockwave>();
         
+        grenade = transform.Find("bullet").gameObject;
+        meteorExplosion = GetComponentInChildren<ParticleSystem>();
+        ParticleSystem.MainModule main = meteorExplosion.main;
+        main.startLifetimeMultiplier *= 0.5f;
+
+        playerShockwavePrefab = GameController.Instance.getPrefabByName("PlayerShockwave");
+    }
+
+    void OnTriggerEnter2D(Collider2D other) {
+        if(!GameController.Instance.isWithPlayer(other) && !GameController.Instance.isWithPlayerBullet(other)){
+            explode();
+            hasExplode = true;
+        }
+    }
+
+    void explode(){  
+        if(!hasExplode){
+            meteorExplosion.Play();
+            playerShockwave.increaseRad(1.5f);
+            StopCoroutine(explodeCoroutine);
+            Destroy(grenade);
+            Destroy(gameObject, 0.5f);
+        }
         
     }
 
-    override protected void OnTriggerEnter2D(Collider2D other) {
-        
-        base.OnTriggerEnter2D(other);
+    void OnCollisionEnter2D(Collision2D other) {   
         meteorExplosion.Play();
-        Debug.Log("DWAHOUI");
-    }
-
-    override protected void OnCollisionEnter2D(Collision2D other) {
-        
-        base.OnCollisionEnter2D(other);
-        meteorExplosion.Play();
-        Debug.Log("DWAHOUI");
     }
 
     IEnumerator GrenadeCoroutine(Rigidbody2D rb){
         while(true){        
-            rb.velocity *= new Vector2(0.9f, 0.9f);
+            rb.velocity *= new Vector2(0.93f, 0.93f);
             yield return new WaitForSeconds(0.05f);      
         }
-        
+    }
 
+    IEnumerator ExplodeCoroutine(){
+        yield return new WaitForSeconds(1);
+        explode();
+        hasExplode = true;
     }
 }
