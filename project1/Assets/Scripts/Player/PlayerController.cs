@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
 
         if(savedWeaponKinds == null) {
             savedWeaponKinds = new List<WeaponKind>();  //starting weapons here
-            savedWeaponKinds.Add(WeaponKind.GrenadeLauncher); 
+            savedWeaponKinds.Add(WeaponKind.PiuPiuLaser); 
             savedWeaponKinds.Add(WeaponKind.Laser);
         }
         if(savedHealth == 0){

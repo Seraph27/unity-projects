@@ -43,8 +43,8 @@ abstract public class EnemyController : MonoBehaviour
     
     void OnTriggerEnter2D(Collider2D c){  //player dealt dmg
         if (GameController.Instance.isWithPlayerBullet(c)) {
-            hpBarScript.ApplyDamage(c.gameObject.GetComponent<Bullet>().power, c.gameObject.GetComponent<Bullet>().isCritBullet);
-            Destroy(c.gameObject);
+            hpBarScript.ApplyDamage(c.gameObject.GetComponentInChildren<Bullet>().power, c.gameObject.GetComponentInChildren<Bullet>().isCritBullet);
+            
         }
     }
 

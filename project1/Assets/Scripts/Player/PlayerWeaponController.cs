@@ -108,7 +108,7 @@ public class PlayerWeaponController : MonoBehaviour
         Rigidbody2D rb;
         GameController.Instance.playAudio("PistolSoundEffect");
 
-        (bullet, rb) = CreateGenericBullet(25 * damageMultiplier, playerCritChance, playerCritMultiplier, 1, "bullet", 2);
+        (bullet, rb) = CreateGenericBullet(25 * damageMultiplier, playerCritChance, playerCritMultiplier, 1, "bullet", 2, 1, 0, "BulletExplosion");
         yield return new WaitForSeconds(0.33f);
 
         isShootingActive = false;
@@ -199,12 +199,20 @@ public class PlayerWeaponController : MonoBehaviour
         string spriteName,                //REMEMBER TO HAVE SPRITE READY
         float bulletLife = 0,
         float speedMultiplier = 1, 
-        float rotationOffset = 0
+        float rotationOffset = 0,
+        string particleEffectName = "MeteorExplosion"
         )
     {
+        GameObject bulletParent = new GameObject("bulletParent"); //setup
         GameObject bullet = new GameObject(spriteName);
+        bullet.transform.parent = bulletParent.transform;
 
-        var bulletDamage = damage * GameController.Instance.globalAttributes.globalPlayerBaseDamage;
+        GameObject explosionPrefab = GameController.Instance.getPrefabByName(particleEffectName);  //particle effect
+        var explosionObject = Instantiate(explosionPrefab, bulletParent.transform.position, Quaternion.identity);
+        explosionObject.transform.parent = bulletParent.transform;
+        var explosion = explosionObject.GetComponent<ParticleSystem>();
+
+        var bulletDamage = damage * GameController.Instance.globalAttributes.globalPlayerBaseDamage; //add damage
         var num = UnityEngine.Random.value;
 
         var bulletScript = bullet.AddComponent<Bullet>();
@@ -217,8 +225,8 @@ public class PlayerWeaponController : MonoBehaviour
         bulletScript.power = bulletDamage;
         
 
-        var ren = bullet.AddComponent<SpriteRenderer>();
-        Rigidbody2D rb = bullet.AddComponent<Rigidbody2D>();
+        var ren = bullet.AddComponent<SpriteRenderer>();                                   //bullet setup 
+        Rigidbody2D rb = bulletParent.AddComponent<Rigidbody2D>();
         var circleCollider = bullet.AddComponent<CircleCollider2D>();
         bullet.tag = "PlayerProjectile";
         ren.sprite = GameController.Instance.spriteHolder.getSpriteByName(spriteName); 
@@ -239,11 +247,11 @@ public class PlayerWeaponController : MonoBehaviour
         direction.Normalize();
         var rotationDegrees = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + rotationOffset;
         var rotationVector =  (Vector2)(Quaternion.Euler(0, 0, rotationDegrees) * Vector2.right);
-        bullet.transform.rotation = Quaternion.Euler(0, 0, rotationDegrees);
-        bullet.transform.position = transform.position + (Vector3)(rotationVector * 1.0f);
+        bulletParent.transform.rotation = Quaternion.Euler(0, 0, rotationDegrees);
+        bulletParent.transform.position = transform.position + (Vector3)(rotationVector * 1.0f);
         rb.velocity = rotationVector * 10 * speedMultiplier;
         if(bulletLife > 0){
-            GameObject.Destroy(bullet, bulletLife);
+            GameObject.Destroy(bulletParent, bulletLife);
         }
         return (bullet, rb);
     }
