@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 3567551268221341403}
   - component: {fileID: 3567551268221341400}
   - component: {fileID: 4859668116281617711}
+  - component: {fileID: 1040492733172501953}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -142,18 +143,22 @@ MonoBehaviour:
     type: 3}
   bulletVelocity: 10
   hpBarScript: {fileID: 0}
-  damageMultiplier: 1
   cashTextPrefab: {fileID: 8139157886150115640, guid: 6e2ab13594a3ee447a47448607e051a1,
     type: 3}
   weaponIconPrefab: {fileID: 174996445486748772, guid: 1f356214148dce049bc34ef891d38ded,
     type: 3}
   iconFramePrefab: {fileID: 4363028151745084828, guid: 70885b2c3cd22874d8d3547514525fd4,
     type: 3}
+  isSlotAActive: 1
+  iconFrame: {fileID: 0}
+  activeWeaponIndexA: 0
+  activeWeaponIndexB: 1
   weaponDropPrefab: {fileID: 2535810492855649084, guid: 89edb6c336b1869449cc1703c1f0ac6f,
     type: 3}
   enemyKills: 0
   exitGamePanelPrefab: {fileID: 8611423907270678143, guid: 5d36dda1b160d2648b919ad6668464b8,
     type: 3}
+  animator: {fileID: 1040492733172501953}
 --- !u!50 &3567551268221341403
 Rigidbody2D:
   serializedVersion: 4
@@ -213,7 +218,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1439e5b547703b34c8615f4ac1d68417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageMultiplier: 1
+--- !u!95 &1040492733172501953
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3567551268221341415}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e4d849b7522ced0498d96d0e907fcffb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5893803255001057638
 GameObject:
   m_ObjectHideFlags: 0

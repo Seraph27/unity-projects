@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
     GameObject onScreenHealthBarPrefab;
     OnScreenHealthBarController onScreenHealthBarScript;
     PlayerWeaponController playerWeaponController;
+    public Animator animator;
     // Start is called before the first frame update
     void Init()
     {
@@ -115,7 +116,10 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(downKey)){
             ren.sprite = front;
             playerVelocity += new Vector3(0,-1,0);
+            
         }
+        animator.SetFloat("playerSpeedX", playerVelocity.x);
+        animator.SetFloat("playerSpeedY", playerVelocity.y);
 
         playerVelocity.Normalize();
 
