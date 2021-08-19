@@ -5,6 +5,7 @@ using System.Linq;
 using System;
 using UnityEngine.Tilemaps;
 using System.IO;
+using TMPro;
 
 public class GlobalAttributes{
     public float globalPlayerMaxHealth = 200;
@@ -46,6 +47,7 @@ public class GameController : Singleton<GameController>
     public bool portalOpensAtStart = true;
     public static int totalEnemyKills;
     public GameObject globalLight2D;
+    public Dictionary<string, string> levelDesc;
 
     public void setupGame(){ //when loading a new game scene
         gameDataPath = Path.Combine(Application.persistentDataPath, "game_data.txt");
@@ -84,7 +86,12 @@ public class GameController : Singleton<GameController>
             
             setupAudio();
         }
-        
+
+        levelDesc = new Dictionary<string, string>();
+        levelDesc["Level1"] = "Grassy Lands";  //level desc
+        //Debug.Log(levelDesc["Level1"]);
+
+
         if(SceneManager.GetActiveScene().name.Contains("Level")){
             
             setupLevel();
@@ -92,6 +99,8 @@ public class GameController : Singleton<GameController>
 
         globalLight2D = getPrefabByName("Global Light 2D");  
         Instantiate(globalLight2D, Vector3.zero, Quaternion.identity);
+
+        
     }
 
     public void setupLevel(){
@@ -115,11 +124,14 @@ public class GameController : Singleton<GameController>
         GameController.Instance.spriteHolder.loadSpritesByName("weapons");    
         playerController.RestorePlayerState(savedWeaponKinds, savedHealth);
 
-        
+        //enter level desc
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        var levelEntryTextPrefab = getPrefabByName("LevelEntryText");
+        var levelEntryText = Instantiate(levelEntryTextPrefab, transform.position, Quaternion.identity);
+        levelEntryText.GetComponentInChildren<TextMeshProUGUI>().SetText(levelDesc[currentSceneName]);
 
         entitySpawner.spawnEnemies(); 
-        string currentSceneName = SceneManager.GetActiveScene().name;
-
+        
         if (savedPositions.ContainsKey(currentSceneName)) {
             player.transform.position = savedPositions[currentSceneName];
         } 
