@@ -18,6 +18,9 @@ public class SceneTransition : MonoBehaviour
         transition.SetTrigger("Start");
         yield return new WaitForSeconds(1f);
 
+        string currentSceneName = SceneManager.GetActiveScene().name;  //this stops music 
+        GameController.Instance.stopAudio(currentSceneName + "BG");
+        
         if(this.tag == "PadToNextLevel"){
 
             GameController.Instance.addCompletedScenes(SceneManager.GetActiveScene().name);

@@ -75,9 +75,9 @@ public class GameController : Singleton<GameController>
         if(levelNames == null){
             levelNames = new List<string>();              
             levelNames.Add(allLevels["lvl1"].RandomElement());
-            // levelNames.Add(allLevels["lvl2"].RandomElement());
-            // levelNames.Add(allLevels["lvl3"].RandomElement());
-            // levelNames.Add(allLevels["lvl4"].RandomElement());
+            levelNames.Add(allLevels["lvl2"].RandomElement());
+            levelNames.Add(allLevels["lvl3"].RandomElement());
+            levelNames.Add(allLevels["lvl4"].RandomElement());
             levelNames.Add(allLevels["boss"].RandomElement());
             Debug.Log(string.Join(", ", levelNames));
         } 
@@ -89,6 +89,13 @@ public class GameController : Singleton<GameController>
 
         levelDesc = new Dictionary<string, string>();
         levelDesc["Level1"] = "Grassy Lands";  //level desc
+        levelDesc["Level2A"] = "Icy Plains";
+        levelDesc["Level2B"] = "Underground Laboratory";
+        levelDesc["Level3A"] = "?????????";
+        levelDesc["Level3B"] = "Above The Skys";
+        levelDesc["Level4A"] = "Scorching Desert";
+        levelDesc["Level4B"] = "Galatic Spaceship";
+        levelDesc["Level5"] = "Heaven";
         //Debug.Log(levelDesc["Level1"]);
 
 
@@ -130,6 +137,15 @@ public class GameController : Singleton<GameController>
         var levelEntryText = Instantiate(levelEntryTextPrefab, transform.position, Quaternion.identity);
         levelEntryText.GetComponentInChildren<TextMeshProUGUI>().SetText(levelDesc[currentSceneName]);
 
+
+        //background music
+        try{
+            GameController.Instance.playAudio(currentSceneName + "BG");
+        } catch(Exception e){
+            Debug.Log("adio"+ e);
+        }
+        
+
         entitySpawner.spawnEnemies(); 
         
         if (savedPositions.ContainsKey(currentSceneName)) {
@@ -156,11 +172,23 @@ public class GameController : Singleton<GameController>
 
         makeAudio("PistolSoundEffect");
         makeAudio("ShotgunSoundEffect");
+        makeAudio("Level1BG");
+        makeAudio("Level2ABG");
+        makeAudio("Level2BBG");
+        makeAudio("Level3ABG");
+        makeAudio("Level3BBG");
+        makeAudio("Level4ABG");
+        makeAudio("Level4BBG");
+        makeAudio("Level5BG");
         
     }
 
     public void playAudio(string audioName){
         audioSources[audioName].Play();
+    }
+
+    public void stopAudio(string audioName){
+        audioSources[audioName].Stop();
     }
 
     public void addCompletedScenes(String sceneName){

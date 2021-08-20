@@ -65,6 +65,7 @@ public class PlayerController : MonoBehaviour
         iconFrame = Instantiate(iconFramePrefab, transform.position, Quaternion.identity);
         onScreenHealthBarPrefab = GameController.Instance.getPrefabByName("OnScreenHealth");
         Instantiate(onScreenHealthBarPrefab, Vector3.zero, Quaternion.identity);
+        
     }
 
     public void RestorePlayerState(List<WeaponKind> savedWeaponKinds, float savedHealth)
