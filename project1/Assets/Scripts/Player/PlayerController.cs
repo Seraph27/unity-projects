@@ -184,6 +184,9 @@ public class PlayerController : MonoBehaviour
         }
 
         if(!hpBarScript.IsAlive()){   //player dies
+            GameController.Instance.playAudio("DiedBG");
+            string currentSceneName = SceneManager.GetActiveScene().name;  //this stops music 
+            GameController.Instance.stopAudio(currentSceneName + "BG");
             SceneManager.LoadScene("EndScene"); 
         }
 

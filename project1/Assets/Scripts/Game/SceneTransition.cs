@@ -20,7 +20,7 @@ public class SceneTransition : MonoBehaviour
 
         string currentSceneName = SceneManager.GetActiveScene().name;  //this stops music 
         GameController.Instance.stopAudio(currentSceneName + "BG");
-        
+
         if(this.tag == "PadToNextLevel"){
 
             GameController.Instance.addCompletedScenes(SceneManager.GetActiveScene().name);
@@ -29,6 +29,7 @@ public class SceneTransition : MonoBehaviour
             SceneManager.LoadScene(GameController.Instance.levelNames[GameController.Instance.currentLevelIndex]); 
         } else if(this.tag == "EndScenePortal"){
             SceneManager.LoadScene("EndScene"); 
+            //play beat game bg
         } else{
             GameController.Instance.currentLevelIndex--;
             Debug.Assert(GameController.Instance.currentLevelIndex >= 0, "negative level index");

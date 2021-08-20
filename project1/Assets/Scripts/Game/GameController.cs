@@ -180,6 +180,7 @@ public class GameController : Singleton<GameController>
         makeAudio("Level4ABG");
         makeAudio("Level4BBG");
         makeAudio("Level5BG");
+        makeAudio("DiedBG");
         
     }
 
