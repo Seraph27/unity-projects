@@ -21,8 +21,9 @@ public class Grenade : MonoBehaviour
 
         playerShockwave = GetComponentInChildren<PlayerShockwave>();
         
-        grenade = transform.Find("bullet").gameObject;
+        grenade = transform.Find("grenade").gameObject;
         meteorExplosion = GetComponentInChildren<ParticleSystem>();
+        Debug.Log(meteorExplosion);
         ParticleSystem.MainModule main = meteorExplosion.main;
         main.startLifetimeMultiplier *= 0.5f;
 

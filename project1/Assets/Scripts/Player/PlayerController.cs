@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
 
         if(savedWeaponKinds == null) {
             savedWeaponKinds = new List<WeaponKind>();  //starting weapons here
-            savedWeaponKinds.Add(WeaponKind.PiuPiuLaser); 
+            savedWeaponKinds.Add(WeaponKind.GrenadeLauncher); 
             savedWeaponKinds.Add(WeaponKind.Laser);
         }
         if(savedHealth == 0){
@@ -98,27 +98,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerVelocity = new Vector3(0,0,0);
-
-        if (Input.GetKey(upKey)){ 
-            ren.sprite = back;
-            playerVelocity += new Vector3(0,1,0);
-        }
-        if (Input.GetKey(rightKey)){
-            ren.sprite = side;
-            ren.flipX = false;
-            playerVelocity += new Vector3(1,0,0);
-        }
-        if (Input.GetKey(leftKey)){
-            ren.sprite = side;
-            ren.flipX = true;
-            playerVelocity += new Vector3(-1,0,0);
-        }
-        if (Input.GetKey(downKey)){
-            ren.sprite = front;
-            playerVelocity += new Vector3(0,-1,0);
+        playerVelocity = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
             
-        }
         animator.SetFloat("playerSpeedX", playerVelocity.x);
         animator.SetFloat("playerSpeedY", playerVelocity.y);
 
@@ -127,13 +108,11 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKeyDown("1")){
             var screenWidth = Screen.width;
-            var iconFramePos = iconFrame.transform.GetChild(0).transform.position;
-            Debug.Log(iconFramePos);
+            var iconFramePos = iconFrame.transform.GetChild(0).transform;
             if(isSlotAActive){
-                iconFramePos += new Vector3(screenWidth * 0.07f, 0, 0);
-                Debug.Log(iconFramePos);
+                iconFramePos.position += new Vector3(screenWidth * 0.07f, 0, 0);
             } else{
-                iconFramePos -= new Vector3(screenWidth * 0.07f, 0, 0);
+                iconFramePos.position -= new Vector3(screenWidth * 0.07f, 0, 0);
             }
 
             isSlotAActive = !isSlotAActive;
