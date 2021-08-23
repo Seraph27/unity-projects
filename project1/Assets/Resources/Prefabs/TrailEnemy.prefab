@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1382040673
-  m_SortingLayer: 2
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f5b9f526b203b0c4897351d308947f24, type: 3}
   m_Color: {r: 0, g: 1, b: 0.36824584, a: 1}
@@ -103,7 +103,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &557536303544266727
 BoxCollider2D:
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91ec0d1f150637645ae5bc7ee7c880cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpBarPrefab: {fileID: 6703622591148104126, guid: 959a8f42eed72dd4c813d8e2c18b6577,
-    type: 3}
+  hpBarScript: {fileID: 0}
+  playerController: {fileID: 0}
   poisonTrail: {fileID: 6311020638314438905, guid: 93713360d51c31c459e2813f333e6cc2,
     type: 3}
