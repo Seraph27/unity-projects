@@ -20,4 +20,5 @@ public static class EnumerableHelper
         bulletTransform.position = playerTransform.position + (Vector3)(rotationVector * 1.0f);
         rb.velocity = rotationVector * 10 * bulletSpeedMultiplier;
     }
+
 }

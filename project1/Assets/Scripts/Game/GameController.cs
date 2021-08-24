@@ -185,12 +185,12 @@ public class GameController : Singleton<GameController>
         audioSources[audioName].Stop();
     }
 
-    public void toggleAudioLoop(string audioName){
-        if(audioSources[audioName].loop){
-            audioSources[audioName].loop = false;
-        } else{
-            audioSources[audioName].loop = true;
-        }
+    public void startAudioLoop(string audioName){
+        audioSources[audioName].loop = true;
+    }
+
+    public void stopAudioLoop(string audioName){
+        audioSources[audioName].loop = false;
     }
 
     public void addCompletedScenes(String sceneName){

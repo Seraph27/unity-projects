@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
 
         if(savedWeaponKinds == null) {
             savedWeaponKinds = new List<WeaponKind>();  //starting weapons here
-            savedWeaponKinds.Add(WeaponKind.GrenadeLauncher); 
+            savedWeaponKinds.Add(WeaponKind.Shotgun); 
             savedWeaponKinds.Add(WeaponKind.Laser);
         }
         if(savedHealth == 0){
@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         playerVelocity = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
-            
+
         animator.SetFloat("playerSpeedX", playerVelocity.x);
         animator.SetFloat("playerSpeedY", playerVelocity.y);
 

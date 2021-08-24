@@ -28,17 +28,19 @@ public class Weapon {
         {WeaponKind.Laser, "weapons_16"},
         {WeaponKind.GrenadeLauncher, "weapons_6"}
     };
+    public string audioName;
+
     public static Weapon make_weapon(WeaponKind kind, PlayerWeaponController playerWeaponController){
         if(kind == WeaponKind.PiuPiuLaser){
-            return new Weapon(WeaponKind.PiuPiuLaser, 25, weaponIcons[kind], playerWeaponController.MakePiuPiuBullet);
+            return new Weapon(WeaponKind.PiuPiuLaser, 25, weaponIcons[kind], playerWeaponController.MakePiuPiuBullet, "PistolSoundEffect");
         }   else if(kind == WeaponKind.Shotgun){
-            return new Weapon(WeaponKind.Shotgun, 10, weaponIcons[kind], playerWeaponController.MakeShotgunBlast);
+            return new Weapon(WeaponKind.Shotgun, 10, weaponIcons[kind], playerWeaponController.MakeShotgunBlast, "ShotgunSoundEffect");
         }   else if(kind == WeaponKind.Flamethrower){
-            return new Weapon(WeaponKind.Flamethrower, 2, weaponIcons[kind], playerWeaponController.MakeFlamethrowerFlame);
+            return new Weapon(WeaponKind.Flamethrower, 2, weaponIcons[kind], playerWeaponController.MakeFlamethrowerFlame, "FlamethrowerSoundEffect2");
         }   else if(kind == WeaponKind.Laser){
-            return new Weapon(WeaponKind.Laser, 10, weaponIcons[kind], playerWeaponController.MakeLaserBeam);
+            return new Weapon(WeaponKind.Laser, 10, weaponIcons[kind], playerWeaponController.MakeLaserBeam, "LaserSoundEffect");
         }   else if(kind == WeaponKind.GrenadeLauncher){
-            return new Weapon(WeaponKind.GrenadeLauncher, 10, weaponIcons[kind], playerWeaponController.MakeGrenadeLauncher);
+            return new Weapon(WeaponKind.GrenadeLauncher, 10, weaponIcons[kind], playerWeaponController.MakeGrenadeLauncher, "GrenadeLaunchSoundEffect");
         }   else{
             throw new NotImplementedException();
         }
@@ -57,11 +59,12 @@ public class Weapon {
         return go;
     }
 
-    public Weapon(WeaponKind kind, int damage, string iconName, Func<IEnumerator> makeBulletFunc) {
+    public Weapon(WeaponKind kind, int damage, string iconName, Func<IEnumerator> makeBulletFunc, string audioName) {
         this.kind = kind;
         this.damage = damage;
         this.icon = GameController.Instance.spriteHolder.getSpriteByName(iconName);
         this.makeBulletFunc = makeBulletFunc;
+        this.audioName = audioName;
     }
 }
 
@@ -75,7 +78,7 @@ public class PlayerWeaponController : MonoBehaviour
     float damageMultiplier = 1.0f; 
     bool isShootingActive = false;
     GameObject grenadePrefab;
-    
+    bool isAudioOn; //also filters out if audio is continous (like laser / flamethrower)
     
     
 
@@ -98,16 +101,27 @@ public class PlayerWeaponController : MonoBehaviour
                 StartCoroutine(playerController.weapons[playerController.activeWeaponIndexB].makeBulletFunc()); 
             }
         } 
-        
+        if(!Input.GetButton("Fire1") && isAudioOn){
+            isAudioOn = false;
+            if(playerController.isSlotAActive){
+                GameController.Instance.stopAudio(playerController.weapons[playerController.activeWeaponIndexA].audioName); 
+                GameController.Instance.stopAudioLoop(playerController.weapons[playerController.activeWeaponIndexA].audioName);
+            } else{
+                GameController.Instance.stopAudio(playerController.weapons[playerController.activeWeaponIndexB].audioName); 
+                GameController.Instance.stopAudioLoop(playerController.weapons[playerController.activeWeaponIndexB].audioName);
+            }
+        }
+        Debug.Log(isAudioOn);
 
     }
+
     public IEnumerator MakePiuPiuBullet()
     {
         GameObject bullet;
         Rigidbody2D rb;
         GameController.Instance.playAudio("PistolSoundEffect");
 
-        (bullet, rb) = CreateGenericBullet(25 * damageMultiplier, playerCritChance, playerCritMultiplier, 1, "bullet", 2, 1, 0, "BulletExplosion");
+        (bullet, rb) = CreateGenericBullet(25 * damageMultiplier, playerCritChance, playerCritMultiplier, 1, "bullet", 2, 1, 0, "BulletExplosion", 0.75f);
         yield return new WaitForSeconds(0.33f);
 
         isShootingActive = false;
@@ -120,22 +134,20 @@ public class PlayerWeaponController : MonoBehaviour
         GameController.Instance.playAudio("ShotgunSoundEffect"); 
 
         for (int i = 0; i < 10; i++) {
-            (bullet, rb) = CreateGenericBullet(10 * damageMultiplier, playerCritChance, playerCritMultiplier, 1, "bullet", 0.5f, 2, UnityEngine.Random.Range(-30, 30));
+            (bullet, rb) = CreateGenericBullet(10 * damageMultiplier, playerCritChance, playerCritMultiplier, 1, "bullet", 0.5f, 2, UnityEngine.Random.Range(-30, 30), "BulletExplosion", 0.3f);
         }
         yield return new WaitForSeconds(0.75f);
 
         isShootingActive = false;
     }
 
-    bool laserAudioOn = false;
-
     public IEnumerator MakeLaserBeam(){
-        if(!laserAudioOn){
-            laserAudioOn = true;
+        if(!isAudioOn){
+            isAudioOn = true;
             GameController.Instance.playAudio("LaserSoundEffect");
-            GameController.Instance.toggleAudioLoop("LaserSoundEffect");
+            GameController.Instance.startAudioLoop("LaserSoundEffect");
         }
-        
+               
         var worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);  //bullet shooting
         var direction = (Vector3)(worldMousePos - transform.position) * 10;      
         Debug.DrawRay(transform.position, direction, Color.red, 1f);
@@ -165,23 +177,21 @@ public class PlayerWeaponController : MonoBehaviour
         }
         yield return new WaitForSeconds(0.05f);
 
-        Debug.Log("adioj" + lineRenderer);
         lineRenderer.enabled = false;
         isShootingActive = false;
 
-        
-        if(Input.GetButton("Fire1") == false){
-            laserAudioOn = false;
-            GameController.Instance.toggleAudioLoop("LaserSoundEffect");
-            GameController.Instance.stopAudio("LaserSoundEffect");
-        }  
     }
 
     public IEnumerator MakeFlamethrowerFlame(){
         GameObject bullet;
         Rigidbody2D rb;
-
-        (bullet, rb) = CreateGenericBullet(2 * damageMultiplier, playerCritChance, playerCritMultiplier, 1, "flame", 0.5f, 0.75f, UnityEngine.Random.Range(-5, 5));
+        if(!isAudioOn){
+            isAudioOn = true;
+            GameController.Instance.playAudio("FlamethrowerSoundEffect2");
+            GameController.Instance.startAudioLoop("FlamethrowerSoundEffect2");
+        }
+     
+        (bullet, rb) = CreateGenericBullet(10 * damageMultiplier, playerCritChance, playerCritMultiplier, 1, "flame", 0.5f, 0.75f, UnityEngine.Random.Range(-5, 5), "FlameExplosion");
 
         yield return new WaitForSeconds(0.1f);
 
@@ -210,7 +220,8 @@ public class PlayerWeaponController : MonoBehaviour
         float bulletLife = 0,
         float speedMultiplier = 1, 
         float rotationOffset = 0,
-        string particleEffectName = "MeteorExplosion"
+        string particleEffectName = "MeteorExplosion",
+        float particleScale = 1
         )
     {
         GameObject bulletParent = new GameObject("bulletParent"); //setup
@@ -221,6 +232,7 @@ public class PlayerWeaponController : MonoBehaviour
         var explosionObject = Instantiate(explosionPrefab, bulletParent.transform.position, Quaternion.identity);
         explosionObject.transform.parent = bulletParent.transform;
         var explosion = explosionObject.GetComponent<ParticleSystem>();
+        explosionObject.transform.localScale *= particleScale;
 
         var bulletDamage = damage * GameController.Instance.globalAttributes.globalPlayerBaseDamage; //add damage
         var num = UnityEngine.Random.value;
@@ -252,7 +264,7 @@ public class PlayerWeaponController : MonoBehaviour
         circleCollider.radius = size / 10;
         bullet.transform.localScale = new Vector3(size * 3, size * 3, 0);
 
-        EnumerableHelper.bulletRotationAndVelocity(transform, bullet.transform, rotationOffset, rb);
+        EnumerableHelper.bulletRotationAndVelocity(transform, bulletParent.transform, rotationOffset, rb);
 
         if(bulletLife > 0){
             GameObject.Destroy(bulletParent, bulletLife);
