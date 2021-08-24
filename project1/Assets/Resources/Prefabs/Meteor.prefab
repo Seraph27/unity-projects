@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8118587049340250943}
   - component: {fileID: 6457173439454413177}
   - component: {fileID: 4564525947761064493}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MeteorExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
@@ -4825,7 +4825,7 @@ GameObject:
   - component: {fileID: 2325918386035800285}
   - component: {fileID: 8050909920340130513}
   - component: {fileID: 579910172562713458}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Meteor
   m_TagString: Untagged
   m_Icon: {fileID: 0}

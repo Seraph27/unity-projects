@@ -20,7 +20,7 @@ public class MeteorController : MonoBehaviour
         GetComponent<Rigidbody2D>().gravityScale = 0;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         if(GameController.Instance.isWithPlayer(other.collider)){
-            player.GetComponent<PlayerController>().hpBarScript.ApplyDamage(100);
+            player.GetComponent<PlayerController>().hpBarScript.ApplyDamage(50);
         }
         explosion.Play();
         GameObject.Destroy(gameObject, 2);

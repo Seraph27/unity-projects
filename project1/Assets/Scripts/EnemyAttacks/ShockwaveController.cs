@@ -16,7 +16,7 @@ public class ShockwaveController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D c){
 
         if(GameController.Instance.isWithPlayer(c)){
-            player.GetComponent<PlayerController>().hpBarScript.ApplyDamage(50);
+            player.GetComponent<PlayerController>().hpBarScript.ApplyDamage(30);
         }
     }
 
