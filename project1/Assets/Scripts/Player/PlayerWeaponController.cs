@@ -90,14 +90,13 @@ public class PlayerWeaponController : MonoBehaviour
     }
     
     private void Update() {
-        if (Input.GetMouseButton(0) && isShootingActive == false) {
+        if (Input.GetButton("Fire1") && isShootingActive == false) {
             isShootingActive = true;
             if(playerController.isSlotAActive){
                 StartCoroutine(playerController.weapons[playerController.activeWeaponIndexA].makeBulletFunc()); 
             } else{
                 StartCoroutine(playerController.weapons[playerController.activeWeaponIndexB].makeBulletFunc()); 
             }
-
         } 
         
 
@@ -128,18 +127,21 @@ public class PlayerWeaponController : MonoBehaviour
         isShootingActive = false;
     }
 
+    bool laserAudioOn = false;
+
     public IEnumerator MakeLaserBeam(){
-
-        //GameController.Instance.playAudio("ShotgunSoundEffect"); 
-
+        if(!laserAudioOn){
+            laserAudioOn = true;
+            GameController.Instance.playAudio("LaserSoundEffect");
+            GameController.Instance.toggleAudioLoop("LaserSoundEffect");
+        }
+        
         var worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);  //bullet shooting
-        var direction = (Vector3)(worldMousePos - transform.position) * 10;
-        Debug.Log(direction);
+        var direction = (Vector3)(worldMousePos - transform.position) * 10;      
         Debug.DrawRay(transform.position, direction, Color.red, 1f);
-        Debug.Log("shoot");
 
         lineRenderer.enabled = true;
-        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction, 110f);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction, 100f);
         
         var gradient = new Gradient();
         Color startColor = Color.red;
@@ -158,14 +160,21 @@ public class PlayerWeaponController : MonoBehaviour
             
             if(GameController.Instance.isWithEnemy(target.collider)){
                 var targetHealthScript = target.collider.gameObject.GetComponent<EnemyController>().hpBarScript;
-                targetHealthScript.ApplyDamage(10);
-                
+                targetHealthScript.ApplyDamage(20);
             }
-            
         }
         yield return new WaitForSeconds(0.05f);
-        isShootingActive = false;
+
+        Debug.Log("adioj" + lineRenderer);
         lineRenderer.enabled = false;
+        isShootingActive = false;
+
+        
+        if(Input.GetButton("Fire1") == false){
+            laserAudioOn = false;
+            GameController.Instance.toggleAudioLoop("LaserSoundEffect");
+            GameController.Instance.stopAudio("LaserSoundEffect");
+        }  
     }
 
     public IEnumerator MakeFlamethrowerFlame(){

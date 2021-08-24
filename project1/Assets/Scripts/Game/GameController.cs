@@ -172,6 +172,7 @@ public class GameController : Singleton<GameController>
 
         makeAudio("PistolSoundEffect");
         makeAudio("ShotgunSoundEffect");
+        makeAudio("LaserSoundEffect");
         makeAudio("Level1BG");
         makeAudio("Level2ABG");
         makeAudio("Level2BBG");
@@ -190,6 +191,14 @@ public class GameController : Singleton<GameController>
 
     public void stopAudio(string audioName){
         audioSources[audioName].Stop();
+    }
+
+    public void toggleAudioLoop(string audioName){
+        if(audioSources[audioName].loop){
+            audioSources[audioName].loop = false;
+        } else{
+            audioSources[audioName].loop = true;
+        }
     }
 
     public void addCompletedScenes(String sceneName){
