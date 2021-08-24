@@ -170,19 +170,11 @@ public class GameController : Singleton<GameController>
             soundEffectChild.transform.parent = audioParent.transform;
         }
 
-        makeAudio("PistolSoundEffect");
-        makeAudio("ShotgunSoundEffect");
-        makeAudio("LaserSoundEffect");
-        makeAudio("Level1BG");
-        makeAudio("Level2ABG");
-        makeAudio("Level2BBG");
-        makeAudio("Level3ABG");
-        makeAudio("Level3BBG");
-        makeAudio("Level4ABG");
-        makeAudio("Level4BBG");
-        makeAudio("Level5BG");
-        makeAudio("DiedBG");
-        
+        foreach (var audio in audioClips) {
+            //print(audio.Key);
+            makeAudio(audio.Key);
+        }
+ 
     }
 
     public void playAudio(string audioName){

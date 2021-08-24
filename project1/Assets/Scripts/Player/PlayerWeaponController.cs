@@ -191,6 +191,7 @@ public class PlayerWeaponController : MonoBehaviour
     public IEnumerator MakeGrenadeLauncher(){
         GameObject bullet;
         Rigidbody2D rb;
+        GameController.Instance.playAudio("GrenadeLaunchSoundEffect"); 
 
         (bullet, rb) = CreateGrenade(10 * damageMultiplier, playerCritChance, playerCritMultiplier, 2, "bullet", 2, 0.75f);
         
@@ -251,14 +252,8 @@ public class PlayerWeaponController : MonoBehaviour
         circleCollider.radius = size / 10;
         bullet.transform.localScale = new Vector3(size * 3, size * 3, 0);
 
-        var worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);  //bullet shooting
-        var direction = (Vector2)(worldMousePos - transform.position);
-        direction.Normalize();
-        var rotationDegrees = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + rotationOffset;
-        var rotationVector =  (Vector2)(Quaternion.Euler(0, 0, rotationDegrees) * Vector2.right);
-        bulletParent.transform.rotation = Quaternion.Euler(0, 0, rotationDegrees);
-        bulletParent.transform.position = transform.position + (Vector3)(rotationVector * 1.0f);
-        rb.velocity = rotationVector * 10 * speedMultiplier;
+        EnumerableHelper.bulletRotationAndVelocity(transform, bullet.transform, rotationOffset, rb);
+
         if(bulletLife > 0){
             GameObject.Destroy(bulletParent, bulletLife);
         }
@@ -290,14 +285,8 @@ public class PlayerWeaponController : MonoBehaviour
         grenadeScript.power = bulletDamage;
         var rb = grenade.GetComponent<Rigidbody2D>();
         rb.gravityScale = 0;
-        var worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);  //bullet shooting
-        var direction = (Vector2)(worldMousePos - transform.position);
-        direction.Normalize();
-        var rotationDegrees = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + rotationOffset;
-        var rotationVector =  (Vector2)(Quaternion.Euler(0, 0, rotationDegrees) * Vector2.right);
-        grenade.transform.rotation = Quaternion.Euler(0, 0, rotationDegrees);
-        grenade.transform.position = transform.position + (Vector3)(rotationVector * 1.0f);
-        rb.velocity = rotationVector * 10 * speedMultiplier;
+        EnumerableHelper.bulletRotationAndVelocity(transform, grenade.transform, rotationOffset, rb);
+        
         if(bulletLife > 0){
             GameObject.Destroy(grenade, bulletLife);
         }

@@ -39,6 +39,7 @@ public class Grenade : MonoBehaviour
 
     void explode(){  
         if(!hasExplode){
+            GameController.Instance.playAudio("GrenadeSoundEffect");
             meteorExplosion.Play();
             playerShockwave.increaseRad(1.5f);
             StopCoroutine(explodeCoroutine);
@@ -49,6 +50,7 @@ public class Grenade : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D other) {   
+        GameController.Instance.playAudio("GrenadeSoundEffect");
         meteorExplosion.Play();
     }
 
