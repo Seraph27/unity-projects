@@ -18,6 +18,6 @@ public class OnScreenHealthBarController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        textMeshProUGUI.SetText("HP: " + playerController.hpBarScript.value); //not sure if this is good
+        textMeshProUGUI.SetText("HP: " + playerController.hpBarScript.value); 
     }
 }

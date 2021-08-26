@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 3567551268221341400}
   - component: {fileID: 4859668116281617711}
   - component: {fileID: 1040492733172501953}
+  - component: {fileID: 8747526784219197220}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -145,7 +146,7 @@ MonoBehaviour:
   hpBarScript: {fileID: 0}
   cashTextPrefab: {fileID: 8139157886150115640, guid: 6e2ab13594a3ee447a47448607e051a1,
     type: 3}
-  weaponIconPrefab: {fileID: 174996445486748772, guid: 1f356214148dce049bc34ef891d38ded,
+  weaponIconPrefab: {fileID: 4363028151745084828, guid: aa82d06c210a879448dd9746cb8c6e3c,
     type: 3}
   iconFramePrefab: {fileID: 4363028151745084828, guid: 70885b2c3cd22874d8d3547514525fd4,
     type: 3}
@@ -159,6 +160,7 @@ MonoBehaviour:
   exitGamePanelPrefab: {fileID: 8611423907270678143, guid: 5d36dda1b160d2648b919ad6668464b8,
     type: 3}
   animator: {fileID: 1040492733172501953}
+  attackJoystickScript: {fileID: 0}
 --- !u!50 &3567551268221341403
 Rigidbody2D:
   serializedVersion: 4
@@ -237,6 +239,37 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8747526784219197220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3567551268221341415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 3d4645d84896c784c9a5dfa5e22930c2,
+    type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &5893803255001057638
 GameObject:
   m_ObjectHideFlags: 0

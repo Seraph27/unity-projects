@@ -93,7 +93,12 @@ public class PlayerWeaponController : MonoBehaviour
     }
     
     private void Update() {
-        if (Input.GetButton("Fire1") && isShootingActive == false) {
+        var buttonCode = "Fire2";
+        // if(Application.platform == RuntimePlatform.Android){
+        //     buttonCode = "Fire2";
+        // }
+
+        if (Input.GetButton(buttonCode) && isShootingActive == false) {
             isShootingActive = true;
             if(playerController.isSlotAActive){
                 StartCoroutine(playerController.weapons[playerController.activeWeaponIndexA].makeBulletFunc()); 
@@ -101,7 +106,7 @@ public class PlayerWeaponController : MonoBehaviour
                 StartCoroutine(playerController.weapons[playerController.activeWeaponIndexB].makeBulletFunc()); 
             }
         } 
-        if(!Input.GetButton("Fire1") && isAudioOn){
+        if(!Input.GetButton(buttonCode) && isAudioOn){
             isAudioOn = false;
             if(playerController.isSlotAActive){
                 GameController.Instance.stopAudio(playerController.weapons[playerController.activeWeaponIndexA].audioName); 
@@ -111,8 +116,6 @@ public class PlayerWeaponController : MonoBehaviour
                 GameController.Instance.stopAudioLoop(playerController.weapons[playerController.activeWeaponIndexB].audioName);
             }
         }
-        Debug.Log(isAudioOn);
-
     }
 
     public IEnumerator MakePiuPiuBullet()
@@ -264,7 +267,8 @@ public class PlayerWeaponController : MonoBehaviour
         circleCollider.radius = size / 10;
         bullet.transform.localScale = new Vector3(size * 3, size * 3, 0);
 
-        EnumerableHelper.bulletRotationAndVelocity(transform, bulletParent.transform, rotationOffset, rb);
+        EnumerableHelper.bulletRotationAndVelocityJoystick(transform, bulletParent.transform, rotationOffset, rb, playerController.attackJoystickScript);
+        //EnumerableHelper.bulletRotationAndVelocity(transform, bulletParent.transform, rotationOffset, rb);
 
         if(bulletLife > 0){
             GameObject.Destroy(bulletParent, bulletLife);

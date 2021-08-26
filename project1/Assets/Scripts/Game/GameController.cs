@@ -48,8 +48,11 @@ public class GameController : Singleton<GameController>
     public static int totalEnemyKills;
     public GameObject globalLight2D;
     public Dictionary<string, string> levelDesc;
+    public RuntimePlatform currentRuntimePlatform;
 
     public void setupGame(){ //when loading a new game scene
+        currentRuntimePlatform = Application.platform;
+
         gameDataPath = Path.Combine(Application.persistentDataPath, "game_data.txt");
 
         Debug.Log(gameDataPath);
@@ -96,6 +99,7 @@ public class GameController : Singleton<GameController>
         levelDesc["Level4A"] = "Scorching Desert";
         levelDesc["Level4B"] = "Galatic Spaceship";
         levelDesc["Level5"] = "Heaven";
+        levelDesc["Level6"] = "TEST";
         //Debug.Log(levelDesc["Level1"]);
 
 

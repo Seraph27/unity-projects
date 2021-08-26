@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     Sprite back;
     Sprite[] weaponSheet;
     SpriteRenderer ren;
-    public Rigidbody2D rb;
+    public Rigidbody2D rb;  
     public GameObject bulletPrefab;
     public float bulletVelocity;
     public HealthBar hpBarScript;
@@ -43,6 +43,11 @@ public class PlayerController : MonoBehaviour
     OnScreenHealthBarController onScreenHealthBarScript;
     PlayerWeaponController playerWeaponController;
     public Animator animator;
+    GameObject joystickPrefab;
+    VariableJoystick joystickScript;
+    GameObject attackJoystickPrefab;
+    public VariableJoystick attackJoystickScript;
+    
     // Start is called before the first frame update
     void Init()
     {
@@ -59,12 +64,21 @@ public class PlayerController : MonoBehaviour
         back = GameController.Instance.spriteHolder.getSpriteByName("backView"); 
         ren = gameObject.GetComponent<SpriteRenderer>();
         rb = gameObject.GetComponent<Rigidbody2D>();
+        iconFrame = Instantiate(iconFramePrefab, transform.position, Quaternion.identity);
         weaponIconA = Instantiate(weaponIconPrefab, transform.position, Quaternion.identity);
         weaponIconB = Instantiate(weaponIconPrefab, transform.position, Quaternion.identity);
         weaponIconB.GetComponentInChildren<Image>().transform.position += new Vector3(Screen.width * 0.07f, 0, 0);
-        iconFrame = Instantiate(iconFramePrefab, transform.position, Quaternion.identity);
+        
         onScreenHealthBarPrefab = GameController.Instance.getPrefabByName("OnScreenHealth");
         Instantiate(onScreenHealthBarPrefab, Vector3.zero, Quaternion.identity);
+
+        if(Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.WindowsEditor){
+            joystickPrefab = GameController.Instance.getPrefabByName("joystick");
+            joystickScript = Instantiate(joystickPrefab, Vector3.zero, Quaternion.identity).GetComponentInChildren<VariableJoystick>();
+            attackJoystickPrefab = GameController.Instance.getPrefabByName("joystick 1");
+            attackJoystickScript = Instantiate(attackJoystickPrefab, Vector3.zero, Quaternion.identity).GetComponentInChildren<VariableJoystick>();
+        }
+        
         
     }
 
@@ -74,7 +88,7 @@ public class PlayerController : MonoBehaviour
 
         if(savedWeaponKinds == null) {
             savedWeaponKinds = new List<WeaponKind>();  //starting weapons here
-            savedWeaponKinds.Add(WeaponKind.Shotgun); 
+            savedWeaponKinds.Add(WeaponKind.PiuPiuLaser); 
             savedWeaponKinds.Add(WeaponKind.Laser);
         }
         if(savedHealth == 0){
@@ -95,11 +109,17 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate(){
         rb.velocity = playerVelocity * GameController.Instance.globalAttributes.globalPlayerSpeed * Time.fixedDeltaTime;
     }
-    // Update is called once per frame
+    
+    // Update is called once per frames
     void Update()
     {
-        playerVelocity = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
-
+        if(Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer){
+            Debug.Log(playerVelocity);
+           playerVelocity = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
+        } else if(Application.platform == RuntimePlatform.Android ){
+           playerVelocity = new Vector3(joystickScript.Horizontal, joystickScript.Vertical, 0);            
+        }
+        
         animator.SetFloat("playerSpeedX", playerVelocity.x);
         animator.SetFloat("playerSpeedY", playerVelocity.y);
 
@@ -122,21 +142,21 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown("e")){ 
             var weaponList = GameObject.FindGameObjectsWithTag("Weapon");        //this or use a collider onTrigger to check. 
             GameObject closestWeapon = null;
-            float distance = Mathf.Infinity;
+            float closestDistance = Mathf.Infinity;
             Vector3 position = transform.position;
  
             foreach (GameObject go in weaponList)
             {
                 Vector3 diff = go.transform.position - position;
                 float curDistance = diff.sqrMagnitude;
-                if (curDistance < distance)
+                if (curDistance < closestDistance)
                 {
                     closestWeapon = go;
-                    distance = curDistance;
+                    closestDistance = curDistance;
                 }
             }
             
-            if(closestWeapon != null){
+            if(closestWeapon != null && closestDistance <= 4){
                 var closestWeaponType = closestWeapon.GetComponent<GunDropController>().gunType;
 
                 if(isSlotAActive){

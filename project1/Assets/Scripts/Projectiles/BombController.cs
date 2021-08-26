@@ -24,11 +24,11 @@ public class BombController : MonoBehaviour
 
     IEnumerator BombCoroutine() {
         rb.velocity = new Vector2(0, -2);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
 
         rb.velocity = Vector2.zero;
         renderer.color = Color.red;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
 
         renderer.color = Color.white;
         transform.localScale = new Vector3(3,3,1);
