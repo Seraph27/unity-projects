@@ -82,8 +82,8 @@ public class PlayerController : MonoBehaviour
             Instantiate(joystickRPrefab, Vector3.zero, Quaternion.identity);
             andriodUI1 = GameController.Instance.getPrefabByName("andriodUI");
             andriodUI2 = GameController.Instance.getPrefabByName("andriodUI2");
-            Instantiate(joystickRPrefab, Vector3.zero, Quaternion.identity);
-            Instantiate(joystickRPrefab, Vector3.zero, Quaternion.identity);
+            Instantiate(andriodUI1, Vector3.zero, Quaternion.identity);
+            Instantiate(andriodUI2, Vector3.zero, Quaternion.identity);
         }
         
         
