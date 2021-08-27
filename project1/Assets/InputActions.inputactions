@@ -14,18 +14,26 @@
                     "interactions": ""
                 },
                 {
-                    "name": "attack",
-                    "type": "Button",
-                    "id": "db7a8261-1878-40c1-8f61-431c8ab92345",
-                    "expectedControlType": "Button",
+                    "name": "attackJoystick",
+                    "type": "Value",
+                    "id": "dab84dbf-eb70-4699-a410-660843b33fc0",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
                 },
                 {
-                    "name": "mousePog",
+                    "name": "cursorPos",
                     "type": "Value",
                     "id": "3c2f0c00-0135-4b7c-b124-6afe0fa6b15c",
                     "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "attackMouse",
+                    "type": "Button",
+                    "id": "db7a8261-1878-40c1-8f61-431c8ab92345",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 }
@@ -88,23 +96,56 @@
                 },
                 {
                     "name": "",
-                    "id": "174368d6-80c8-464e-8a81-a35d15bcbec1",
-                    "path": "<Mouse>/leftButton",
+                    "id": "530d76ae-1312-4d6a-80d4-94f52357f8dd",
+                    "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "pc",
-                    "action": "attack",
+                    "groups": "andriod",
+                    "action": "move",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "b4436844-cc2b-4db1-bd30-b9b0422f650b",
+                    "id": "174368d6-80c8-464e-8a81-a35d15bcbec1",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "pc",
+                    "action": "attackMouse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e7e16b42-bb4d-4460-9b87-26c03d09062e",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "andriod",
+                    "action": "attackJoystick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4fc8654e-02c7-4c8b-9432-59f776856381",
+                    "path": "<Touchscreen>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "andriod",
+                    "action": "cursorPos",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6f5734c1-52df-4af4-822f-5bd40d8d04f5",
                     "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",
                     "groups": "pc",
-                    "action": "mousePog",
+                    "action": "cursorPos",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -123,6 +164,32 @@
                 },
                 {
                     "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "andriod",
+            "bindingGroup": "andriod",
+            "devices": [
+                {
+                    "devicePath": "<AndroidGamepad>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Touchscreen>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Gamepad>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Joystick>",
                     "isOptional": false,
                     "isOR": false
                 }

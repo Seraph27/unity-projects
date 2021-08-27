@@ -160,7 +160,6 @@ MonoBehaviour:
   exitGamePanelPrefab: {fileID: 8611423907270678143, guid: 5d36dda1b160d2648b919ad6668464b8,
     type: 3}
   animator: {fileID: 1040492733172501953}
-  attackJoystickScript: {fileID: 0}
 --- !u!50 &3567551268221341403
 Rigidbody2D:
   serializedVersion: 4
@@ -310,6 +309,21 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 3c2f0c00-0135-4b7c-b124-6afe0fa6b15c
     m_ActionName: player/mousePog[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4859668116281617711}
+        m_MethodName: OnJoystickAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: dab84dbf-eb70-4699-a410-660843b33fc0
+    m_ActionName: player/attackJoystick
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: player

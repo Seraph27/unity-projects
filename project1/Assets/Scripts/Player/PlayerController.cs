@@ -45,9 +45,7 @@ public class PlayerController : MonoBehaviour
     PlayerWeaponController playerWeaponController;
     public Animator animator;
     GameObject joystickPrefab;
-    VariableJoystick joystickScript;
-    GameObject attackJoystickPrefab;
-    public VariableJoystick attackJoystickScript;
+    GameObject joystickRPrefab;
     //TESTING NEW INPUT
     Vector2 inputMovement;
 
@@ -75,12 +73,12 @@ public class PlayerController : MonoBehaviour
         onScreenHealthBarPrefab = GameController.Instance.getPrefabByName("OnScreenHealth");
         Instantiate(onScreenHealthBarPrefab, Vector3.zero, Quaternion.identity);
 
-        // if(Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.WindowsEditor){
-        //     joystickPrefab = GameController.Instance.getPrefabByName("joystick");
-        //     joystickScript = Instantiate(joystickPrefab, Vector3.zero, Quaternion.identity).GetComponentInChildren<VariableJoystick>();
-        //     attackJoystickPrefab = GameController.Instance.getPrefabByName("joystick 1");
-        //     attackJoystickScript = Instantiate(attackJoystickPrefab, Vector3.zero, Quaternion.identity).GetComponentInChildren<VariableJoystick>();
-        // }
+        if(Application.platform == RuntimePlatform.Android){
+            joystickPrefab = GameController.Instance.getPrefabByName("newjoystick");
+            Instantiate(joystickPrefab, Vector3.zero, Quaternion.identity);
+            joystickRPrefab = GameController.Instance.getPrefabByName("newjoystickR");
+            Instantiate(joystickRPrefab, Vector3.zero, Quaternion.identity);
+        }
         
         
     }
@@ -112,14 +110,13 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate(){
         rb.velocity = playerVelocity * GameController.Instance.globalAttributes.globalPlayerSpeed * Time.fixedDeltaTime;
     }
-
+    
     public void OnMovement(InputAction.CallbackContext value)
     {
         inputMovement = value.ReadValue<Vector2>();
         Debug.Log(inputMovement);
     }
 
-    
     // Update is called once per frames
     void Update()
     {
@@ -131,7 +128,6 @@ public class PlayerController : MonoBehaviour
         //    playerVelocity = new Vector3(joystickScript.Horizontal, joystickScript.Vertical, 0);            
         // }
 
-        
         playerVelocity = new Vector3(inputMovement.x, inputMovement.y, 0);
         animator.SetFloat("playerSpeedX", playerVelocity.x);
         animator.SetFloat("playerSpeedY", playerVelocity.y);

@@ -82,6 +82,7 @@ public class PlayerWeaponController : MonoBehaviour
     bool isAudioOn; //also filters out if audio is continous (like laser / flamethrower)
     bool isAttacking = false;
     Vector3 mousePosition;
+    Vector2 joystickAttack;  //for aiming relative to joystick's position
 
     private void Start() {
         linePrefab = GameController.Instance.getPrefabByName("LineLaser");
@@ -93,28 +94,33 @@ public class PlayerWeaponController : MonoBehaviour
         grenadePrefab = GameController.Instance.getPrefabByName("Grenade");
     }
     
-    public void OnAttack(InputAction.CallbackContext value)
+    public void OnAttack(InputAction.CallbackContext context)
     {
-        if(value.started){
+        if(context.started){
             isAttacking = true;  
-            Debug.Log("at");  
         }
-        if(value.canceled){
+        if(context.canceled){
             isAttacking = false;
-            Debug.Log("ddd");  
         }
     } 
+
+    
+    public void OnJoystickAttack(InputAction.CallbackContext context)
+    {
+        if(context.started){
+            isAttacking = true;   
+        }
+        if(context.canceled){
+            isAttacking = false;
+        }
+        joystickAttack = context.ReadValue<Vector2>();
+    }   
 
     public void OnAim(InputAction.CallbackContext context)
     {
         mousePosition = context.ReadValue<Vector2>();
     }   
     private void Update() {
-        // var buttonCode = "Fire2";
-        // // if(Application.platform == RuntimePlatform.Android){
-        // //     buttonCode = "Fire2";
-        // // }
-
         if (isAttacking && isShootingActive == false) {
             isShootingActive = true;
             if(playerController.isSlotAActive){
@@ -284,7 +290,7 @@ public class PlayerWeaponController : MonoBehaviour
         circleCollider.radius = size / 10;
         bullet.transform.localScale = new Vector3(size * 3, size * 3, 0);
         //EnumerableHelper.bulletRotationAndVelocityJoystick(transform, bulletParent.transform, rotationOffset, rb, playerController.attackJoystickScript);
-        EnumerableHelper.bulletRotationAndVelocity(transform, bulletParent.transform, rotationOffset, rb, mousePosition);
+        bulletRotationAndVelocity(transform, bulletParent.transform, rotationOffset, rb, mousePosition);
 
         if(bulletLife > 0){
             GameObject.Destroy(bulletParent, bulletLife);
@@ -324,6 +330,25 @@ public class PlayerWeaponController : MonoBehaviour
         }
         return (grenade, rb);
 
+    }
+
+
+
+    public void bulletRotationAndVelocity(Transform playerTransform, Transform bulletTransform, float rotationOffset, Rigidbody2D rb, Vector3 mousePos, float bulletSpeedMultiplier = 1){
+        Vector2 direction;
+        if(Application.platform == RuntimePlatform.Android){
+            direction = joystickAttack;
+        } else{
+            var worldMousePos = Camera.main.ScreenToWorldPoint(mousePos);  //bullet shooting
+            direction = (Vector2)(worldMousePos - playerTransform.position);
+        }
+       
+        direction.Normalize();
+        var rotationDegrees = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + rotationOffset;
+        var rotationVector =  (Vector2)(Quaternion.Euler(0, 0, rotationDegrees) * Vector2.right);
+        bulletTransform.rotation = Quaternion.Euler(0, 0, rotationDegrees);
+        bulletTransform.position = playerTransform.position + (Vector3)(rotationVector * 1.0f);
+        rb.velocity = rotationVector * 10 * bulletSpeedMultiplier;
     }
 
 }
