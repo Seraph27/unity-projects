@@ -10,8 +10,8 @@ public static class EnumerableHelper
         return l[r];
     }
 
-    public static void bulletRotationAndVelocity(Transform playerTransform, Transform bulletTransform, float rotationOffset, Rigidbody2D rb, float bulletSpeedMultiplier = 1){
-        var worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);  //bullet shooting
+    public static void bulletRotationAndVelocity(Transform playerTransform, Transform bulletTransform, float rotationOffset, Rigidbody2D rb, Vector3 mousePos, float bulletSpeedMultiplier = 1){
+        var worldMousePos = Camera.main.ScreenToWorldPoint(mousePos);  //bullet shooting
         var direction = (Vector2)(worldMousePos - playerTransform.position);
         direction.Normalize();
         var rotationDegrees = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + rotationOffset;

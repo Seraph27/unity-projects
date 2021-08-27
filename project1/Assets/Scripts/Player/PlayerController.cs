@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
 using System.Linq;
+using UnityEngine.InputSystem;
 
 
 
@@ -47,7 +48,9 @@ public class PlayerController : MonoBehaviour
     VariableJoystick joystickScript;
     GameObject attackJoystickPrefab;
     public VariableJoystick attackJoystickScript;
-    
+    //TESTING NEW INPUT
+    Vector2 inputMovement;
+
     // Start is called before the first frame update
     void Init()
     {
@@ -72,12 +75,12 @@ public class PlayerController : MonoBehaviour
         onScreenHealthBarPrefab = GameController.Instance.getPrefabByName("OnScreenHealth");
         Instantiate(onScreenHealthBarPrefab, Vector3.zero, Quaternion.identity);
 
-        if(Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.WindowsEditor){
-            joystickPrefab = GameController.Instance.getPrefabByName("joystick");
-            joystickScript = Instantiate(joystickPrefab, Vector3.zero, Quaternion.identity).GetComponentInChildren<VariableJoystick>();
-            attackJoystickPrefab = GameController.Instance.getPrefabByName("joystick 1");
-            attackJoystickScript = Instantiate(attackJoystickPrefab, Vector3.zero, Quaternion.identity).GetComponentInChildren<VariableJoystick>();
-        }
+        // if(Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.WindowsEditor){
+        //     joystickPrefab = GameController.Instance.getPrefabByName("joystick");
+        //     joystickScript = Instantiate(joystickPrefab, Vector3.zero, Quaternion.identity).GetComponentInChildren<VariableJoystick>();
+        //     attackJoystickPrefab = GameController.Instance.getPrefabByName("joystick 1");
+        //     attackJoystickScript = Instantiate(attackJoystickPrefab, Vector3.zero, Quaternion.identity).GetComponentInChildren<VariableJoystick>();
+        // }
         
         
     }
@@ -109,17 +112,27 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate(){
         rb.velocity = playerVelocity * GameController.Instance.globalAttributes.globalPlayerSpeed * Time.fixedDeltaTime;
     }
+
+    public void OnMovement(InputAction.CallbackContext value)
+    {
+        inputMovement = value.ReadValue<Vector2>();
+        Debug.Log(inputMovement);
+    }
+
     
     // Update is called once per frames
     void Update()
     {
-        if(Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer){
-            Debug.Log(playerVelocity);
-           playerVelocity = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
-        } else if(Application.platform == RuntimePlatform.Android ){
-           playerVelocity = new Vector3(joystickScript.Horizontal, joystickScript.Vertical, 0);            
-        }
+        // Debug.Log("iodaw");
+        // if(Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer){
+        //     Debug.Log(playerVelocity);
+        //    playerVelocity = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
+        // } else if(Application.platform == RuntimePlatform.Android ){
+        //    playerVelocity = new Vector3(joystickScript.Horizontal, joystickScript.Vertical, 0);            
+        // }
+
         
+        playerVelocity = new Vector3(inputMovement.x, inputMovement.y, 0);
         animator.SetFloat("playerSpeedX", playerVelocity.x);
         animator.SetFloat("playerSpeedY", playerVelocity.y);
 
@@ -136,51 +149,51 @@ public class PlayerController : MonoBehaviour
             }
 
             isSlotAActive = !isSlotAActive;
-
         }
-        //weapon swapping
-        if(Input.GetKeyDown("e")){ 
-            var weaponList = GameObject.FindGameObjectsWithTag("Weapon");        //this or use a collider onTrigger to check. 
-            GameObject closestWeapon = null;
-            float closestDistance = Mathf.Infinity;
-            Vector3 position = transform.position;
+
+        // //weapon swapping
+        // if(Input.GetKeyDown("e")){ 
+        //     var weaponList = GameObject.FindGameObjectsWithTag("Weapon");        //this or use a collider onTrigger to check. 
+        //     GameObject closestWeapon = null;
+        //     float closestDistance = Mathf.Infinity;
+        //     Vector3 position = transform.position;
  
-            foreach (GameObject go in weaponList)
-            {
-                Vector3 diff = go.transform.position - position;
-                float curDistance = diff.sqrMagnitude;
-                if (curDistance < closestDistance)
-                {
-                    closestWeapon = go;
-                    closestDistance = curDistance;
-                }
-            }
+        //     foreach (GameObject go in weaponList)
+        //     {
+        //         Vector3 diff = go.transform.position - position;
+        //         float curDistance = diff.sqrMagnitude;
+        //         if (curDistance < closestDistance)
+        //         {
+        //             closestWeapon = go;
+        //             closestDistance = curDistance;
+        //         }
+        //     }
             
-            if(closestWeapon != null && closestDistance <= 4){
-                var closestWeaponType = closestWeapon.GetComponent<GunDropController>().gunType;
+        //     if(closestWeapon != null && closestDistance <= 4){
+        //         var closestWeaponType = closestWeapon.GetComponent<GunDropController>().gunType;
 
-                if(isSlotAActive){
-                    Weapon.make_drop(transform.position, weapons[activeWeaponIndexA].kind);
-                    weapons[0] = Weapon.make_weapon(closestWeaponType, playerWeaponController);
-                    weaponIconA.GetComponentInChildren<Image>().sprite = weapons[activeWeaponIndexA].icon;
+        //         if(isSlotAActive){
+        //             Weapon.make_drop(transform.position, weapons[activeWeaponIndexA].kind);
+        //             weapons[0] = Weapon.make_weapon(closestWeaponType, playerWeaponController);
+        //             weaponIconA.GetComponentInChildren<Image>().sprite = weapons[activeWeaponIndexA].icon;
 
-                } else{
-                    Weapon.make_drop(transform.position, weapons[activeWeaponIndexB].kind);
-                    weapons[1] = Weapon.make_weapon(closestWeaponType, playerWeaponController);
-                    weaponIconB.GetComponentInChildren<Image>().sprite = weapons[activeWeaponIndexB].icon;
-                } 
+        //         } else{
+        //             Weapon.make_drop(transform.position, weapons[activeWeaponIndexB].kind);
+        //             weapons[1] = Weapon.make_weapon(closestWeaponType, playerWeaponController);
+        //             weaponIconB.GetComponentInChildren<Image>().sprite = weapons[activeWeaponIndexB].icon;
+        //         } 
 
-                GameObject.Destroy(closestWeapon);
-            }
-        }
+        //         GameObject.Destroy(closestWeapon);
+        //     }
+        // }
 
-        if(Input.GetKeyDown(KeyCode.Escape)){
-            Debug.Log("escaped");
-            gameObject.SetActive(false);
-            var exitGamePanel = Instantiate(exitGamePanelPrefab, Vector3.zero, Quaternion.identity);
-            var c = exitGamePanel.AddComponent<CameraFollowScript>();
-            c.depth = 0;
-        }
+        // if(Input.GetKeyDown(KeyCode.Escape)){
+        //     Debug.Log("escaped");
+        //     gameObject.SetActive(false);
+        //     var exitGamePanel = Instantiate(exitGamePanelPrefab, Vector3.zero, Quaternion.identity);
+        //     var c = exitGamePanel.AddComponent<CameraFollowScript>();
+        //     c.depth = 0;
+        // }
 
         if(!hpBarScript.IsAlive()){   //player dies
             GameController.Instance.playAudio("DiedBG");

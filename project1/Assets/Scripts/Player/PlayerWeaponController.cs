@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
 using System.Linq;
+using UnityEngine.InputSystem;
 
 
 public enum WeaponKind{
@@ -79,8 +80,8 @@ public class PlayerWeaponController : MonoBehaviour
     bool isShootingActive = false;
     GameObject grenadePrefab;
     bool isAudioOn; //also filters out if audio is continous (like laser / flamethrower)
-    
-    
+    bool isAttacking = false;
+    Vector3 mousePosition;
 
     private void Start() {
         linePrefab = GameController.Instance.getPrefabByName("LineLaser");
@@ -92,13 +93,29 @@ public class PlayerWeaponController : MonoBehaviour
         grenadePrefab = GameController.Instance.getPrefabByName("Grenade");
     }
     
-    private void Update() {
-        var buttonCode = "Fire2";
-        // if(Application.platform == RuntimePlatform.Android){
-        //     buttonCode = "Fire2";
-        // }
+    public void OnAttack(InputAction.CallbackContext value)
+    {
+        if(value.started){
+            isAttacking = true;  
+            Debug.Log("at");  
+        }
+        if(value.canceled){
+            isAttacking = false;
+            Debug.Log("ddd");  
+        }
+    } 
 
-        if (Input.GetButton(buttonCode) && isShootingActive == false) {
+    public void OnAim(InputAction.CallbackContext context)
+    {
+        mousePosition = context.ReadValue<Vector2>();
+    }   
+    private void Update() {
+        // var buttonCode = "Fire2";
+        // // if(Application.platform == RuntimePlatform.Android){
+        // //     buttonCode = "Fire2";
+        // // }
+
+        if (isAttacking && isShootingActive == false) {
             isShootingActive = true;
             if(playerController.isSlotAActive){
                 StartCoroutine(playerController.weapons[playerController.activeWeaponIndexA].makeBulletFunc()); 
@@ -106,7 +123,7 @@ public class PlayerWeaponController : MonoBehaviour
                 StartCoroutine(playerController.weapons[playerController.activeWeaponIndexB].makeBulletFunc()); 
             }
         } 
-        if(!Input.GetButton(buttonCode) && isAudioOn){
+        if(isAttacking && isAudioOn){
             isAudioOn = false;
             if(playerController.isSlotAActive){
                 GameController.Instance.stopAudio(playerController.weapons[playerController.activeWeaponIndexA].audioName); 
@@ -266,9 +283,8 @@ public class PlayerWeaponController : MonoBehaviour
         circleCollider.isTrigger = true;
         circleCollider.radius = size / 10;
         bullet.transform.localScale = new Vector3(size * 3, size * 3, 0);
-
-        EnumerableHelper.bulletRotationAndVelocityJoystick(transform, bulletParent.transform, rotationOffset, rb, playerController.attackJoystickScript);
-        //EnumerableHelper.bulletRotationAndVelocity(transform, bulletParent.transform, rotationOffset, rb);
+        //EnumerableHelper.bulletRotationAndVelocityJoystick(transform, bulletParent.transform, rotationOffset, rb, playerController.attackJoystickScript);
+        EnumerableHelper.bulletRotationAndVelocity(transform, bulletParent.transform, rotationOffset, rb, mousePosition);
 
         if(bulletLife > 0){
             GameObject.Destroy(bulletParent, bulletLife);
@@ -301,7 +317,7 @@ public class PlayerWeaponController : MonoBehaviour
         grenadeScript.power = bulletDamage;
         var rb = grenade.GetComponent<Rigidbody2D>();
         rb.gravityScale = 0;
-        EnumerableHelper.bulletRotationAndVelocity(transform, grenade.transform, rotationOffset, rb);
+        //EnumerableHelper.bulletRotationAndVelocity(transform, grenade.transform, rotationOffset, rb);
         
         if(bulletLife > 0){
             GameObject.Destroy(grenade, bulletLife);
