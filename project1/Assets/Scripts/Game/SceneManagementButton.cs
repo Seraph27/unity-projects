@@ -1,15 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class ResumeGameScript : MonoBehaviour
+public class SceneManagementButton : MonoBehaviour
 {
+    public string sceneName;
+    public bool LoadFirstLevel;
     public Button button;
 
-    // Start is called before the first frame update
     void onMouseDown() {
-        Debug.Log("clicked");
-        Destroy(transform.parent.gameObject);
-        GameController.Instance.player.SetActive(true);
+        if(LoadFirstLevel){
+            SceneManager.LoadScene(GameController.Instance.levelNames[0]);
+        }  else{
+            SceneManager.LoadScene(sceneName);
+        } 
     }
 
     void OnEnable()

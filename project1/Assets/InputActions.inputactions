@@ -36,6 +36,30 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "swapWeapon",
+                    "type": "Button",
+                    "id": "14c62749-cab1-4e8d-82c9-053346ec4d9f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "swapGround",
+                    "type": "Button",
+                    "id": "87728117-34fe-40c9-be06-2d1ed5b2c6a0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "pauseGame",
+                    "type": "Button",
+                    "id": "65bb96fb-3231-4527-9085-7070f8a43864",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -146,6 +170,72 @@
                     "processors": "",
                     "groups": "pc",
                     "action": "cursorPos",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "76e967c7-cc41-4271-91c3-761443af94a4",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "pc",
+                    "action": "swapWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8a2b6b22-7aab-4ac2-86ab-7dbaf52d11e4",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "andriod",
+                    "action": "swapWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "65d19c4c-107a-45c4-9d2b-c1a6a2bcbb85",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "pc",
+                    "action": "swapGround",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b768acec-6f39-4318-bc41-8d702f639a10",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "andriod",
+                    "action": "swapGround",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5523d3da-66ac-41ee-bb5f-7607d43d9111",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "pc",
+                    "action": "pauseGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b6040ab4-8188-405d-877a-05e4968b48e3",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "andriod",
+                    "action": "pauseGame",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

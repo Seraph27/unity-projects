@@ -157,7 +157,7 @@ MonoBehaviour:
   weaponDropPrefab: {fileID: 2535810492855649084, guid: 89edb6c336b1869449cc1703c1f0ac6f,
     type: 3}
   enemyKills: 0
-  exitGamePanelPrefab: {fileID: 8611423907270678143, guid: 5d36dda1b160d2648b919ad6668464b8,
+  exitGamePanelPrefab: {fileID: 6690254425968795913, guid: c79cf244fa5b1ed42be9ef3be99e04d9,
     type: 3}
   animator: {fileID: 1040492733172501953}
 --- !u!50 &3567551268221341403
@@ -324,6 +324,51 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: dab84dbf-eb70-4699-a410-660843b33fc0
     m_ActionName: player/attackJoystick
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3567551268221341402}
+        m_MethodName: OnWeaponSwap
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 14c62749-cab1-4e8d-82c9-053346ec4d9f
+    m_ActionName: player/swapWeapon[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3567551268221341402}
+        m_MethodName: OnSwapGround
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 87728117-34fe-40c9-be06-2d1ed5b2c6a0
+    m_ActionName: player/swapGround[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3567551268221341402}
+        m_MethodName: OnPause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 65bb96fb-3231-4527-9085-7070f8a43864
+    m_ActionName: player/pauseGame[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: player

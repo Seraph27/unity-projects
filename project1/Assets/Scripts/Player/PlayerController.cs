@@ -46,6 +46,8 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     GameObject joystickPrefab;
     GameObject joystickRPrefab;
+    GameObject andriodUI1;
+    GameObject andriodUI2;
     //TESTING NEW INPUT
     Vector2 inputMovement;
 
@@ -78,6 +80,10 @@ public class PlayerController : MonoBehaviour
             Instantiate(joystickPrefab, Vector3.zero, Quaternion.identity);
             joystickRPrefab = GameController.Instance.getPrefabByName("newjoystickR");
             Instantiate(joystickRPrefab, Vector3.zero, Quaternion.identity);
+            andriodUI1 = GameController.Instance.getPrefabByName("andriodUI");
+            andriodUI2 = GameController.Instance.getPrefabByName("andriodUI2");
+            Instantiate(andriodUI1, Vector3.zero, Quaternion.identity);
+            Instantiate(andriodUI2, Vector3.zero, Quaternion.identity);
         }
         
         
@@ -116,18 +122,34 @@ public class PlayerController : MonoBehaviour
         inputMovement = value.ReadValue<Vector2>();
         Debug.Log(inputMovement);
     }
+    
 
+    bool isWeaponSwap = false;
+    public void OnWeaponSwap(InputAction.CallbackContext value) //swapping with hand items
+    {
+        if(value.started){
+            isWeaponSwap = true;
+        }
+    }
+
+    bool isSwappingGround = false;
+    public void OnSwapGround(InputAction.CallbackContext value)  //swappign with ground items
+    {
+        if(value.started){
+            isSwappingGround = true;
+        }
+    }
+
+    bool isPause = false;
+    public void OnPause(InputAction.CallbackContext value)  //swappign with ground items
+    {
+        if(value.started){
+            isPause = true;
+        }
+    }
     // Update is called once per frames
     void Update()
     {
-        // Debug.Log("iodaw");
-        // if(Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer){
-        //     Debug.Log(playerVelocity);
-        //    playerVelocity = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
-        // } else if(Application.platform == RuntimePlatform.Android ){
-        //    playerVelocity = new Vector3(joystickScript.Horizontal, joystickScript.Vertical, 0);            
-        // }
-
         playerVelocity = new Vector3(inputMovement.x, inputMovement.y, 0);
         animator.SetFloat("playerSpeedX", playerVelocity.x);
         animator.SetFloat("playerSpeedY", playerVelocity.y);
@@ -135,7 +157,8 @@ public class PlayerController : MonoBehaviour
         playerVelocity.Normalize();
 
 
-        if(Input.GetKeyDown("1")){
+        if(isWeaponSwap){
+            isWeaponSwap = false;
             var screenWidth = Screen.width;
             var iconFramePos = iconFrame.transform.GetChild(0).transform;
             if(isSlotAActive){
@@ -147,49 +170,51 @@ public class PlayerController : MonoBehaviour
             isSlotAActive = !isSlotAActive;
         }
 
-        // //weapon swapping
-        // if(Input.GetKeyDown("e")){ 
-        //     var weaponList = GameObject.FindGameObjectsWithTag("Weapon");        //this or use a collider onTrigger to check. 
-        //     GameObject closestWeapon = null;
-        //     float closestDistance = Mathf.Infinity;
-        //     Vector3 position = transform.position;
+        //weapon swapping
+        if(isSwappingGround){ 
+            isSwappingGround = false;
+            var weaponList = GameObject.FindGameObjectsWithTag("Weapon");        //this or use a collider onTrigger to check. 
+            GameObject closestWeapon = null;
+            float closestDistance = Mathf.Infinity;
+            Vector3 position = transform.position;
  
-        //     foreach (GameObject go in weaponList)
-        //     {
-        //         Vector3 diff = go.transform.position - position;
-        //         float curDistance = diff.sqrMagnitude;
-        //         if (curDistance < closestDistance)
-        //         {
-        //             closestWeapon = go;
-        //             closestDistance = curDistance;
-        //         }
-        //     }
+            foreach (GameObject go in weaponList)
+            {
+                Vector3 diff = go.transform.position - position;
+                float curDistance = diff.sqrMagnitude;
+                if (curDistance < closestDistance)
+                {
+                    closestWeapon = go;
+                    closestDistance = curDistance;
+                }
+            }
             
-        //     if(closestWeapon != null && closestDistance <= 4){
-        //         var closestWeaponType = closestWeapon.GetComponent<GunDropController>().gunType;
+            if(closestWeapon != null && closestDistance <= 4){
+                var closestWeaponType = closestWeapon.GetComponent<GunDropController>().gunType;
 
-        //         if(isSlotAActive){
-        //             Weapon.make_drop(transform.position, weapons[activeWeaponIndexA].kind);
-        //             weapons[0] = Weapon.make_weapon(closestWeaponType, playerWeaponController);
-        //             weaponIconA.GetComponentInChildren<Image>().sprite = weapons[activeWeaponIndexA].icon;
+                if(isSlotAActive){
+                    Weapon.make_drop(transform.position, weapons[activeWeaponIndexA].kind);
+                    weapons[0] = Weapon.make_weapon(closestWeaponType, playerWeaponController);
+                    weaponIconA.GetComponentInChildren<Image>().sprite = weapons[activeWeaponIndexA].icon;
 
-        //         } else{
-        //             Weapon.make_drop(transform.position, weapons[activeWeaponIndexB].kind);
-        //             weapons[1] = Weapon.make_weapon(closestWeaponType, playerWeaponController);
-        //             weaponIconB.GetComponentInChildren<Image>().sprite = weapons[activeWeaponIndexB].icon;
-        //         } 
+                } else{
+                    Weapon.make_drop(transform.position, weapons[activeWeaponIndexB].kind);
+                    weapons[1] = Weapon.make_weapon(closestWeaponType, playerWeaponController);
+                    weaponIconB.GetComponentInChildren<Image>().sprite = weapons[activeWeaponIndexB].icon;
+                } 
 
-        //         GameObject.Destroy(closestWeapon);
-        //     }
-        // }
+                GameObject.Destroy(closestWeapon);
+            }
+        }
 
-        // if(Input.GetKeyDown(KeyCode.Escape)){
-        //     Debug.Log("escaped");
-        //     gameObject.SetActive(false);
-        //     var exitGamePanel = Instantiate(exitGamePanelPrefab, Vector3.zero, Quaternion.identity);
-        //     var c = exitGamePanel.AddComponent<CameraFollowScript>();
-        //     c.depth = 0;
-        // }
+        if(isPause){
+            isPause = false;
+            Debug.Log("escaped");
+            gameObject.SetActive(false);
+            var exitGamePanel = Instantiate(exitGamePanelPrefab, Vector3.zero, Quaternion.identity);
+            var c = exitGamePanel.AddComponent<CameraFollowScript>();
+            c.depth = 0;
+        }
 
         if(!hpBarScript.IsAlive()){   //player dies
             GameController.Instance.playAudio("DiedBG");
