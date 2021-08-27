@@ -197,6 +197,12 @@ public class GameController : Singleton<GameController>
         audioSources[audioName].loop = false;
     }
 
+    public void stopAllAudio(){
+        foreach (var audioSource in audioSources){
+            audioSource.Value.Stop();
+        }
+    }
+
     public void addCompletedScenes(String sceneName){
         completedScenes.Add(sceneName);
     }

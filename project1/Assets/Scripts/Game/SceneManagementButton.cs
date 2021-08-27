@@ -14,6 +14,7 @@ public class SceneManagementButton : MonoBehaviour
         }  else{
             SceneManager.LoadScene(sceneName);
         } 
+        GameController.Instance.stopAllAudio();
     }
 
     void OnEnable()

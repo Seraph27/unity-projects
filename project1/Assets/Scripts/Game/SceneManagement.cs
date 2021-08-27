@@ -9,6 +9,7 @@ public class SceneManagement : MonoBehaviour
     public bool LoadFirstLevel;
     
     void OnMouseDown() {
+        GameController.Instance.stopAllAudio();
         if(LoadFirstLevel){
             SceneManager.LoadScene(GameController.Instance.levelNames[0]);
         }  else{
