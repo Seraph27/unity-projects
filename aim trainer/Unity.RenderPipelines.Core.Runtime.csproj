@@ -9,10 +9,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{1cc4b7c5-4a1c-8e81-8158-81bb0531e5be}</ProjectGuid>
+    <ProjectGuid>{9ae7e4c6-e426-cac6-dbd8-73ba15143709}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>Unity.RenderPipelines.Core.Runtime</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -22,11 +22,11 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>Temp\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;UNITY_2019_4_14;UNITY_2019_4;UNITY_2019;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;INCLUDE_DYNAMIC_GI;ENABLE_MONO_BDWGC;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_VIDEO;PLATFORM_STANDALONE;PLATFORM_STANDALONE_WIN;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_STANDARD_2_0;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_LEGACY_INPUT_MANAGER;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;UNITY_2019_4_14;UNITY_2019_4;UNITY_2019;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;INCLUDE_DYNAMIC_GI;ENABLE_MONO_BDWGC;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_VIDEO;PLATFORM_STANDALONE;PLATFORM_STANDALONE_WIN;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_STANDARD_2_0;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_LEGACY_INPUT_MANAGER;ENABLE_VR_MODULE;ENABLE_XR_MODULE;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
-    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <NoConfig>true</NoConfig>
@@ -36,8 +36,96 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\GunController.cs" />
-     <Compile Include="Assets\Scripts\PlayerController.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\AssemblyInfo.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Camera\CameraSwitcher.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Camera\FreeCamera.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Common\CommandBufferPool.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Common\CommonStructs.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Common\ComponentSingleton.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Common\CoreUnsafeUtils.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Common\DynamicArray.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Common\DynamicResolutionHandler.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Common\GlobalDynamicResolutionSettings.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Common\ObjectPools.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Common\ObservableList.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Common\SerializedDictionary.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Common\XRGraphics.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\DebugManager.Actions.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\DebugManager.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\DebugShapes.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\DebugUI.Containers.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\DebugUI.Fields.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\DebugUI.Panel.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\DebugUI.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\DebugUpdater.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\MousePositionDebug.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerBitField.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerButton.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerCanvas.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerColor.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerContainer.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerEnumField.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerEnumHistory.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerFloatField.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerFoldout.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerGroup.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerHBox.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerIndirectFloatField.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerIndirectToggle.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerIntField.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerPanel.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerPersistentCanvas.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerToggle.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerToggleHistory.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerUIntField.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerVBox.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerValue.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerVector2.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerVector3.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerVector4.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerWidget.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\Prefabs\Scripts\UIFoldout.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Debugging\ProfilingScope.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Documentation.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Inputs\InputRegistering.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\LookDev\IDataProvider.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\RenderGraph\RenderGraph.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\RenderGraph\RenderGraphBuilder.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\RenderGraph\RenderGraphLogger.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\RenderGraph\RenderGraphObjectPool.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\RenderGraph\RenderGraphProfileId.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\RenderGraph\RenderGraphResource.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\RenderGraph\RenderGraphResourceRegistry.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\RendererList\RendererList.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\ShaderGenerator\ShaderGeneratorAttributes.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Textures\BufferedRTHandleSystem.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Textures\DepthBits.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Textures\MSAASamples.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Textures\RTHandle.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Textures\RTHandleSystem.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Textures\RTHandles.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Textures\TextureXR.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Utilities\BitArray.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Utilities\CameraCaptureBridge.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Utilities\ColorUtils.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Utilities\CoreRenderPipelinePreferences.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Utilities\CoreUtils.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Utilities\DelegateUtility.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Utilities\HableCurve.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Utilities\HaltonSequence.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Utilities\MaterialQuality.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Utilities\ResourceReloader.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Utilities\SceneRenderPipeline.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Utilities\TextureCurve.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Utilities\TileLayoutUtils.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Utilities\XRUtils.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Volume\Volume.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Volume\VolumeComponent.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Volume\VolumeManager.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Volume\VolumeParameter.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Volume\VolumeProfile.cs" />
+     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Volume\VolumeStack.cs" />
+     <None Include="Library\PackageCache\com.unity.render-pipelines.core@7.3.1\Runtime\Unity.RenderPipelines.Core.Runtime.asmdef" />
     <Reference Include="UnityEngine">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.14f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -220,6 +308,18 @@
     </Reference>
     <Reference Include="UnityEditor">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.14f1/Editor/Data/Managed/UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.VR">
+        <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.14f1/Editor/Data/UnityExtensions/Unity/UnityVR/Editor/UnityEditor.VR.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Graphs">
+        <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.14f1/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.WindowsStandalone.Extensions">
+        <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.14f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory">
+        <HintPath>C:/Users/Lenovo/Documents/unity_tests/aim trainer/Library/PackageCache/com.unity.render-pipelines.core@7.3.1/Editor/ShaderGenerator/ICSharpCode.NRefactory.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.14f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
@@ -568,49 +668,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Unity.Timeline.Editor.csproj">
-      <Project>{52d6f177-c065-113e-4a25-fef6871acfda}</Project>
-      <Name>Unity.Timeline.Editor</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="Unity.VSCode.Editor.csproj">
-      <Project>{85fa3864-8a57-0cb4-a7ec-abe3e027a7ff}</Project>
-      <Name>Unity.VSCode.Editor</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="Unity.TextMeshPro.Editor.csproj">
-      <Project>{64cf4db4-037f-d44f-5b0c-e1dd7fd60ac0}</Project>
-      <Name>Unity.TextMeshPro.Editor</Name>
+    <ProjectReference Include="UnityEditor.UI.csproj">
+      <Project>{367c9a64-434a-1f29-8960-375eda32d057}</Project>
+      <Name>UnityEditor.UI</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="UnityEngine.UI.csproj">
       <Project>{21a54d17-0610-6d42-1664-b32f94891cee}</Project>
       <Name>UnityEngine.UI</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Timeline.csproj">
-      <Project>{c712e247-8684-aca7-a07d-63a93ad31ce3}</Project>
-      <Name>Unity.Timeline</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="Unity.CollabProxy.Editor.csproj">
-      <Project>{1cfe4b7a-60dc-1f71-ab84-27f433e614ce}</Project>
-      <Name>Unity.CollabProxy.Editor</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Rider.Editor.csproj">
-      <Project>{39e6ca0c-f099-105a-bd52-21f9e6d97511}</Project>
-      <Name>Unity.Rider.Editor</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="Unity.TextMeshPro.csproj">
-      <Project>{055fda65-8e8a-0b00-e355-d6f6fce835b8}</Project>
-      <Name>Unity.TextMeshPro</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{367c9a64-434a-1f29-8960-375eda32d057}</Project>
-      <Name>UnityEditor.UI</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
   </ItemGroup>
