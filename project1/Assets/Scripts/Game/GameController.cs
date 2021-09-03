@@ -49,6 +49,7 @@ public class GameController : Singleton<GameController>
     public GameObject globalLight2D;
     public Dictionary<string, string> levelDesc;
     public RuntimePlatform currentRuntimePlatform;
+    public float audioVolume = 0.25f;
 
     public void setupGame(){ //when loading a new game scene
         currentRuntimePlatform = Application.platform;
@@ -149,6 +150,8 @@ public class GameController : Singleton<GameController>
             Debug.Log("adio"+ e);
         }
         
+        GameController.Instance.setAudioVolume(audioVolume);
+        Debug.Log(audioVolume + " duaid");
 
         entitySpawner.spawnEnemies(); 
         
@@ -201,6 +204,14 @@ public class GameController : Singleton<GameController>
         foreach (var audioSource in audioSources){
             audioSource.Value.Stop();
         }
+    }
+
+    public void setAudioVolume(float value){
+        foreach (var audioSource in audioSources)
+        {
+            audioSource.Value.volume = value;
+        }
+        audioVolume = value;
     }
 
     public void addCompletedScenes(String sceneName){

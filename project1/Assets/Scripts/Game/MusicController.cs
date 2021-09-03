@@ -19,12 +19,10 @@ public class MusicController : MonoBehaviour
     }
 
     //Called when Slider is moved
-    void changeVolume(float sliderValue)
+    public void changeVolume(float sliderValue)
     {
-        foreach (var audioSource in audioSources)
-        {
-            audioSource.volume = sliderValue;
-        }
+        GameController.Instance.setAudioVolume(sliderValue);
+        GameController.Instance.audioVolume = sliderValue;
     }
 
     void OnDisable()

@@ -30,18 +30,19 @@ public class Weapon {
         {WeaponKind.GrenadeLauncher, "weapons_6"}
     };
     public string audioName;
+    public bool isAudioContinous;
 
     public static Weapon make_weapon(WeaponKind kind, PlayerWeaponController playerWeaponController){
         if(kind == WeaponKind.PiuPiuLaser){
-            return new Weapon(WeaponKind.PiuPiuLaser, 25, weaponIcons[kind], playerWeaponController.MakePiuPiuBullet, "PistolSoundEffect");
+            return new Weapon(WeaponKind.PiuPiuLaser, 25, weaponIcons[kind], playerWeaponController.MakePiuPiuBullet, "PistolSoundEffect", false);
         }   else if(kind == WeaponKind.Shotgun){
-            return new Weapon(WeaponKind.Shotgun, 10, weaponIcons[kind], playerWeaponController.MakeShotgunBlast, "ShotgunSoundEffect");
+            return new Weapon(WeaponKind.Shotgun, 10, weaponIcons[kind], playerWeaponController.MakeShotgunBlast, "ShotgunSoundEffect", false);
         }   else if(kind == WeaponKind.Flamethrower){
-            return new Weapon(WeaponKind.Flamethrower, 2, weaponIcons[kind], playerWeaponController.MakeFlamethrowerFlame, "FlamethrowerSoundEffect2");
+            return new Weapon(WeaponKind.Flamethrower, 2, weaponIcons[kind], playerWeaponController.MakeFlamethrowerFlame, "FlamethrowerSoundEffect2", true);
         }   else if(kind == WeaponKind.Laser){
-            return new Weapon(WeaponKind.Laser, 10, weaponIcons[kind], playerWeaponController.MakeLaserBeam, "LaserSoundEffect");
+            return new Weapon(WeaponKind.Laser, 10, weaponIcons[kind], playerWeaponController.MakeLaserBeam, "LaserSoundEffect", true);
         }   else if(kind == WeaponKind.GrenadeLauncher){
-            return new Weapon(WeaponKind.GrenadeLauncher, 10, weaponIcons[kind], playerWeaponController.MakeGrenadeLauncher, "GrenadeLaunchSoundEffect");
+            return new Weapon(WeaponKind.GrenadeLauncher, 10, weaponIcons[kind], playerWeaponController.MakeGrenadeLauncher, "GrenadeLaunchSoundEffect", false);
         }   else{
             throw new NotImplementedException();
         }
@@ -60,12 +61,13 @@ public class Weapon {
         return go;
     }
 
-    public Weapon(WeaponKind kind, int damage, string iconName, Func<IEnumerator> makeBulletFunc, string audioName) {
+    public Weapon(WeaponKind kind, int damage, string iconName, Func<IEnumerator> makeBulletFunc, string audioName, bool isAudioContinous) {
         this.kind = kind;
         this.damage = damage;
         this.icon = GameController.Instance.spriteHolder.getSpriteByName(iconName);
         this.makeBulletFunc = makeBulletFunc;
         this.audioName = audioName;
+        this.isAudioContinous = isAudioContinous;
     }
 }
 
@@ -120,24 +122,22 @@ public class PlayerWeaponController : MonoBehaviour
     {
         mousePosition = context.ReadValue<Vector2>();
     }   
+    
     private void Update() {
-        if (isAttacking && isShootingActive == false) {
-            isShootingActive = true;
-            if(playerController.isSlotAActive){
-                StartCoroutine(playerController.weapons[playerController.activeWeaponIndexA].makeBulletFunc()); 
-            } else{
-                StartCoroutine(playerController.weapons[playerController.activeWeaponIndexB].makeBulletFunc()); 
-            }
+        if (isAttacking && !isShootingActive) {
+            isShootingActive = true;          
+            StartCoroutine(playerController.weapons[playerController.currentWeaponIndex].makeBulletFunc()); 
+            if(playerController.weapons[playerController.currentWeaponIndex].isAudioContinous && !isAudioOn){
+                isAudioOn = true;
+                GameController.Instance.playAudio(playerController.weapons[playerController.currentWeaponIndex].audioName);
+                GameController.Instance.startAudioLoop(playerController.weapons[playerController.currentWeaponIndex].audioName);
+            }   
         } 
-        if(isAttacking && isAudioOn){
+
+        if(!isAttacking && isShootingActive && isAudioOn && playerController.weapons[playerController.currentWeaponIndex].isAudioContinous){
             isAudioOn = false;
-            if(playerController.isSlotAActive){
-                GameController.Instance.stopAudio(playerController.weapons[playerController.activeWeaponIndexA].audioName); 
-                GameController.Instance.stopAudioLoop(playerController.weapons[playerController.activeWeaponIndexA].audioName);
-            } else{
-                GameController.Instance.stopAudio(playerController.weapons[playerController.activeWeaponIndexB].audioName); 
-                GameController.Instance.stopAudioLoop(playerController.weapons[playerController.activeWeaponIndexB].audioName);
-            }
+            GameController.Instance.stopAudio(playerController.weapons[playerController.currentWeaponIndex].audioName);
+            GameController.Instance.stopAudioLoop(playerController.weapons[playerController.currentWeaponIndex].audioName);
         }
     }
 
