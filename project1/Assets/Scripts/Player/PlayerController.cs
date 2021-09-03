@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     public List<Weapon> weapons = new List<Weapon>();
     public int activeWeaponIndexA = 0;
     public int activeWeaponIndexB = 1;
+    public int currentWeaponIndex = 0;
     public GameObject weaponDropPrefab;
     GameObject flamethrower;
     public int enemyKills; //kill for each scene used to unlock next lvl
@@ -162,12 +163,14 @@ public class PlayerController : MonoBehaviour
             var screenWidth = Screen.width;
             var iconFramePos = iconFrame.transform.GetChild(0).transform;
             if(isSlotAActive){
+                currentWeaponIndex++;
                 iconFramePos.position += new Vector3(screenWidth * 0.07f, 0, 0);
             } else{
+                currentWeaponIndex--;
                 iconFramePos.position -= new Vector3(screenWidth * 0.07f, 0, 0);
             }
-
             isSlotAActive = !isSlotAActive;
+            
         }
 
         //weapon swapping
@@ -212,6 +215,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("escaped");
             gameObject.SetActive(false);
             var exitGamePanel = Instantiate(exitGamePanelPrefab, Vector3.zero, Quaternion.identity);
+            exitGamePanel.GetComponentInChildren<Slider>().value = GameController.Instance.audioVolume;
             var c = exitGamePanel.AddComponent<CameraFollowScript>();
             c.depth = 0;
         }

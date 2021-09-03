@@ -17015,6 +17015,11 @@ PrefabInstance:
       propertyPath: sceneName
       value: Level1
       objectReference: {fileID: 0}
+    - target: {fileID: 8618774751796077383, guid: ba9441c68238ee24ea616ae7604c0f38,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.31
+      objectReference: {fileID: 0}
     - target: {fileID: 8618774751870082134, guid: ba9441c68238ee24ea616ae7604c0f38,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17023,7 +17028,7 @@ PrefabInstance:
     - target: {fileID: 8618774751870082134, guid: ba9441c68238ee24ea616ae7604c0f38,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 44.28
+      value: 44.5
       objectReference: {fileID: 0}
     - target: {fileID: 8618774751870082134, guid: ba9441c68238ee24ea616ae7604c0f38,
         type: 3}
