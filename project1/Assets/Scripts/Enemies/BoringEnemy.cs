@@ -2,9 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Direction{
+    Up,
+    Down,
+    Left,
+    Right
+}
+
 public class BoringEnemy : EnemyController
 {
-    int direction = 1;
+    Direction direction = Direction.Right;
+    float totalDistance = 0;
+    Vector3 oldPos;
+    protected override void Start()
+    {
+        base.Start();
+        oldPos = transform.position;
+
+    }
 
     override public int GetBaseHp(){
         return 200;
@@ -12,14 +27,15 @@ public class BoringEnemy : EnemyController
     // Update is called once per frame
     override protected void Update()
     {
-        if (transform.position.x >= 5.5) {
-            direction = -1;
+        Vector3 distanceVector = transform.position - oldPos;
+        float distanceThisFrame = distanceVector.magnitude;
+        totalDistance += distanceThisFrame;
+        oldPos = transform.position;
+        if(totalDistance > 5){
+            totalDistance = 0;
+            
         }
-        if (transform.position.x < -5.5) {
-            direction = 1;
-        }
-        var velocity = new Vector3(direction,0,0);
-        
+
         rb.velocity = velocity * 100 *  Time.deltaTime;
 
         base.Update();

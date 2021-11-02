@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public static class EnumerableHelper
 {
     public static T RandomElement<T>(this List<T> l) {
@@ -10,7 +11,10 @@ public static class EnumerableHelper
         return l[r];
     }
 
-
+    public static T RandomEnum<T>(T value) where T : Enum{
+        var values = Enum.GetValues(typeof(T));
+        return (T)UnityEngine.Random.Range(0, System.Enum.GetValues(typeof(T)).Length);
+    }
 
     public static void bulletRotationAndVelocityJoystick(Transform playerTransform, Transform bulletTransform, float rotationOffset, Rigidbody2D rb, VariableJoystick joystick, float bulletSpeedMultiplier = 1){
         var direction = new Vector2(joystick.Horizontal, joystick.Vertical);

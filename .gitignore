@@ -5,3 +5,4 @@ temp
 project1/Library
 aim trainer/Library
 trash
+*.csproj

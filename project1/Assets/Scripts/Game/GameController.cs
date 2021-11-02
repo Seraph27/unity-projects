@@ -63,9 +63,9 @@ public class GameController : Singleton<GameController>
         } else{
             globalAttributes = new GlobalAttributes();
             saveGlobalsToFile(); 
-        }
+            }
 
-        prefabs = Resources.LoadAll<GameObject>("Prefabs").ToDictionary(go => go.name, go => go);
+            prefabs = Resources.LoadAll<GameObject>("Prefabs").ToDictionary(go => go.name, go => go);
         audioClips = Resources.LoadAll<AudioClip>("Audio").ToDictionary(clip => clip.name, clip => clip);
         
 
