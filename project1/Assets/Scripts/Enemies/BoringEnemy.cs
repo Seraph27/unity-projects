@@ -2,60 +2,48 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public enum MovingDirection{
+public enum Direction{
     Up,
     Down,
     Left,
-    Right,
+    Right
 }
 
 public class BoringEnemy : EnemyController
 {
-    int direction = 1;
-    GameObject coinDrop;
-    MovingDirection movingDirection = MovingDirection.Right;
+    Direction direction = Direction.Right;
+    float totalDistance = 0;
+    Vector3 oldPos;
+    protected override void Start()
+    {
+        base.Start();
+        oldPos = transform.position;
+
+    }
 
     override public int GetBaseHp(){
         return 200;
     }
-
-    protected override void Start()
-    {
-        coinDrop = GameController.Instance.getPrefabByName("coinDrop");
-        base.Start();
-    }
     // Update is called once per frame
     override protected void Update()
     {
-        Vector3 velocity = new Vector3(0, 0, 0);
-
-        if(movingDirection == MovingDirection.Up){
-            velocity = new Vector3(0, 1, 0);
-        } else if(movingDirection == MovingDirection.Down){
-            velocity = new Vector3(0, -1, 0);
-        } else if(movingDirection == MovingDirection.Right){
-            velocity = new Vector3(1, 0, 0);
-        } else if(movingDirection == MovingDirection.Left){
-            velocity = new Vector3(-1, 0, 0);
+        Vector3 distanceVector = transform.position - oldPos;
+        float distanceThisFrame = distanceVector.magnitude;
+        totalDistance += distanceThisFrame;
+        oldPos = transform.position;
+        if(totalDistance > 5){
+            totalDistance = 0;
+            
         }
-        
+
         rb.velocity = velocity * 100 *  Time.deltaTime;
 
         base.Update();
     }
 
     void OnCollisionEnter2D(Collision2D collision) {
-        MovingDirection newMovingDirection = movingDirection;
-        while(newMovingDirection == movingDirection){
-            newMovingDirection = (MovingDirection)Random.Range(0, System.Enum.GetValues(typeof(MovingDirection)).Length);
-        }
-        movingDirection = newMovingDirection;
+        direction *= -1;
     }
 
-    protected override void OnDied()
-    {
-        base.OnDied();
-        Instantiate(coinDrop, transform.position, Quaternion.identity);        
-    }
+
 }
