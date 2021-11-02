@@ -44,7 +44,8 @@ public class HealthBar : MonoBehaviour
         whitePixel.GetComponent<SpriteRenderer>().color = colorAfterDamage;
 
         //dmg text
-        var damageText = Instantiate(damageTextPrefab, transform.position, Quaternion.identity);
+        Vector3 damageTextRandomOffset = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0);
+        var damageText = Instantiate(damageTextPrefab, transform.position + damageTextRandomOffset, Quaternion.identity);
         var damageTextTMP = damageText.GetComponentInChildren<TextMeshPro>();
         damageTextTMP.color = Color.yellow;
         damageTextTMP.SetText(damage.ToString());

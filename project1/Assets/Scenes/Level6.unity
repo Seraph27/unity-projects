@@ -12515,6 +12515,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: newjoystick
       objectReference: {fileID: 0}
+    - target: {fileID: 3675599191159136136, guid: 2ecff430c894ec14399c383fed98cc16,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3675599191159136140, guid: 2ecff430c894ec14399c383fed98cc16,
         type: 3}
       propertyPath: m_LocalPosition.x
